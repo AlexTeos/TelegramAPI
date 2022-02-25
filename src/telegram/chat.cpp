@@ -1,5 +1,7 @@
 #include "chat.h"
 
+#include "message.h"
+
 namespace TelegramApi
 {
 void readValue(Chat::Ptr& value, const QJsonObject& json, const QString& valueName)
