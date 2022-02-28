@@ -3,6 +3,7 @@
 
 #include "callbackquery.h"
 #include "chatjoinrequest.h"
+#include "chatmemberupdated.h"
 #include "choseninlineresult.h"
 #include "common.h"
 #include "inlinequery.h"
@@ -18,7 +19,7 @@ struct Update
 {
     typedef QSharedPointer<Update> Ptr;
 
-    int32_t                 m_update_id;
+    int32_t                 m_update_id = 0;
     Message::Ptr            m_message;
     Message::Ptr            m_edited_message;
     Message::Ptr            m_channel_post;

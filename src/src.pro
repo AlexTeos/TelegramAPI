@@ -17,6 +17,14 @@ SOURCES += \
         telegram/chatinvitelink.cpp \
         telegram/chatjoinrequest.cpp \
         telegram/chatlocation.cpp \
+        telegram/chatmember.cpp \
+        telegram/chatmemberadministrator.cpp \
+        telegram/chatmemberbanned.cpp \
+        telegram/chatmemberleft.cpp \
+        telegram/chatmembermember.cpp \
+        telegram/chatmemberowner.cpp \
+        telegram/chatmemberrestricted.cpp \
+        telegram/chatmemberupdated.cpp \
         telegram/chatpermissions.cpp \
         telegram/chatphoto.cpp \
         telegram/choseninlineresult.cpp \
@@ -76,6 +84,14 @@ HEADERS += \
     telegram/chatinvitelink.h \
     telegram/chatjoinrequest.h \
     telegram/chatlocation.h \
+    telegram/chatmember.h \
+    telegram/chatmemberadministrator.h \
+    telegram/chatmemberbanned.h \
+    telegram/chatmemberleft.h \
+    telegram/chatmembermember.h \
+    telegram/chatmemberowner.h \
+    telegram/chatmemberrestricted.h \
+    telegram/chatmemberupdated.h \
     telegram/chatpermissions.h \
     telegram/chatphoto.h \
     telegram/choseninlineresult.h \
