@@ -9,18 +9,18 @@ struct ChatMemberAdministrator : public ChatMember
 {
     typedef QSharedPointer<ChatMemberAdministrator> Ptr;
 
-    bool    m_can_be_edited;
-    bool    m_is_anonymous;
-    bool    m_can_manage_chat;
-    bool    m_can_delete_messages;
-    bool    m_can_manage_voice_chats;
-    bool    m_can_restrict_members;
-    bool    m_can_promote_members;
-    bool    m_can_change_info;
-    bool    m_can_invite_users;
-    bool    m_can_post_messages;
-    bool    m_can_edit_messages;
-    bool    m_can_pin_messages;
+    bool    m_can_be_edited          = false;
+    bool    m_is_anonymous           = false;
+    bool    m_can_manage_chat        = false;
+    bool    m_can_delete_messages    = false;
+    bool    m_can_manage_voice_chats = false;
+    bool    m_can_restrict_members   = false;
+    bool    m_can_promote_members    = false;
+    bool    m_can_change_info        = false;
+    bool    m_can_invite_users       = false;
+    bool    m_can_post_messages      = false;
+    bool    m_can_edit_messages      = false;
+    bool    m_can_pin_messages       = false;
     QString m_custom_title;
 };
 

@@ -12,7 +12,7 @@ struct LoginUrl
     QString m_url;
     QString m_forward_text;
     QString m_bot_username;
-    bool    m_request_write_access;
+    bool    m_request_write_access = false;
 };
 
 void readValue(LoginUrl::Ptr& value, const QJsonObject& json, const QString& valueName);

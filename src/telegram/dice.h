@@ -9,7 +9,7 @@ struct Dice
     typedef QSharedPointer<Dice> Ptr;
 
     QString m_emoji;
-    int32_t m_value;
+    int32_t m_value = 0;
 };
 
 void readValue(Dice::Ptr& value, const QJsonObject& json, const QString& valueName);

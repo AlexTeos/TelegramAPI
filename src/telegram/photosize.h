@@ -11,9 +11,9 @@ struct PhotoSize
 
     QString m_file_id;
     QString m_file_unique_id;
-    int32_t m_width;
-    int32_t m_height;
-    int32_t m_file_size;
+    int32_t m_width     = 0;
+    int32_t m_height    = 0;
+    int32_t m_file_size = 0;
 };
 
 void readValue(PhotoSize::Ptr& value, const QJsonObject& json, const QString& valueName);

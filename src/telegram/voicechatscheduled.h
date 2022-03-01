@@ -10,7 +10,7 @@ struct VoiceChatScheduled
 {
     typedef QSharedPointer<VoiceChatScheduled> Ptr;
 
-    int32_t m_start_date;
+    int32_t m_start_date = 0;
 };
 
 void readValue(VoiceChatScheduled::Ptr& value, const QJsonObject& json, const QString& valueName);

@@ -12,7 +12,7 @@ struct ProximityAlertTriggered
 
     User::Ptr m_traveler;
     User::Ptr m_watcher;
-    int32_t   m_distance;
+    int32_t   m_distance = 0;
 };
 
 void readValue(ProximityAlertTriggered::Ptr& value, const QJsonObject& json, const QString& valueName);

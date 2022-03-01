@@ -14,7 +14,7 @@ struct PreCheckoutQuery
     QString        m_id;
     User::Ptr      m_from;
     QString        m_currency;
-    int32_t        m_total_amount;
+    int32_t        m_total_amount = 0;
     QString        m_invoice_payload;
     QString        m_shipping_option_id;
     OrderInfo::Ptr m_order_info;

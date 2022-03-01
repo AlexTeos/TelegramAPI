@@ -12,7 +12,7 @@ struct Contact
     QString m_phone_number;
     QString m_first_name;
     QString m_last_name;
-    int32_t m_user_id;
+    int32_t m_user_id = 0;
     QString m_vcard;
 };
 

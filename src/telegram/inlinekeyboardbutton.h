@@ -18,7 +18,7 @@ struct InlineKeyboardButton
     QString           m_switch_inline_query;
     QString           m_switch_inline_query_current_chat;
     CallbackGame::Ptr m_callback_game;
-    bool              m_pay;
+    bool              m_pay = false;
 };
 
 void readValue(InlineKeyboardButton::Ptr& value, const QJsonObject& json, const QString& valueName);

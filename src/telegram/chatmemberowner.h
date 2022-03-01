@@ -9,7 +9,7 @@ struct ChatMemberOwner : public ChatMember
 {
     typedef QSharedPointer<ChatMemberOwner> Ptr;
 
-    bool    m_is_anonymous;
+    bool    m_is_anonymous = false;
     QString m_custom_title;
 };
 

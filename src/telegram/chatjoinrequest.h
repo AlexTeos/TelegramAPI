@@ -14,7 +14,7 @@ struct ChatJoinRequest
 
     Chat::Ptr           m_chat;
     User::Ptr           m_from;
-    int32_t             m_date;
+    int32_t             m_date = 0;
     QString             m_bio;
     ChatInviteLink::Ptr m_invite_link;
 };

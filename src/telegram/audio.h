@@ -12,12 +12,12 @@ struct Audio
 
     QString        m_file_id;
     QString        m_file_unique_id;
-    int32_t        m_duration;
+    int32_t        m_duration = 0;
     QString        m_performer;
     QString        m_title;
     QString        m_file_name;
     QString        m_mime_type;
-    int32_t        m_file_size;
+    int32_t        m_file_size = 0;
     PhotoSize::Ptr m_thumb;
 };
 
