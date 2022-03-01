@@ -1,6 +1,7 @@
 #ifndef COMMON_H
 #define COMMON_H
 
+#include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
 
@@ -12,13 +13,42 @@ void readValue(bool& value, const QJsonObject& json, const QString& valueName);
 void readValue(float& value, const QJsonObject& json, const QString& valueName);
 
 template <typename T>
-void readArray(QVector<T>& array, const QJsonObject& json, const QString& valueName)
+void readValue(QVector<T>& valueArray, const QJsonObject& json, const QString& valueName)
 {
-}
+    if (json.contains(valueName) && json[valueName].isArray())
+    {
+        QJsonArray jsonArray = json[valueName].toArray();
+        valueArray.resize(jsonArray.size());
 
-template <typename T>
-void readArrayOfArray(QVector<T>& array, const QJsonObject& json, const QString& valueName)
-{
+        auto valueArrayIter = valueArray.begin();
+        auto jsonArrayIter  = jsonArray.begin();
+        for (; valueArrayIter != valueArray.end() && jsonArrayIter != jsonArray.end();
+             ++valueArrayIter, ++jsonArrayIter)
+        {
+            QJsonObject object;
+            if (jsonArrayIter->isArray())
+            {
+                object = QJsonObject{{valueName, jsonArrayIter->toArray()}};
+            }
+            else if (jsonArrayIter->isObject())
+            {
+                object = QJsonObject{{valueName, jsonArrayIter->toObject()}};
+            }
+            else if (jsonArrayIter->isString())
+            {
+                object = QJsonObject{{valueName, jsonArrayIter->toString()}};
+            }
+            else if (jsonArrayIter->isDouble())
+            {
+                object = QJsonObject{{valueName, jsonArrayIter->toDouble()}};
+            }
+            else if (jsonArrayIter->isBool())
+            {
+                object = QJsonObject{{valueName, jsonArrayIter->toBool()}};
+            }
+            readValue(*valueArrayIter, object, valueName);
+        }
+    }
 }
 }
 

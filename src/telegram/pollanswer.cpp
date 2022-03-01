@@ -12,7 +12,7 @@ void readValue(PollAnswer::Ptr& value, const QJsonObject& json, const QString& v
 
         readValue(value->m_poll_id, object, "poll_id");
         readValue(value->m_user, object, "user");
-        readArray(value->m_option_ids, object, "option_ids");
+        readValue(value->m_option_ids, object, "option_ids");
     }
 }
 }

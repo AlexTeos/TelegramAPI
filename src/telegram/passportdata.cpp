@@ -10,7 +10,7 @@ void readValue(PassportData::Ptr& value, const QJsonObject& json, const QString&
 
         QJsonObject object = json[valueName].toObject();
 
-        readArray(value->m_data, object, "data");
+        readValue(value->m_data, object, "data");
         readValue(value->m_credentials, object, "credentials");
     }
 }

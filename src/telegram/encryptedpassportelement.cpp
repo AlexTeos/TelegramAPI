@@ -14,11 +14,11 @@ void readValue(EncryptedPassportElement::Ptr& value, const QJsonObject& json, co
         readValue(value->m_data, object, "data");
         readValue(value->m_phone_number, object, "phone_number");
         readValue(value->m_email, object, "email");
-        readArray(value->m_files, object, "files");
+        readValue(value->m_files, object, "files");
         readValue(value->m_front_side, object, "front_side");
         readValue(value->m_reverse_side, object, "reverse_side");
         readValue(value->m_selfie, object, "selfie");
-        readArray(value->m_translation, object, "translation");
+        readValue(value->m_translation, object, "translation");
         readValue(value->m_hash, object, "hash");
     }
 }

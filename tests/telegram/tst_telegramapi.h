@@ -11,5 +11,6 @@ private slots:
     void testApiMessage();
     void testApiChatMember();
     void testApiUpdate();
-    void testApiUpdateArray();
+    void testApiInlineKeyboardMarkup();
+    void testApiPollAnswer();
 };

@@ -10,7 +10,7 @@ void readValue(VoiceChatParticipantsInvited::Ptr& value, const QJsonObject& json
 
         QJsonObject object = json[valueName].toObject();
 
-        readArray(value->m_users, object, "users");
+        readValue(value->m_users, object, "users");
     }
 }
 }

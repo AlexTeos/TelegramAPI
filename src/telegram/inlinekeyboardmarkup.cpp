@@ -10,7 +10,7 @@ void readValue(InlineKeyboardMarkup::Ptr& value, const QJsonObject& json, const 
 
         QJsonObject object = json[valueName].toObject();
 
-        readArrayOfArray(value->m_inline_keyboard, object, "inline_keyboard");
+        readValue(value->m_inline_keyboard, object, "inline_keyboard");
     }
 }
 }
