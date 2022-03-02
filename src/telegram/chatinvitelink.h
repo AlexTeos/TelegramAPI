@@ -16,9 +16,9 @@ struct ChatInviteLink
     bool      m_is_primary           = false;
     bool      m_is_revoked           = false;
     QString   m_name;
-    int32_t   m_expire_date                = 0;
-    int32_t   m_member_limit               = 0;
-    int32_t   m_pending_join_request_count = 0;
+    qint64    m_expire_date                = 0;
+    qint64    m_member_limit               = 0;
+    qint64    m_pending_join_request_count = 0;
 };
 
 void readValue(ChatInviteLink::Ptr& value, const QJsonObject& json, const QString& valueName);

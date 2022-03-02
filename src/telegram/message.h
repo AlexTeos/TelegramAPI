@@ -33,21 +33,21 @@ struct Message
 {
     typedef QSharedPointer<Message> Ptr;
 
-    int32_t                            m_message_id = 0;
+    qint64                             m_message_id = 0;
     User::Ptr                          m_from;
     Chat::Ptr                          m_sender_chat;
-    int32_t                            m_date = 0;
+    qint64                             m_date = 0;
     Chat::Ptr                          m_chat;
     User::Ptr                          m_forward_from;
     Chat::Ptr                          m_forward_from_chat;
-    int32_t                            m_forward_from_message_id = 0;
+    qint64                             m_forward_from_message_id = 0;
     QString                            m_forward_signature;
     QString                            m_forward_sender_name;
-    int32_t                            m_forward_date         = 0;
+    qint64                             m_forward_date         = 0;
     bool                               m_is_automatic_forward = false;
     Message::Ptr                       m_reply_to_message;
     User::Ptr                          m_via_bot;
-    int32_t                            m_edit_date             = 0;
+    qint64                             m_edit_date             = 0;
     bool                               m_has_protected_content = false;
     QString                            m_media_group_id;
     QString                            m_author_signature;
@@ -78,8 +78,8 @@ struct Message
     bool                               m_supergroup_chat_created = false;
     bool                               m_channel_chat_created    = false;
     MessageAutoDeleteTimerChanged::Ptr m_message_auto_delete_timer_changed;
-    int32_t                            m_migrate_to_chat_id   = 0;
-    int32_t                            m_migrate_from_chat_id = 0;
+    qint64                             m_migrate_to_chat_id   = 0;
+    qint64                             m_migrate_from_chat_id = 0;
     Message::Ptr                       m_pinned_message;
     Invoice::Ptr                       m_invoice;
     SuccessfulPayment::Ptr             m_successful_payment;

@@ -11,8 +11,8 @@ struct MessageEntity
     typedef QSharedPointer<MessageEntity> Ptr;
 
     QString   m_type;
-    int32_t   m_offset = 0;
-    int32_t   m_length = 0;
+    qint64    m_offset = 0;
+    qint64    m_length = 0;
     QString   m_url;
     User::Ptr m_user;
     QString   m_language;

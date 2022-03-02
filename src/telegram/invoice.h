@@ -13,7 +13,7 @@ struct Invoice
     QString m_description;
     QString m_start_parameter;
     QString m_currency;
-    int32_t m_total_amount = 0;
+    qint64  m_total_amount = 0;
 };
 
 void readValue(Invoice::Ptr& value, const QJsonObject& json, const QString& valueName);

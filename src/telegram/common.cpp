@@ -7,9 +7,9 @@ void readValue(QString& value, const QJsonObject& json, const QString& valueName
     if (json.contains(valueName) && json[valueName].isString()) value = json[valueName].toString();
 }
 
-void readValue(int32_t& value, const QJsonObject& json, const QString& valueName)
+void readValue(qint64& value, const QJsonObject& json, const QString& valueName)
 {
-    if (json.contains(valueName) && json[valueName].isDouble()) value = json[valueName].toInt();
+    if (json.contains(valueName) && json[valueName].isDouble()) value = json[valueName].toInteger();
 }
 
 void readValue(bool& value, const QJsonObject& json, const QString& valueName)
@@ -17,7 +17,7 @@ void readValue(bool& value, const QJsonObject& json, const QString& valueName)
     if (json.contains(valueName) && json[valueName].isBool()) value = json[valueName].toBool();
 }
 
-void readValue(float& value, const QJsonObject& json, const QString& valueName)
+void readValue(double& value, const QJsonObject& json, const QString& valueName)
 {
     if (json.contains(valueName) && json[valueName].isDouble()) value = json[valueName].toDouble();
 }

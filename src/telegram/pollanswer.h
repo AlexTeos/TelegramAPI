@@ -10,9 +10,9 @@ struct PollAnswer
 {
     typedef QSharedPointer<PollAnswer> Ptr;
 
-    QString          m_poll_id;
-    User::Ptr        m_user;
-    QVector<int32_t> m_option_ids;
+    QString         m_poll_id;
+    User::Ptr       m_user;
+    QVector<qint64> m_option_ids;
 };
 
 void readValue(PollAnswer::Ptr& value, const QJsonObject& json, const QString& valueName);

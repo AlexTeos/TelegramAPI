@@ -10,7 +10,7 @@ struct PollOption
     typedef QSharedPointer<PollOption> Ptr;
 
     QString m_text;
-    int32_t m_voter_count = 0;
+    qint64  m_voter_count = 0;
 };
 
 void readValue(PollOption::Ptr& value, const QJsonObject& json, const QString& valueName);

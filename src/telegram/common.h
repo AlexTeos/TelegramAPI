@@ -8,9 +8,9 @@
 namespace TelegramApi
 {
 void readValue(QString& value, const QJsonObject& json, const QString& valueName);
-void readValue(int32_t& value, const QJsonObject& json, const QString& valueName);
+void readValue(qint64& value, const QJsonObject& json, const QString& valueName);
 void readValue(bool& value, const QJsonObject& json, const QString& valueName);
-void readValue(float& value, const QJsonObject& json, const QString& valueName);
+void readValue(double& value, const QJsonObject& json, const QString& valueName);
 
 template <typename T>
 void readValue(QVector<T>& valueArray, const QJsonObject& json, const QString& valueName)

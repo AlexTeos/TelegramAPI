@@ -15,7 +15,7 @@ struct ChatMemberUpdated
 
     Chat::Ptr           m_chat;
     User::Ptr           m_from;
-    int32_t             m_date = 0;
+    qint64              m_date = 0;
     ChatMember::Ptr     m_old_chat_member;
     ChatMember::Ptr     m_new_chat_member;
     ChatInviteLink::Ptr m_invite_link;

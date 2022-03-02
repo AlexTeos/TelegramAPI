@@ -9,7 +9,7 @@ struct User
 {
     typedef QSharedPointer<User> Ptr;
 
-    int32_t m_id     = 0;
+    qint64  m_id     = 0;
     bool    m_is_bot = false;
     QString m_first_name;
     QString m_last_name;

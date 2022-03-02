@@ -13,4 +13,5 @@ private slots:
     void testApiUpdate();
     void testApiInlineKeyboardMarkup();
     void testApiPollAnswer();
+    void testApiLocation();
 };

@@ -19,7 +19,7 @@ struct Update
 {
     typedef QSharedPointer<Update> Ptr;
 
-    int32_t                 m_update_id = 0;
+    qint64                  m_update_id = 0;
     Message::Ptr            m_message;
     Message::Ptr            m_edited_message;
     Message::Ptr            m_channel_post;

@@ -15,7 +15,7 @@ struct Document
     PhotoSize::Ptr m_thumb;
     QString        m_file_name;
     QString        m_mime_type;
-    int32_t        m_file_size = 0;
+    qint64         m_file_size = 0;
 };
 
 void readValue(Document::Ptr& value, const QJsonObject& json, const QString& valueName);
