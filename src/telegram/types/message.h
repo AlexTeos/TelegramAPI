@@ -52,7 +52,7 @@ struct Message
     QString                            m_media_group_id;
     QString                            m_author_signature;
     QString                            m_text;
-    QVector<Message::Ptr>              m_entities;
+    QVector<MessageEntity::Ptr>        m_entities;
     Animation::Ptr                     m_animation;
     Audio::Ptr                         m_audio;
     Document::Ptr                      m_document;
