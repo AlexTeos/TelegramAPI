@@ -1,10 +1,10 @@
 #include "tst_telegramapi.h"
 
-#include "../src/telegram/chatmember.h"
-#include "../src/telegram/inlinekeyboardmarkup.h"
-#include "../src/telegram/message.h"
-#include "../src/telegram/pollanswer.h"
-#include "../src/telegram/update.h"
+#include "../src/telegram/types/chatmember.h"
+#include "../src/telegram/types/inlinekeyboardmarkup.h"
+#include "../src/telegram/types/message.h"
+#include "../src/telegram/types/pollanswer.h"
+#include "../src/telegram/types/update.h"
 
 using namespace TelegramApi;
 
