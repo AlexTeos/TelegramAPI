@@ -1,8 +1,8 @@
 #include "loginurl.h"
 
-namespace TelegramApi
+namespace Telegram
 {
-void readValue(LoginUrl::Ptr& value, const QJsonObject& json, const QString& valueName)
+void readJsonObject(LoginUrl::Ptr& value, const QJsonObject& json, const QString& valueName)
 {
     if (json.contains(valueName) && json[valueName].isObject())
     {
@@ -10,10 +10,22 @@ void readValue(LoginUrl::Ptr& value, const QJsonObject& json, const QString& val
 
         QJsonObject object = json[valueName].toObject();
 
-        readValue(value->m_url, object, "url");
-        readValue(value->m_forward_text, object, "forward_text");
-        readValue(value->m_bot_username, object, "bot_username");
-        readValue(value->m_request_write_access, object, "request_write_access");
+        readJsonObject(value->m_url, object, "url");
+        readJsonObject(value->m_forward_text, object, "forward_text");
+        readJsonObject(value->m_bot_username, object, "bot_username");
+        readJsonObject(value->m_request_write_access, object, "request_write_access");
     }
+}
+
+QJsonValue toJsonValue(const LoginUrl::Ptr& value)
+{
+    QJsonObject jsonObject;
+
+    jsonObject.insert("url", value->m_url);
+    jsonObject.insert("forward_text", value->m_forward_text);
+    jsonObject.insert("bot_username", value->m_bot_username);
+    jsonObject.insert("request_write_access", value->m_request_write_access);
+
+    return jsonObject;
 }
 }

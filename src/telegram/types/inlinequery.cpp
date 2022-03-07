@@ -1,8 +1,8 @@
 #include "inlinequery.h"
 
-namespace TelegramApi
+namespace Telegram
 {
-void readValue(InlineQuery::Ptr& value, const QJsonObject& json, const QString& valueName)
+void readJsonObject(InlineQuery::Ptr& value, const QJsonObject& json, const QString& valueName)
 {
     if (json.contains(valueName) && json[valueName].isObject())
     {
@@ -10,12 +10,12 @@ void readValue(InlineQuery::Ptr& value, const QJsonObject& json, const QString& 
 
         QJsonObject object = json[valueName].toObject();
 
-        readValue(value->m_id, object, "id");
-        readValue(value->m_from, object, "from");
-        readValue(value->m_query, object, "query");
-        readValue(value->m_offset, object, "offset");
-        readValue(value->m_chat_type, object, "chat_type");
-        readValue(value->m_location, object, "location");
+        readJsonObject(value->m_id, object, "id");
+        readJsonObject(value->m_from, object, "from");
+        readJsonObject(value->m_query, object, "query");
+        readJsonObject(value->m_offset, object, "offset");
+        readJsonObject(value->m_chat_type, object, "chat_type");
+        readJsonObject(value->m_location, object, "location");
     }
 }
 }

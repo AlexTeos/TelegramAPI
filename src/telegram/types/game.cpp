@@ -1,8 +1,8 @@
 #include "game.h"
 
-namespace TelegramApi
+namespace Telegram
 {
-void readValue(Game::Ptr& value, const QJsonObject& json, const QString& valueName)
+void readJsonObject(Game::Ptr& value, const QJsonObject& json, const QString& valueName)
 {
     if (json.contains(valueName) && json[valueName].isObject())
     {
@@ -10,12 +10,12 @@ void readValue(Game::Ptr& value, const QJsonObject& json, const QString& valueNa
 
         QJsonObject object = json[valueName].toObject();
 
-        readValue(value->m_title, object, "m_title");
-        readValue(value->m_description, object, "m_description");
-        readValue(value->m_photo, object, "m_photo");
-        readValue(value->m_text, object, "m_text");
-        readValue(value->m_text_entities, object, "m_text_entities");
-        readValue(value->m_animation, object, "m_animation");
+        readJsonObject(value->m_title, object, "m_title");
+        readJsonObject(value->m_description, object, "m_description");
+        readJsonObject(value->m_photo, object, "m_photo");
+        readJsonObject(value->m_text, object, "m_text");
+        readJsonObject(value->m_text_entities, object, "m_text_entities");
+        readJsonObject(value->m_animation, object, "m_animation");
     }
 }
 }

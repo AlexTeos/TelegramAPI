@@ -4,7 +4,7 @@
 #include "common.h"
 #include "photosize.h"
 
-namespace TelegramApi
+namespace Telegram
 {
 struct Video
 {
@@ -21,6 +21,6 @@ struct Video
     qint64         m_file_size = 0;
 };
 
-void readValue(Video::Ptr& value, const QJsonObject& json, const QString& valueName);
+void readJsonObject(Video::Ptr& value, const QJsonObject& json, const QString& valueName);
 }
 #endif // VIDEO_H

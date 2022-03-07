@@ -7,7 +7,7 @@
 #include "common.h"
 #include "user.h"
 
-namespace TelegramApi
+namespace Telegram
 {
 struct ChatMemberUpdated
 {
@@ -21,7 +21,7 @@ struct ChatMemberUpdated
     ChatInviteLink::Ptr m_invite_link;
 };
 
-void readValue(ChatMemberUpdated::Ptr& value, const QJsonObject& json, const QString& valueName);
+void readJsonObject(ChatMemberUpdated::Ptr& value, const QJsonObject& json, const QString& valueName);
 }
 
 #endif // CHATMEMBERUPDATED_H

@@ -1,8 +1,8 @@
 #include "chatjoinrequest.h"
 
-namespace TelegramApi
+namespace Telegram
 {
-void readValue(ChatJoinRequest::Ptr& value, const QJsonObject& json, const QString& valueName)
+void readJsonObject(ChatJoinRequest::Ptr& value, const QJsonObject& json, const QString& valueName)
 {
     if (json.contains(valueName) && json[valueName].isObject())
     {
@@ -10,11 +10,11 @@ void readValue(ChatJoinRequest::Ptr& value, const QJsonObject& json, const QStri
 
         QJsonObject object = json[valueName].toObject();
 
-        readValue(value->m_chat, object, "chat");
-        readValue(value->m_from, object, "from");
-        readValue(value->m_date, object, "date");
-        readValue(value->m_bio, object, "bio");
-        readValue(value->m_invite_link, object, "invite_link");
+        readJsonObject(value->m_chat, object, "chat");
+        readJsonObject(value->m_from, object, "from");
+        readJsonObject(value->m_date, object, "date");
+        readJsonObject(value->m_bio, object, "bio");
+        readJsonObject(value->m_invite_link, object, "invite_link");
     }
 }
 }

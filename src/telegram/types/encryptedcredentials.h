@@ -3,7 +3,7 @@
 
 #include "common.h"
 
-namespace TelegramApi
+namespace Telegram
 {
 struct EncryptedCredentials
 {
@@ -14,7 +14,7 @@ struct EncryptedCredentials
     QString m_secret;
 };
 
-void readValue(EncryptedCredentials::Ptr& value, const QJsonObject& json, const QString& valueName);
+void readJsonObject(EncryptedCredentials::Ptr& value, const QJsonObject& json, const QString& valueName);
 }
 
 #endif // ENCRYPTEDCREDENTIALS_H

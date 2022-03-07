@@ -4,7 +4,7 @@
 #include "common.h"
 #include "user.h"
 
-namespace TelegramApi
+namespace Telegram
 {
 struct ProximityAlertTriggered
 {
@@ -15,6 +15,6 @@ struct ProximityAlertTriggered
     qint64    m_distance = 0;
 };
 
-void readValue(ProximityAlertTriggered::Ptr& value, const QJsonObject& json, const QString& valueName);
+void readJsonObject(ProximityAlertTriggered::Ptr& value, const QJsonObject& json, const QString& valueName);
 }
 #endif // PROXIMITYALERTTRIGGERED_H

@@ -5,7 +5,7 @@
 #include "messageentity.h"
 #include "polloption.h"
 
-namespace TelegramApi
+namespace Telegram
 {
 struct Poll
 {
@@ -26,6 +26,6 @@ struct Poll
     qint64                      m_close_date  = false;
 };
 
-void readValue(Poll::Ptr& value, const QJsonObject& json, const QString& valueName);
+void readJsonObject(Poll::Ptr& value, const QJsonObject& json, const QString& valueName);
 }
 #endif // POLL_H

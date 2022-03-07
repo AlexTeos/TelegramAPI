@@ -1,8 +1,8 @@
 #include "voicechatstarted.h"
 
-namespace TelegramApi
+namespace Telegram
 {
-void readValue(VoiceChatStarted::Ptr& value, const QJsonObject& json, const QString& valueName)
+void readJsonObject(VoiceChatStarted::Ptr& value, const QJsonObject& json, const QString& valueName)
 {
     if (json.contains(valueName) && json[valueName].isObject())
     {

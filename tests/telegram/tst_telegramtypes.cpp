@@ -1,4 +1,4 @@
-#include "tst_telegramapi.h"
+#include "tst_telegramtypes.h"
 
 #include "../src/telegram/types/chatmemberowner.h"
 #include "../src/telegram/types/inlinekeyboardmarkup.h"
@@ -6,13 +6,13 @@
 #include "../src/telegram/types/pollanswer.h"
 #include "../src/telegram/types/update.h"
 
-using namespace TelegramApi;
+using namespace Telegram;
 
-void TestTelegramApi::initTestCase() {}
+void TestTelegramTypes::initTestCase() {}
 
-void TestTelegramApi::cleanupTestCase() {}
+void TestTelegramTypes::cleanupTestCase() {}
 
-void TestTelegramApi::testApiMessage()
+void TestTelegramTypes::tesApiMessage()
 {
     QString messageJson =
         "{\"message\":{\"message_id\":3,\"from\":{\"id\":9007199254740991,\"is_bot\":false,\"first_name\":\"test_first_"
@@ -21,9 +21,9 @@ void TestTelegramApi::testApiMessage()
         "start\",\"entities\":[{\"offset\":0,\"length\":6,\"type\":\"bot_command\"}]}}";
     Message::Ptr message;
 
-    QJsonDocument loadDoc(QJsonDocument::fromJson(messageJson.toLatin1()));
+    QJsonDocument jsonDocument(QJsonDocument::fromJson(messageJson.toLatin1()));
 
-    readValue(message, loadDoc.object(), "message");
+    readJsonObject(message, jsonDocument.object(), "message");
 
     QVERIFY(message);
     QVERIFY(message->m_message_id == 3);
@@ -50,7 +50,7 @@ void TestTelegramApi::testApiMessage()
     QVERIFY(message->m_entities[0]->m_type == "bot_command");
 }
 
-void TestTelegramApi::testApiChatMember()
+void TestTelegramTypes::tesApiChatMember()
 {
     QString chatMemberJson =
         "{\"new_chat_member\":{\"status\":\"creator\",\"user\":{\"id\":295590000,\"is_bot\":false,\"first_name\":"
@@ -58,9 +58,9 @@ void TestTelegramApi::testApiChatMember()
 
     ChatMember::Ptr chatMember;
 
-    QJsonDocument loadDoc(QJsonDocument::fromJson(chatMemberJson.toLatin1()));
+    QJsonDocument jsonDocument(QJsonDocument::fromJson(chatMemberJson.toLatin1()));
 
-    readValue(chatMember, loadDoc.object(), "new_chat_member");
+    readJsonObject(chatMember, jsonDocument.object(), "new_chat_member");
 
     ChatMemberOwner::Ptr chatMemberOwner = chatMember.staticCast<ChatMemberOwner>();
 
@@ -77,7 +77,7 @@ void TestTelegramApi::testApiChatMember()
     QVERIFY(chatMemberOwner->m_user->m_language_code == "ru");
 }
 
-void TestTelegramApi::testApiUpdate()
+void TestTelegramTypes::tesApiUpdate()
 {
     QString updateJson =
         "{\"ok\":true,\"result\":[{\"update_id\":642464933,\"message\":{\"message_id\":8,\"from\":{\"id\":295590000,"
@@ -104,9 +104,9 @@ void TestTelegramApi::testApiUpdate()
 
     QVector<Update::Ptr> update;
 
-    QJsonDocument loadDoc(QJsonDocument::fromJson(updateJson.toLatin1()));
+    QJsonDocument jsonDocument(QJsonDocument::fromJson(updateJson.toLatin1()));
 
-    readValue(update, loadDoc.object(), "result");
+    readJsonObject(update, jsonDocument.object(), "result");
 
     QVERIFY(update.size() == 5);
 
@@ -246,7 +246,7 @@ void TestTelegramApi::testApiUpdate()
     QVERIFY(update[4]->m_message->m_entities[0]->m_type == "bot_command");
 }
 
-void TestTelegramApi::testApiInlineKeyboardMarkup()
+void TestTelegramTypes::tesApiInlineKeyboardMarkup()
 {
     QString inlineKeyboardMarkupJson =
         "{\"inlineKeyboardMarkup\":{\"inline_keyboard\":[[{\"text\":\"1\"},{\"text\":\"2\"},{\"text\":"
@@ -254,9 +254,9 @@ void TestTelegramApi::testApiInlineKeyboardMarkup()
 
     InlineKeyboardMarkup::Ptr inlineKeyboardMarkup;
 
-    QJsonDocument loadDoc(QJsonDocument::fromJson(inlineKeyboardMarkupJson.toLatin1()));
+    QJsonDocument jsonDocument(QJsonDocument::fromJson(inlineKeyboardMarkupJson.toLatin1()));
 
-    readValue(inlineKeyboardMarkup, loadDoc.object(), "inlineKeyboardMarkup");
+    readJsonObject(inlineKeyboardMarkup, jsonDocument.object(), "inlineKeyboardMarkup");
 
     QVERIFY(inlineKeyboardMarkup);
     QVERIFY(inlineKeyboardMarkup->m_inline_keyboard.size() == 3);
@@ -280,7 +280,7 @@ void TestTelegramApi::testApiInlineKeyboardMarkup()
     QVERIFY(inlineKeyboardMarkup->m_inline_keyboard[2][1]->m_text == "6");
 }
 
-void TestTelegramApi::testApiPollAnswer()
+void TestTelegramTypes::tesApiPollAnswer()
 {
     QString pollAnswerJson = "{\"poll_answer\":{\"poll_id\":\"1234\",\"user\":{\"id\":295590000,\"is_bot\":false,"
                              "\"first_name\":\"test_first_name\",\"username\":\"test_username\",\"language_code\":"
@@ -288,9 +288,9 @@ void TestTelegramApi::testApiPollAnswer()
 
     PollAnswer::Ptr pollAnswer;
 
-    QJsonDocument loadDoc(QJsonDocument::fromJson(pollAnswerJson.toLatin1()));
+    QJsonDocument jsonDocument(QJsonDocument::fromJson(pollAnswerJson.toLatin1()));
 
-    readValue(pollAnswer, loadDoc.object(), "poll_answer");
+    readJsonObject(pollAnswer, jsonDocument.object(), "poll_answer");
 
     QVERIFY(pollAnswer);
     QVERIFY(pollAnswer->m_poll_id == "1234");
@@ -312,15 +312,15 @@ void TestTelegramApi::testApiPollAnswer()
     QVERIFY(pollAnswer->m_option_ids[6] == 6);
 }
 
-void TestTelegramApi::testApiLocation()
+void TestTelegramTypes::tesApiLocation()
 {
     QString locationJson = "{\"location\":{\"latitude\":58.978341,\"longitude\":32.370649}}";
 
     Location::Ptr location;
 
-    QJsonDocument loadDoc(QJsonDocument::fromJson(locationJson.toLatin1()));
+    QJsonDocument jsonDocument(QJsonDocument::fromJson(locationJson.toLatin1()));
 
-    readValue(location, loadDoc.object(), "location");
+    readJsonObject(location, jsonDocument.object(), "location");
 
     QVERIFY(location);
     QVERIFY(location->m_latitude == 58.978341);

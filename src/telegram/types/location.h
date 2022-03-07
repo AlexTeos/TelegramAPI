@@ -3,7 +3,7 @@
 
 #include "common.h"
 
-namespace TelegramApi
+namespace Telegram
 {
 struct Location
 {
@@ -17,6 +17,6 @@ struct Location
     qint64 m_proximity_alert_radius = 0;
 };
 
-void readValue(Location::Ptr& value, const QJsonObject& json, const QString& valueName);
+void readJsonObject(Location::Ptr& value, const QJsonObject& json, const QString& valueName);
 }
 #endif // LOCATION_H

@@ -1,8 +1,8 @@
 #include "proximityalerttriggered.h"
 
-namespace TelegramApi
+namespace Telegram
 {
-void readValue(ProximityAlertTriggered::Ptr& value, const QJsonObject& json, const QString& valueName)
+void readJsonObject(ProximityAlertTriggered::Ptr& value, const QJsonObject& json, const QString& valueName)
 {
     if (json.contains(valueName) && json[valueName].isObject())
     {
@@ -10,9 +10,9 @@ void readValue(ProximityAlertTriggered::Ptr& value, const QJsonObject& json, con
 
         QJsonObject object = json[valueName].toObject();
 
-        readValue(value->m_traveler, object, "traveler");
-        readValue(value->m_watcher, object, "watcher");
-        readValue(value->m_distance, object, "distance");
+        readJsonObject(value->m_traveler, object, "traveler");
+        readJsonObject(value->m_watcher, object, "watcher");
+        readJsonObject(value->m_distance, object, "distance");
     }
 }
 }

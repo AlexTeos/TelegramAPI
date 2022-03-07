@@ -3,7 +3,7 @@
 
 #include "common.h"
 
-namespace TelegramApi
+namespace Telegram
 {
 struct Voice
 {
@@ -16,7 +16,7 @@ struct Voice
     qint64  m_file_size = 0;
 };
 
-void readValue(Voice::Ptr& value, const QJsonObject& json, const QString& valueName);
+void readJsonObject(Voice::Ptr& value, const QJsonObject& json, const QString& valueName);
 }
 
 #endif // VOICE_H

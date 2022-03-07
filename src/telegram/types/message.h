@@ -27,7 +27,7 @@
 #include "voicechatscheduled.h"
 #include "voicechatstarted.h"
 
-namespace TelegramApi
+namespace Telegram
 {
 struct Message
 {
@@ -93,7 +93,7 @@ struct Message
     InlineKeyboardMarkup::Ptr          m_reply_markup;
 };
 
-void readValue(Message::Ptr& value, const QJsonObject& json, const QString& valueName);
+void readJsonObject(Message::Ptr& value, const QJsonObject& json, const QString& valueName);
 }
 
 #endif // MESSAGE_H

@@ -1,8 +1,8 @@
 #include "chatmembermember.h"
 
-namespace TelegramApi
+namespace Telegram
 {
-void readValue(ChatMemberMember::Ptr& value, const QJsonObject& json, const QString& valueName)
+void readJsonObject(ChatMemberMember::Ptr& value, const QJsonObject& json, const QString& valueName)
 {
     if (json.contains(valueName) && json[valueName].isObject())
     {

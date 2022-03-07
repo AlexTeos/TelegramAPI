@@ -1,8 +1,8 @@
 #include "chatmemberbanned.h"
 
-namespace TelegramApi
+namespace Telegram
 {
-void readValue(ChatMemberBanned::Ptr& value, const QJsonObject& json, const QString& valueName)
+void readJsonObject(ChatMemberBanned::Ptr& value, const QJsonObject& json, const QString& valueName)
 {
     if (json.contains(valueName) && json[valueName].isObject())
     {
@@ -10,7 +10,7 @@ void readValue(ChatMemberBanned::Ptr& value, const QJsonObject& json, const QStr
 
         QJsonObject object = json[valueName].toObject();
 
-        readValue(value->m_until_date, object, "until_date");
+        readJsonObject(value->m_until_date, object, "until_date");
     }
 }
 }

@@ -4,7 +4,7 @@
 #include "common.h"
 #include "photosize.h"
 
-namespace TelegramApi
+namespace Telegram
 {
 struct VoiceChatScheduled
 {
@@ -13,7 +13,7 @@ struct VoiceChatScheduled
     qint64 m_start_date = 0;
 };
 
-void readValue(VoiceChatScheduled::Ptr& value, const QJsonObject& json, const QString& valueName);
+void readJsonObject(VoiceChatScheduled::Ptr& value, const QJsonObject& json, const QString& valueName);
 }
 
 #endif // VOICECHATSCHEDULED_H

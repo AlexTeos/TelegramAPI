@@ -1,8 +1,8 @@
 #include "user.h"
 
-namespace TelegramApi
+namespace Telegram
 {
-void readValue(User::Ptr& value, const QJsonObject& json, const QString& valueName)
+void readJsonObject(User::Ptr& value, const QJsonObject& json, const QString& valueName)
 {
     if (json.contains(valueName) && json[valueName].isObject())
     {
@@ -10,15 +10,32 @@ void readValue(User::Ptr& value, const QJsonObject& json, const QString& valueNa
 
         QJsonObject object = json[valueName].toObject();
 
-        readValue(value->m_id, object, "id");
-        readValue(value->m_is_bot, object, "ibot");
-        readValue(value->m_first_name, object, "first_name");
-        readValue(value->m_last_name, object, "last_name");
-        readValue(value->m_username, object, "username");
-        readValue(value->m_language_code, object, "language_code");
-        readValue(value->m_can_join_groups, object, "can_join_groups");
-        readValue(value->m_can_read_all_group_messages, object, "can_read_all_group_messages");
-        readValue(value->m_supports_inline_queries, object, "supports_inline_queries");
+        readJsonObject(value->m_id, object, "id");
+        readJsonObject(value->m_is_bot, object, "ibot");
+        readJsonObject(value->m_first_name, object, "first_name");
+        readJsonObject(value->m_last_name, object, "last_name");
+        readJsonObject(value->m_username, object, "username");
+        readJsonObject(value->m_language_code, object, "language_code");
+        readJsonObject(value->m_can_join_groups, object, "can_join_groups");
+        readJsonObject(value->m_can_read_all_group_messages, object, "can_read_all_group_messages");
+        readJsonObject(value->m_supports_inline_queries, object, "supports_inline_queries");
     }
+}
+
+QJsonValue toJsonValue(const User::Ptr& value)
+{
+    QJsonObject jsonObject;
+
+    jsonObject.insert("id", value->m_id);
+    jsonObject.insert("is_bot", value->m_is_bot);
+    jsonObject.insert("first_name", value->m_first_name);
+    jsonObject.insert("last_name", value->m_last_name);
+    jsonObject.insert("username", value->m_username);
+    jsonObject.insert("language_code", value->m_language_code);
+    jsonObject.insert("can_join_groups", value->m_can_join_groups);
+    jsonObject.insert("can_read_all_group_messages", value->m_can_read_all_group_messages);
+    jsonObject.insert("supports_inline_queries", value->m_supports_inline_queries);
+
+    return jsonObject;
 }
 }

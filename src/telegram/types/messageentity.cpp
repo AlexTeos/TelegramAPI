@@ -1,8 +1,8 @@
 #include "messageentity.h"
 
-namespace TelegramApi
+namespace Telegram
 {
-void readValue(MessageEntity::Ptr& value, const QJsonObject& json, const QString& valueName)
+void readJsonObject(MessageEntity::Ptr& value, const QJsonObject& json, const QString& valueName)
 {
     if (json.contains(valueName) && json[valueName].isObject())
     {
@@ -10,12 +10,26 @@ void readValue(MessageEntity::Ptr& value, const QJsonObject& json, const QString
 
         QJsonObject object = json[valueName].toObject();
 
-        readValue(value->m_type, object, "type");
-        readValue(value->m_offset, object, "offset");
-        readValue(value->m_length, object, "length");
-        readValue(value->m_url, object, "url");
-        readValue(value->m_user, object, "user");
-        readValue(value->m_language, object, "language");
+        readJsonObject(value->m_type, object, "type");
+        readJsonObject(value->m_offset, object, "offset");
+        readJsonObject(value->m_length, object, "length");
+        readJsonObject(value->m_url, object, "url");
+        readJsonObject(value->m_user, object, "user");
+        readJsonObject(value->m_language, object, "language");
     }
+}
+
+QJsonValue toJsonValue(const MessageEntity::Ptr& value)
+{
+    QJsonObject jsonObject;
+
+    jsonObject.insert("type", value->m_type);
+    jsonObject.insert("offset", value->m_offset);
+    jsonObject.insert("length", value->m_length);
+    jsonObject.insert("url", value->m_url);
+    jsonObject.insert("user", toJsonValue(value->m_user));
+    jsonObject.insert("language", value->m_language);
+
+    return jsonObject;
 }
 }

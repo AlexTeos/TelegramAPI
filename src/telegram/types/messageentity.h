@@ -4,7 +4,7 @@
 #include "common.h"
 #include "user.h"
 
-namespace TelegramApi
+namespace Telegram
 {
 struct MessageEntity
 {
@@ -18,7 +18,8 @@ struct MessageEntity
     QString   m_language;
 };
 
-void readValue(MessageEntity::Ptr& value, const QJsonObject& json, const QString& valueName);
+void       readJsonObject(MessageEntity::Ptr& value, const QJsonObject& json, const QString& valueName);
+QJsonValue toJsonValue(const MessageEntity::Ptr& value);
 }
 
 #endif // MESSAGEENTITY_H

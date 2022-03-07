@@ -3,7 +3,7 @@
 
 #include "common.h"
 
-namespace TelegramApi
+namespace Telegram
 {
 struct MessageAutoDeleteTimerChanged
 {
@@ -12,6 +12,6 @@ struct MessageAutoDeleteTimerChanged
     qint64 m_message_auto_delete_time = 0;
 };
 
-void readValue(MessageAutoDeleteTimerChanged::Ptr& value, const QJsonObject& json, const QString& valueName);
+void readJsonObject(MessageAutoDeleteTimerChanged::Ptr& value, const QJsonObject& json, const QString& valueName);
 }
 #endif // MESSAGEAUTODELETETIMERCHANGED_H

@@ -3,7 +3,7 @@
 
 #include "common.h"
 
-namespace TelegramApi
+namespace Telegram
 {
 struct LoginUrl
 {
@@ -15,6 +15,7 @@ struct LoginUrl
     bool    m_request_write_access = false;
 };
 
-void readValue(LoginUrl::Ptr& value, const QJsonObject& json, const QString& valueName);
+void       readJsonObject(LoginUrl::Ptr& value, const QJsonObject& json, const QString& valueName);
+QJsonValue toJsonValue(const LoginUrl::Ptr& value);
 }
 #endif // LOGINURL_H

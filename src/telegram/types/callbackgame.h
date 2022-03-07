@@ -3,7 +3,7 @@
 
 #include "common.h"
 
-namespace TelegramApi
+namespace Telegram
 {
 struct CallbackGame
 {
@@ -18,6 +18,7 @@ struct CallbackGame
     QString m_inline_message_id;
 };
 
-void readValue(CallbackGame::Ptr& value, const QJsonObject& json, const QString& valueName);
+void       readJsonObject(CallbackGame::Ptr& value, const QJsonObject& json, const QString& valueName);
+QJsonValue toJsonValue(const CallbackGame::Ptr& value);
 }
 #endif // CALLBACKGAME_H

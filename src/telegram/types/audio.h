@@ -4,7 +4,7 @@
 #include "common.h"
 #include "photosize.h"
 
-namespace TelegramApi
+namespace Telegram
 {
 struct Audio
 {
@@ -21,7 +21,7 @@ struct Audio
     PhotoSize::Ptr m_thumb;
 };
 
-void readValue(Audio::Ptr& value, const QJsonObject& json, const QString& valueName);
+void readJsonObject(Audio::Ptr& value, const QJsonObject& json, const QString& valueName);
 }
 
 #endif // AUDIO_H

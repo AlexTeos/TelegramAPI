@@ -4,7 +4,7 @@
 #include "common.h"
 #include "orderinfo.h"
 
-namespace TelegramApi
+namespace Telegram
 {
 struct SuccessfulPayment
 {
@@ -19,6 +19,6 @@ struct SuccessfulPayment
     QString        m_provider_payment_charge_id;
 };
 
-void readValue(SuccessfulPayment::Ptr& value, const QJsonObject& json, const QString& valueName);
+void readJsonObject(SuccessfulPayment::Ptr& value, const QJsonObject& json, const QString& valueName);
 }
 #endif // SUCCESSFULPAYMENT_H

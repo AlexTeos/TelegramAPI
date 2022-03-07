@@ -1,8 +1,8 @@
 #include "messageautodeletetimerchanged.h"
 
-namespace TelegramApi
+namespace Telegram
 {
-void readValue(MessageAutoDeleteTimerChanged::Ptr& value, const QJsonObject& json, const QString& valueName)
+void readJsonObject(MessageAutoDeleteTimerChanged::Ptr& value, const QJsonObject& json, const QString& valueName)
 {
     if (json.contains(valueName) && json[valueName].isObject())
     {
@@ -10,7 +10,7 @@ void readValue(MessageAutoDeleteTimerChanged::Ptr& value, const QJsonObject& jso
 
         QJsonObject object = json[valueName].toObject();
 
-        readValue(value->m_message_auto_delete_time, object, "message_auto_delete_time");
+        readJsonObject(value->m_message_auto_delete_time, object, "message_auto_delete_time");
     }
 }
 }

@@ -1,8 +1,8 @@
 #include "passportdata.h"
 
-namespace TelegramApi
+namespace Telegram
 {
-void readValue(PassportData::Ptr& value, const QJsonObject& json, const QString& valueName)
+void readJsonObject(PassportData::Ptr& value, const QJsonObject& json, const QString& valueName)
 {
     if (json.contains(valueName) && json[valueName].isObject())
     {
@@ -10,8 +10,8 @@ void readValue(PassportData::Ptr& value, const QJsonObject& json, const QString&
 
         QJsonObject object = json[valueName].toObject();
 
-        readValue(value->m_data, object, "data");
-        readValue(value->m_credentials, object, "credentials");
+        readJsonObject(value->m_data, object, "data");
+        readJsonObject(value->m_credentials, object, "credentials");
     }
 }
 }

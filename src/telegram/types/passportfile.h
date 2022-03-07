@@ -3,7 +3,7 @@
 
 #include "common.h"
 
-namespace TelegramApi
+namespace Telegram
 {
 struct PassportFile
 {
@@ -15,7 +15,7 @@ struct PassportFile
     qint64  m_file_date = 0;
 };
 
-void readValue(PassportFile::Ptr& value, const QJsonObject& json, const QString& valueName);
+void readJsonObject(PassportFile::Ptr& value, const QJsonObject& json, const QString& valueName);
 }
 
 #endif // PASSPORTFILE_H

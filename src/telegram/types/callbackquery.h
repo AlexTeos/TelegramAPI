@@ -4,7 +4,7 @@
 #include "common.h"
 #include "message.h"
 
-namespace TelegramApi
+namespace Telegram
 {
 struct CallbackQuery
 {
@@ -19,6 +19,6 @@ struct CallbackQuery
     QString      m_game_short_name;
 };
 
-void readValue(CallbackQuery::Ptr& value, const QJsonObject& json, const QString& valueName);
+void readJsonObject(CallbackQuery::Ptr& value, const QJsonObject& json, const QString& valueName);
 }
 #endif // CALLBACKQUERY_H

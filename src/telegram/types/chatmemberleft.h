@@ -3,13 +3,13 @@
 
 #include "chatmember.h"
 
-namespace TelegramApi
+namespace Telegram
 {
 struct ChatMemberLeft : public ChatMember
 {
     typedef QSharedPointer<ChatMemberLeft> Ptr;
 };
 
-void readValue(ChatMemberLeft::Ptr& value, const QJsonObject& json, const QString& valueName);
+void readJsonObject(ChatMemberLeft::Ptr& value, const QJsonObject& json, const QString& valueName);
 }
 #endif // CHATMEMBERLEFT_H

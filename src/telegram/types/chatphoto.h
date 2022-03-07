@@ -3,7 +3,7 @@
 
 #include "common.h"
 
-namespace TelegramApi
+namespace Telegram
 {
 struct ChatPhoto
 {
@@ -15,7 +15,7 @@ struct ChatPhoto
     QString m_big_file_unique_id;
 };
 
-void readValue(ChatPhoto::Ptr& value, const QJsonObject& json, const QString& valueName);
+void readJsonObject(ChatPhoto::Ptr& value, const QJsonObject& json, const QString& valueName);
 }
 
 #endif // CHATPHOTO_H

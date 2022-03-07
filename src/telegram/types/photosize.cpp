@@ -1,8 +1,8 @@
 #include "photosize.h"
 
-namespace TelegramApi
+namespace Telegram
 {
-void readValue(PhotoSize::Ptr& value, const QJsonObject& json, const QString& valueName)
+void readJsonObject(PhotoSize::Ptr& value, const QJsonObject& json, const QString& valueName)
 {
     if (json.contains(valueName) && json[valueName].isObject())
     {
@@ -10,11 +10,11 @@ void readValue(PhotoSize::Ptr& value, const QJsonObject& json, const QString& va
 
         QJsonObject object = json[valueName].toObject();
 
-        readValue(value->m_file_id, object, "file_id");
-        readValue(value->m_file_unique_id, object, "file_unique_id");
-        readValue(value->m_width, object, "width");
-        readValue(value->m_height, object, "height");
-        readValue(value->m_file_size, object, "duration");
+        readJsonObject(value->m_file_id, object, "file_id");
+        readJsonObject(value->m_file_unique_id, object, "file_unique_id");
+        readJsonObject(value->m_width, object, "width");
+        readJsonObject(value->m_height, object, "height");
+        readJsonObject(value->m_file_size, object, "duration");
     }
 }
 }

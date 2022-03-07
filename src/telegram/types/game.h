@@ -6,7 +6,7 @@
 #include "messageentity.h"
 #include "photosize.h"
 
-namespace TelegramApi
+namespace Telegram
 {
 struct Game
 {
@@ -20,7 +20,7 @@ struct Game
     Animation::Ptr              m_animation;
 };
 
-void readValue(Game::Ptr& value, const QJsonObject& json, const QString& valueName);
+void readJsonObject(Game::Ptr& value, const QJsonObject& json, const QString& valueName);
 }
 
 #endif // GAME_H

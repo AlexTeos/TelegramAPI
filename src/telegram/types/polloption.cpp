@@ -1,8 +1,8 @@
 #include "polloption.h"
 
-namespace TelegramApi
+namespace Telegram
 {
-void readValue(PollOption::Ptr& value, const QJsonObject& json, const QString& valueName)
+void readJsonObject(PollOption::Ptr& value, const QJsonObject& json, const QString& valueName)
 {
     if (json.contains(valueName) && json[valueName].isObject())
     {
@@ -10,8 +10,8 @@ void readValue(PollOption::Ptr& value, const QJsonObject& json, const QString& v
 
         QJsonObject object = json[valueName].toObject();
 
-        readValue(value->m_text, object, "text");
-        readValue(value->m_voter_count, object, "voter_count");
+        readJsonObject(value->m_text, object, "text");
+        readJsonObject(value->m_voter_count, object, "voter_count");
     }
 }
 }

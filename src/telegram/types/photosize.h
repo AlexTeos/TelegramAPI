@@ -3,7 +3,7 @@
 
 #include "common.h"
 
-namespace TelegramApi
+namespace Telegram
 {
 struct PhotoSize
 {
@@ -16,7 +16,7 @@ struct PhotoSize
     qint64  m_file_size = 0;
 };
 
-void readValue(PhotoSize::Ptr& value, const QJsonObject& json, const QString& valueName);
+void readJsonObject(PhotoSize::Ptr& value, const QJsonObject& json, const QString& valueName);
 }
 
 #endif // PHOTOSIZE_H

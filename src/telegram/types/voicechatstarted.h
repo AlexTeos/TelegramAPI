@@ -3,13 +3,13 @@
 
 #include "common.h"
 
-namespace TelegramApi
+namespace Telegram
 {
 struct VoiceChatStarted
 {
     typedef QSharedPointer<VoiceChatStarted> Ptr;
 };
 
-void readValue(VoiceChatStarted::Ptr& value, const QJsonObject& json, const QString& valueName);
+void readJsonObject(VoiceChatStarted::Ptr& value, const QJsonObject& json, const QString& valueName);
 }
 #endif // VOICECHATSTARTED_H

@@ -3,7 +3,7 @@
 
 #include "chatmember.h"
 
-namespace TelegramApi
+namespace Telegram
 {
 struct ChatMemberAdministrator : public ChatMember
 {
@@ -24,6 +24,6 @@ struct ChatMemberAdministrator : public ChatMember
     QString m_custom_title;
 };
 
-void readValue(ChatMemberAdministrator::Ptr& value, const QJsonObject& json, const QString& valueName);
+void readJsonObject(ChatMemberAdministrator::Ptr& value, const QJsonObject& json, const QString& valueName);
 }
 #endif // CHATMEMBERADMINISTRATOR_H

@@ -4,7 +4,7 @@
 #include "common.h"
 #include "passportfile.h"
 
-namespace TelegramApi
+namespace Telegram
 {
 struct EncryptedPassportElement
 {
@@ -22,7 +22,7 @@ struct EncryptedPassportElement
     QString                    m_hash;
 };
 
-void readValue(EncryptedPassportElement::Ptr& value, const QJsonObject& json, const QString& valueName);
+void readJsonObject(EncryptedPassportElement::Ptr& value, const QJsonObject& json, const QString& valueName);
 }
 
 #endif // ENCRYPTEDPASSPORTELEMENT_H

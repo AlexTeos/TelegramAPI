@@ -5,7 +5,7 @@
 #include "encryptedcredentials.h"
 #include "encryptedpassportelement.h"
 
-namespace TelegramApi
+namespace Telegram
 {
 struct PassportData
 {
@@ -15,6 +15,6 @@ struct PassportData
     EncryptedCredentials::Ptr              m_credentials;
 };
 
-void readValue(PassportData::Ptr& value, const QJsonObject& json, const QString& valueName);
+void readJsonObject(PassportData::Ptr& value, const QJsonObject& json, const QString& valueName);
 }
 #endif // PASSPORTDATA_H

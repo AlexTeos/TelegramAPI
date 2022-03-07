@@ -1,8 +1,8 @@
 #include "dice.h"
 
-namespace TelegramApi
+namespace Telegram
 {
-void readValue(Dice::Ptr& value, const QJsonObject& json, const QString& valueName)
+void readJsonObject(Dice::Ptr& value, const QJsonObject& json, const QString& valueName)
 {
     if (json.contains(valueName) && json[valueName].isObject())
     {
@@ -10,8 +10,8 @@ void readValue(Dice::Ptr& value, const QJsonObject& json, const QString& valueNa
 
         QJsonObject object = json[valueName].toObject();
 
-        readValue(value->m_emoji, object, "emoji");
-        readValue(value->m_value, object, "value");
+        readJsonObject(value->m_emoji, object, "emoji");
+        readJsonObject(value->m_value, object, "value");
     }
 }
 }

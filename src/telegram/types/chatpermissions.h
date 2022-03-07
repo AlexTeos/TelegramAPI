@@ -3,7 +3,7 @@
 
 #include "common.h"
 
-namespace TelegramApi
+namespace Telegram
 {
 struct ChatPermissions
 {
@@ -19,7 +19,7 @@ struct ChatPermissions
     bool m_can_pin_messages          = false;
 };
 
-void readValue(ChatPermissions::Ptr& value, const QJsonObject& json, const QString& valueName);
+void readJsonObject(ChatPermissions::Ptr& value, const QJsonObject& json, const QString& valueName);
 }
 
 #endif // CHATPERMISSIONS_H

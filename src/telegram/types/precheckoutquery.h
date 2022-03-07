@@ -5,7 +5,7 @@
 #include "orderinfo.h"
 #include "user.h"
 
-namespace TelegramApi
+namespace Telegram
 {
 struct PreCheckoutQuery
 {
@@ -20,6 +20,6 @@ struct PreCheckoutQuery
     OrderInfo::Ptr m_order_info;
 };
 
-void readValue(PreCheckoutQuery::Ptr& value, const QJsonObject& json, const QString& valueName);
+void readJsonObject(PreCheckoutQuery::Ptr& value, const QJsonObject& json, const QString& valueName);
 }
 #endif // PRECHECKOUTQUERY_H

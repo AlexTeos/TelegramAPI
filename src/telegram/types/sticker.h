@@ -5,7 +5,7 @@
 #include "maskposition.h"
 #include "photosize.h"
 
-namespace TelegramApi
+namespace Telegram
 {
 struct Sticker
 {
@@ -24,7 +24,7 @@ struct Sticker
     qint64            m_file_size = 0;
 };
 
-void readValue(Sticker::Ptr& value, const QJsonObject& json, const QString& valueName);
+void readJsonObject(Sticker::Ptr& value, const QJsonObject& json, const QString& valueName);
 }
 
 #endif // STICKER_H

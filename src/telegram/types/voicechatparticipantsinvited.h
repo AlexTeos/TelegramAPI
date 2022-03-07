@@ -4,7 +4,7 @@
 #include "common.h"
 #include "user.h"
 
-namespace TelegramApi
+namespace Telegram
 {
 struct VoiceChatParticipantsInvited
 {
@@ -13,7 +13,7 @@ struct VoiceChatParticipantsInvited
     QVector<User::Ptr> m_users;
 };
 
-void readValue(VoiceChatParticipantsInvited::Ptr& value, const QJsonObject& json, const QString& valueName);
+void readJsonObject(VoiceChatParticipantsInvited::Ptr& value, const QJsonObject& json, const QString& valueName);
 }
 
 #endif // VOICECHATPARTICIPANTSINVITED_H

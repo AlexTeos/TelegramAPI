@@ -4,7 +4,7 @@
 #include "common.h"
 #include "location.h"
 
-namespace TelegramApi
+namespace Telegram
 {
 struct ChatLocation
 {
@@ -14,7 +14,7 @@ struct ChatLocation
     QString       m_address;
 };
 
-void readValue(ChatLocation::Ptr& value, const QJsonObject& json, const QString& valueName);
+void readJsonObject(ChatLocation::Ptr& value, const QJsonObject& json, const QString& valueName);
 }
 
 #endif // CHATLOCATION_H

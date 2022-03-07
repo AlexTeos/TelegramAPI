@@ -5,7 +5,7 @@
 #include "common.h"
 #include "loginurl.h"
 
-namespace TelegramApi
+namespace Telegram
 {
 struct InlineKeyboardButton
 {
@@ -21,7 +21,8 @@ struct InlineKeyboardButton
     bool              m_pay = false;
 };
 
-void readValue(InlineKeyboardButton::Ptr& value, const QJsonObject& json, const QString& valueName);
+void       readJsonObject(InlineKeyboardButton::Ptr& value, const QJsonObject& json, const QString& valueName);
+QJsonValue toJsonValue(const InlineKeyboardButton::Ptr& value);
 }
 
 #endif // INLINEKEYBOARDBUTTON_H

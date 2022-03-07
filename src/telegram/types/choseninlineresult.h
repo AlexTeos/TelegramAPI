@@ -5,7 +5,7 @@
 #include "location.h"
 #include "user.h"
 
-namespace TelegramApi
+namespace Telegram
 {
 struct ChosenInlineResult
 {
@@ -18,7 +18,7 @@ struct ChosenInlineResult
     QString       m_query;
 };
 
-void readValue(ChosenInlineResult::Ptr& value, const QJsonObject& json, const QString& valueName);
+void readJsonObject(ChosenInlineResult::Ptr& value, const QJsonObject& json, const QString& valueName);
 }
 
 #endif // CHOSENINLINERESULT_H

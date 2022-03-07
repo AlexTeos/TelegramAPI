@@ -1,8 +1,8 @@
 #include "chatmemberowner.h"
 
-namespace TelegramApi
+namespace Telegram
 {
-void readValue(ChatMemberOwner::Ptr& value, const QJsonObject& json, const QString& valueName)
+void readJsonObject(ChatMemberOwner::Ptr& value, const QJsonObject& json, const QString& valueName)
 {
     if (json.contains(valueName) && json[valueName].isObject())
     {
@@ -10,8 +10,8 @@ void readValue(ChatMemberOwner::Ptr& value, const QJsonObject& json, const QStri
 
         QJsonObject object = json[valueName].toObject();
 
-        readValue(value->m_is_anonymous, object, "is_anonymous");
-        readValue(value->m_custom_title, object, "custom_title");
+        readJsonObject(value->m_is_anonymous, object, "is_anonymous");
+        readJsonObject(value->m_custom_title, object, "custom_title");
     }
 }
 }

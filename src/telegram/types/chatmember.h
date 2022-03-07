@@ -4,7 +4,7 @@
 #include "common.h"
 #include "user.h"
 
-namespace TelegramApi
+namespace Telegram
 {
 struct ChatMember
 {
@@ -14,6 +14,6 @@ struct ChatMember
     User::Ptr m_user;
 };
 
-void readValue(ChatMember::Ptr& value, const QJsonObject& json, const QString& valueName);
+void readJsonObject(ChatMember::Ptr& value, const QJsonObject& json, const QString& valueName);
 }
 #endif // CHATMEMBER_H

@@ -7,6 +7,7 @@ CONFIG -= app_bundle
 TEMPLATE = app
 
 SOURCES += \
+    ../src/telegram/api.cpp \
     ../src/telegram/types/animation.cpp \
     ../src/telegram/types/audio.cpp \
     ../src/telegram/types/callbackgame.cpp \
@@ -32,11 +33,14 @@ SOURCES += \
     ../src/telegram/types/document.cpp \
     ../src/telegram/types/encryptedcredentials.cpp \
     ../src/telegram/types/encryptedpassportelement.cpp \
+    ../src/telegram/types/forcereply.cpp \
     ../src/telegram/types/game.cpp \
     ../src/telegram/types/inlinekeyboardbutton.cpp \
     ../src/telegram/types/inlinekeyboardmarkup.cpp \
     ../src/telegram/types/inlinequery.cpp \
     ../src/telegram/types/invoice.cpp \
+    ../src/telegram/types/keyboardbutton.cpp \
+    ../src/telegram/types/keyboardbuttonpolltype.cpp \
     ../src/telegram/types/location.cpp \
     ../src/telegram/types/loginurl.cpp \
     ../src/telegram/types/maskposition.cpp \
@@ -52,6 +56,8 @@ SOURCES += \
     ../src/telegram/types/polloption.cpp \
     ../src/telegram/types/precheckoutquery.cpp \
     ../src/telegram/types/proximityalerttriggered.cpp \
+    ../src/telegram/types/replykeyboardmarkup.cpp \
+    ../src/telegram/types/replykeyboardremove.cpp \
     ../src/telegram/types/shippingaddress.cpp \
     ../src/telegram/types/shippingquery.cpp \
     ../src/telegram/types/sticker.cpp \
@@ -67,9 +73,11 @@ SOURCES += \
     ../src/telegram/types/voicechatscheduled.cpp \
     ../src/telegram/types/voicechatstarted.cpp \
     main.cpp \
-    telegram/tst_telegramapi.cpp \
+    telegram/tst_telegrammethods.cpp \
+    telegram/tst_telegramtypes.cpp
 
 HEADERS += \
+    ../src/telegram/api.h \
     ../src/telegram/types/animation.h \
     ../src/telegram/types/audio.h \
     ../src/telegram/types/callbackgame.h \
@@ -95,11 +103,14 @@ HEADERS += \
     ../src/telegram/types/document.h \
     ../src/telegram/types/encryptedcredentials.h \
     ../src/telegram/types/encryptedpassportelement.h \
+    ../src/telegram/types/forcereply.h \
     ../src/telegram/types/game.h \
     ../src/telegram/types/inlinekeyboardbutton.h \
     ../src/telegram/types/inlinekeyboardmarkup.h \
     ../src/telegram/types/inlinequery.h \
     ../src/telegram/types/invoice.h \
+    ../src/telegram/types/keyboardbutton.h \
+    ../src/telegram/types/keyboardbuttonpolltype.h \
     ../src/telegram/types/location.h \
     ../src/telegram/types/loginurl.h \
     ../src/telegram/types/maskposition.h \
@@ -115,6 +126,8 @@ HEADERS += \
     ../src/telegram/types/polloption.h \
     ../src/telegram/types/precheckoutquery.h \
     ../src/telegram/types/proximityalerttriggered.h \
+    ../src/telegram/types/replykeyboardmarkup.h \
+    ../src/telegram/types/replykeyboardremove.h \
     ../src/telegram/types/shippingaddress.h \
     ../src/telegram/types/shippingquery.h \
     ../src/telegram/types/sticker.h \
@@ -129,4 +142,5 @@ HEADERS += \
     ../src/telegram/types/voicechatparticipantsinvited.h \
     ../src/telegram/types/voicechatscheduled.h \
     ../src/telegram/types/voicechatstarted.h \
-    telegram/tst_telegramapi.h \
+    telegram/tst_telegrammethods.h \
+    telegram/tst_telegramtypes.h

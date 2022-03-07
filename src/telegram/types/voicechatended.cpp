@@ -1,8 +1,8 @@
 #include "voicechatended.h"
 
-namespace TelegramApi
+namespace Telegram
 {
-void readValue(VoiceChatEnded::Ptr& value, const QJsonObject& json, const QString& valueName)
+void readJsonObject(VoiceChatEnded::Ptr& value, const QJsonObject& json, const QString& valueName)
 {
     if (json.contains(valueName) && json[valueName].isObject())
     {
@@ -10,7 +10,7 @@ void readValue(VoiceChatEnded::Ptr& value, const QJsonObject& json, const QStrin
 
         QJsonObject object = json[valueName].toObject();
 
-        readValue(value->m_duration, object, "duration");
+        readJsonObject(value->m_duration, object, "duration");
     }
 }
 }

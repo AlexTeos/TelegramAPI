@@ -13,7 +13,7 @@
 #include "precheckoutquery.h"
 #include "shippingquery.h"
 
-namespace TelegramApi
+namespace Telegram
 {
 struct Update
 {
@@ -36,7 +36,7 @@ struct Update
     ChatJoinRequest::Ptr    m_chat_join_request;
 };
 
-void readValue(Update::Ptr& value, const QJsonObject& json, const QString& valueName);
+void readJsonObject(Update::Ptr& value, const QJsonObject& json, const QString& valueName);
 }
 
 #endif // UPDATE_H

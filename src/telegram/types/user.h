@@ -3,7 +3,7 @@
 
 #include "common.h"
 
-namespace TelegramApi
+namespace Telegram
 {
 struct User
 {
@@ -20,7 +20,8 @@ struct User
     bool    m_supports_inline_queries     = false;
 };
 
-void readValue(User::Ptr& value, const QJsonObject& json, const QString& valueName);
+void       readJsonObject(User::Ptr& value, const QJsonObject& json, const QString& valueName);
+QJsonValue toJsonValue(const User::Ptr& value);
 }
 
 #endif // USER_H

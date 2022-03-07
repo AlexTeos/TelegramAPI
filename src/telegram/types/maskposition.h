@@ -3,7 +3,7 @@
 
 #include "common.h"
 
-namespace TelegramApi
+namespace Telegram
 {
 struct MaskPosition
 {
@@ -15,7 +15,7 @@ struct MaskPosition
     double   m_scale   = 0;
 };
 
-void readValue(MaskPosition::Ptr& value, const QJsonObject& json, const QString& valueName);
+void readJsonObject(MaskPosition::Ptr& value, const QJsonObject& json, const QString& valueName);
 }
 
 #endif // MASKPOSITION_H

@@ -1,8 +1,8 @@
 #include "encryptedcredentials.h"
 
-namespace TelegramApi
+namespace Telegram
 {
-void readValue(EncryptedCredentials::Ptr& value, const QJsonObject& json, const QString& valueName)
+void readJsonObject(EncryptedCredentials::Ptr& value, const QJsonObject& json, const QString& valueName)
 {
     if (json.contains(valueName) && json[valueName].isObject())
     {
@@ -10,9 +10,9 @@ void readValue(EncryptedCredentials::Ptr& value, const QJsonObject& json, const 
 
         QJsonObject object = json[valueName].toObject();
 
-        readValue(value->m_data, object, "data");
-        readValue(value->m_hash, object, "hash");
-        readValue(value->m_secret, object, "secret");
+        readJsonObject(value->m_data, object, "data");
+        readJsonObject(value->m_hash, object, "hash");
+        readJsonObject(value->m_secret, object, "secret");
     }
 }
 }

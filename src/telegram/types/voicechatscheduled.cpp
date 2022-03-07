@@ -1,8 +1,8 @@
 #include "voicechatscheduled.h"
 
-namespace TelegramApi
+namespace Telegram
 {
-void readValue(VoiceChatScheduled::Ptr& value, const QJsonObject& json, const QString& valueName)
+void readJsonObject(VoiceChatScheduled::Ptr& value, const QJsonObject& json, const QString& valueName)
 {
     if (json.contains(valueName) && json[valueName].isObject())
     {
@@ -10,7 +10,7 @@ void readValue(VoiceChatScheduled::Ptr& value, const QJsonObject& json, const QS
 
         QJsonObject object = json[valueName].toObject();
 
-        readValue(value->m_start_date, object, "start_date");
+        readJsonObject(value->m_start_date, object, "start_date");
     }
 }
 }

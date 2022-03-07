@@ -4,7 +4,7 @@
 #include "common.h"
 #include "user.h"
 
-namespace TelegramApi
+namespace Telegram
 {
 struct ChatInviteLink
 {
@@ -21,6 +21,6 @@ struct ChatInviteLink
     qint64    m_pending_join_request_count = 0;
 };
 
-void readValue(ChatInviteLink::Ptr& value, const QJsonObject& json, const QString& valueName);
+void readJsonObject(ChatInviteLink::Ptr& value, const QJsonObject& json, const QString& valueName);
 }
 #endif // CHATINVITELINK_H

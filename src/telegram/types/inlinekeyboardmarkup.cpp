@@ -1,8 +1,8 @@
 #include "inlinekeyboardmarkup.h"
 
-namespace TelegramApi
+namespace Telegram
 {
-void readValue(InlineKeyboardMarkup::Ptr& value, const QJsonObject& json, const QString& valueName)
+void readJsonObject(InlineKeyboardMarkup::Ptr& value, const QJsonObject& json, const QString& valueName)
 {
     if (json.contains(valueName) && json[valueName].isObject())
     {
@@ -10,7 +10,17 @@ void readValue(InlineKeyboardMarkup::Ptr& value, const QJsonObject& json, const 
 
         QJsonObject object = json[valueName].toObject();
 
-        readValue(value->m_inline_keyboard, object, "inline_keyboard");
+        readJsonObject(value->m_inline_keyboard, object, "inline_keyboard");
     }
 }
+
+QJsonValue toJsonValue(const InlineKeyboardMarkup::Ptr& value)
+{
+    QJsonObject jsonObject;
+
+    jsonObject.insert("inline_keyboard", toJsonValue(value->m_inline_keyboard));
+
+    return jsonObject;
+}
+
 }

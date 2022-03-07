@@ -3,7 +3,7 @@
 
 #include "chatmember.h"
 
-namespace TelegramApi
+namespace Telegram
 {
 struct ChatMemberRestricted : public ChatMember
 {
@@ -21,6 +21,6 @@ struct ChatMemberRestricted : public ChatMember
     qint64 m_until_date                = 0;
 };
 
-void readValue(ChatMemberRestricted::Ptr& value, const QJsonObject& json, const QString& valueName);
+void readJsonObject(ChatMemberRestricted::Ptr& value, const QJsonObject& json, const QString& valueName);
 }
 #endif // CHATMEMBERRESTRICTED_H

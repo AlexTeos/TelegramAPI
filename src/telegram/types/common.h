@@ -5,15 +5,15 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 
-namespace TelegramApi
+namespace Telegram
 {
-void readValue(QString& value, const QJsonObject& json, const QString& valueName);
-void readValue(qint64& value, const QJsonObject& json, const QString& valueName);
-void readValue(bool& value, const QJsonObject& json, const QString& valueName);
-void readValue(double& value, const QJsonObject& json, const QString& valueName);
+void readJsonObject(QString& value, const QJsonObject& json, const QString& valueName);
+void readJsonObject(qint64& value, const QJsonObject& json, const QString& valueName);
+void readJsonObject(bool& value, const QJsonObject& json, const QString& valueName);
+void readJsonObject(double& value, const QJsonObject& json, const QString& valueName);
 
 template <typename T>
-void readValue(QVector<T>& valueArray, const QJsonObject& json, const QString& valueName)
+void readJsonObject(QVector<T>& valueArray, const QJsonObject& json, const QString& valueName)
 {
     if (json.contains(valueName) && json[valueName].isArray())
     {
@@ -46,9 +46,25 @@ void readValue(QVector<T>& valueArray, const QJsonObject& json, const QString& v
             {
                 object = QJsonObject{{valueName, jsonArrayIter->toBool()}};
             }
-            readValue(*valueArrayIter, object, valueName);
+            readJsonObject(*valueArrayIter, object, valueName);
         }
     }
+}
+
+QJsonValue toJsonValue(const QString& value);
+QJsonValue toJsonValue(const qint64& value);
+QJsonValue toJsonValue(const bool& value);
+QJsonValue toJsonValue(const double& value);
+
+template <typename T>
+QJsonValue toJsonValue(const QVector<T>& valueArray)
+{
+    QJsonArray jsonArray;
+
+    for (auto valueArrayIter = valueArray.begin(); valueArrayIter != valueArray.end(); ++valueArrayIter)
+        jsonArray.append(toJsonValue(*valueArrayIter));
+
+    return jsonArray;
 }
 }
 

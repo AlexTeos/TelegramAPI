@@ -4,7 +4,7 @@
 #include "common.h"
 #include "location.h"
 
-namespace TelegramApi
+namespace Telegram
 {
 struct Venue
 {
@@ -19,6 +19,6 @@ struct Venue
     QString       m_google_place_type;
 };
 
-void readValue(Venue::Ptr& value, const QJsonObject& json, const QString& valueName);
+void readJsonObject(Venue::Ptr& value, const QJsonObject& json, const QString& valueName);
 }
 #endif // VENUE_H

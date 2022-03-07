@@ -3,7 +3,7 @@
 
 #include "common.h"
 
-namespace TelegramApi
+namespace Telegram
 {
 struct Invoice
 {
@@ -16,6 +16,6 @@ struct Invoice
     qint64  m_total_amount = 0;
 };
 
-void readValue(Invoice::Ptr& value, const QJsonObject& json, const QString& valueName);
+void readJsonObject(Invoice::Ptr& value, const QJsonObject& json, const QString& valueName);
 }
 #endif // INVOICE_H

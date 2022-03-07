@@ -4,7 +4,7 @@
 #include "common.h"
 #include "user.h"
 
-namespace TelegramApi
+namespace Telegram
 {
 struct PollAnswer
 {
@@ -15,6 +15,6 @@ struct PollAnswer
     QVector<qint64> m_option_ids;
 };
 
-void readValue(PollAnswer::Ptr& value, const QJsonObject& json, const QString& valueName);
+void readJsonObject(PollAnswer::Ptr& value, const QJsonObject& json, const QString& valueName);
 }
 #endif // POLLANSWER_H

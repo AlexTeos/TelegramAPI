@@ -6,7 +6,7 @@
 #include "chatphoto.h"
 #include "common.h"
 
-namespace TelegramApi
+namespace Telegram
 {
 struct Message;
 
@@ -36,7 +36,7 @@ struct Chat
     ChatLocation::Ptr       m_location;
 };
 
-void readValue(Chat::Ptr& value, const QJsonObject& json, const QString& valueName);
+void readJsonObject(Chat::Ptr& value, const QJsonObject& json, const QString& valueName);
 }
 
 #endif // CHAT_H

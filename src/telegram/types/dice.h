@@ -2,7 +2,7 @@
 #define DICE_H
 #include "common.h"
 
-namespace TelegramApi
+namespace Telegram
 {
 struct Dice
 {
@@ -12,7 +12,7 @@ struct Dice
     qint64  m_value = 0;
 };
 
-void readValue(Dice::Ptr& value, const QJsonObject& json, const QString& valueName);
+void readJsonObject(Dice::Ptr& value, const QJsonObject& json, const QString& valueName);
 }
 
 #endif // DICE_H

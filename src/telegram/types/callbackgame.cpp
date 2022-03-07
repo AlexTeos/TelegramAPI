@@ -1,8 +1,8 @@
 #include "callbackgame.h"
 
-namespace TelegramApi
+namespace Telegram
 {
-void readValue(CallbackGame::Ptr& value, const QJsonObject& json, const QString& valueName)
+void readJsonObject(CallbackGame::Ptr& value, const QJsonObject& json, const QString& valueName)
 {
     if (json.contains(valueName) && json[valueName].isObject())
     {
@@ -10,13 +10,28 @@ void readValue(CallbackGame::Ptr& value, const QJsonObject& json, const QString&
 
         QJsonObject object = json[valueName].toObject();
 
-        readValue(value->m_user_id, object, "user_id");
-        readValue(value->m_score, object, "score");
-        readValue(value->m_force, object, "force");
-        readValue(value->m_disable_edit_message, object, "disable_edit_message");
-        readValue(value->m_chat_id, object, "chat_id");
-        readValue(value->m_message_id, object, "message_id");
-        readValue(value->m_inline_message_id, object, "inline_message_id");
+        readJsonObject(value->m_user_id, object, "user_id");
+        readJsonObject(value->m_score, object, "score");
+        readJsonObject(value->m_force, object, "force");
+        readJsonObject(value->m_disable_edit_message, object, "disable_edit_message");
+        readJsonObject(value->m_chat_id, object, "chat_id");
+        readJsonObject(value->m_message_id, object, "message_id");
+        readJsonObject(value->m_inline_message_id, object, "inline_message_id");
     }
+}
+
+QJsonValue toJsonValue(const CallbackGame::Ptr& value)
+{
+    QJsonObject jsonObject;
+
+    jsonObject.insert("user_id", value->m_user_id);
+    jsonObject.insert("score", value->m_score);
+    jsonObject.insert("force", value->m_force);
+    jsonObject.insert("disable_edit_message", value->m_disable_edit_message);
+    jsonObject.insert("chat_id", value->m_chat_id);
+    jsonObject.insert("message_id", value->m_message_id);
+    jsonObject.insert("inline_message_id", value->m_inline_message_id);
+
+    return jsonObject;
 }
 }

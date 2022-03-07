@@ -1,8 +1,8 @@
 #include "choseninlineresult.h"
 
-namespace TelegramApi
+namespace Telegram
 {
-void readValue(ChosenInlineResult::Ptr& value, const QJsonObject& json, const QString& valueName)
+void readJsonObject(ChosenInlineResult::Ptr& value, const QJsonObject& json, const QString& valueName)
 {
     if (json.contains(valueName) && json[valueName].isObject())
     {
@@ -10,11 +10,11 @@ void readValue(ChosenInlineResult::Ptr& value, const QJsonObject& json, const QS
 
         QJsonObject object = json[valueName].toObject();
 
-        readValue(value->m_result_id, object, "result_id");
-        readValue(value->m_from, object, "from");
-        readValue(value->m_location, object, "locatio");
-        readValue(value->m_inline_message_id, object, "inline_message_id");
-        readValue(value->m_query, object, "query");
+        readJsonObject(value->m_result_id, object, "result_id");
+        readJsonObject(value->m_from, object, "from");
+        readJsonObject(value->m_location, object, "locatio");
+        readJsonObject(value->m_inline_message_id, object, "inline_message_id");
+        readJsonObject(value->m_query, object, "query");
     }
 }
 }

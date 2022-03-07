@@ -1,8 +1,8 @@
 #include "orderinfo.h"
 
-namespace TelegramApi
+namespace Telegram
 {
-void readValue(OrderInfo::Ptr& value, const QJsonObject& json, const QString& valueName)
+void readJsonObject(OrderInfo::Ptr& value, const QJsonObject& json, const QString& valueName)
 {
     if (json.contains(valueName) && json[valueName].isObject())
     {
@@ -10,10 +10,10 @@ void readValue(OrderInfo::Ptr& value, const QJsonObject& json, const QString& va
 
         QJsonObject object = json[valueName].toObject();
 
-        readValue(value->m_name, object, "name");
-        readValue(value->m_phone_number, object, "phone_number");
-        readValue(value->m_email, object, "email");
-        readValue(value->m_shipping_address, object, "shipping_address");
+        readJsonObject(value->m_name, object, "name");
+        readJsonObject(value->m_phone_number, object, "phone_number");
+        readJsonObject(value->m_email, object, "email");
+        readJsonObject(value->m_shipping_address, object, "shipping_address");
     }
 }
 }

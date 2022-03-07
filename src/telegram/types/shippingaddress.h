@@ -3,7 +3,7 @@
 
 #include "common.h"
 
-namespace TelegramApi
+namespace Telegram
 {
 struct ShippingAddress
 {
@@ -17,6 +17,6 @@ struct ShippingAddress
     QString m_post_code;
 };
 
-void readValue(ShippingAddress::Ptr& value, const QJsonObject& json, const QString& valueName);
+void readJsonObject(ShippingAddress::Ptr& value, const QJsonObject& json, const QString& valueName);
 }
 #endif // SHIPPINGADDRESS_H

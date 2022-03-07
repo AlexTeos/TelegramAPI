@@ -1,8 +1,8 @@
 #include "chatlocation.h"
 
-namespace TelegramApi
+namespace Telegram
 {
-void readValue(ChatLocation::Ptr& value, const QJsonObject& json, const QString& valueName)
+void readJsonObject(ChatLocation::Ptr& value, const QJsonObject& json, const QString& valueName)
 {
     if (json.contains(valueName) && json[valueName].isObject())
     {
@@ -10,8 +10,8 @@ void readValue(ChatLocation::Ptr& value, const QJsonObject& json, const QString&
 
         QJsonObject object = json[valueName].toObject();
 
-        readValue(value->m_location, object, "location");
-        readValue(value->m_address, object, "address");
+        readJsonObject(value->m_location, object, "location");
+        readJsonObject(value->m_address, object, "address");
     }
 }
 }

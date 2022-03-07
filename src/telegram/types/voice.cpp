@@ -1,8 +1,8 @@
 #include "voice.h"
 
-namespace TelegramApi
+namespace Telegram
 {
-void readValue(Voice::Ptr& value, const QJsonObject& json, const QString& valueName)
+void readJsonObject(Voice::Ptr& value, const QJsonObject& json, const QString& valueName)
 {
     if (json.contains(valueName) && json[valueName].isObject())
     {
@@ -10,11 +10,11 @@ void readValue(Voice::Ptr& value, const QJsonObject& json, const QString& valueN
 
         QJsonObject object = json[valueName].toObject();
 
-        readValue(value->m_file_id, object, "file_id");
-        readValue(value->m_file_unique_id, object, "file_unique_id");
-        readValue(value->m_duration, object, "duration");
-        readValue(value->m_mime_type, object, "mime_type");
-        readValue(value->m_file_size, object, "file_size");
+        readJsonObject(value->m_file_id, object, "file_id");
+        readJsonObject(value->m_file_unique_id, object, "file_unique_id");
+        readJsonObject(value->m_duration, object, "duration");
+        readJsonObject(value->m_mime_type, object, "mime_type");
+        readJsonObject(value->m_file_size, object, "file_size");
     }
 }
 }
