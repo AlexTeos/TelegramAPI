@@ -26,11 +26,11 @@ QJsonValue toJsonValue(const CallbackGame::Ptr& value)
 
     jsonObject.insert("user_id", value->m_user_id);
     jsonObject.insert("score", value->m_score);
-    jsonObject.insert("force", value->m_force);
-    jsonObject.insert("disable_edit_message", value->m_disable_edit_message);
-    jsonObject.insert("chat_id", value->m_chat_id);
-    jsonObject.insert("message_id", value->m_message_id);
-    jsonObject.insert("inline_message_id", value->m_inline_message_id);
+    if (value->m_force) jsonObject.insert("force", value->m_force.value());
+    if (value->m_disable_edit_message) jsonObject.insert("disable_edit_message", value->m_disable_edit_message.value());
+    if (value->m_chat_id) jsonObject.insert("chat_id", value->m_chat_id.value());
+    if (value->m_message_id) jsonObject.insert("message_id", value->m_message_id.value());
+    if (value->m_inline_message_id) jsonObject.insert("inline_message_id", value->m_inline_message_id.value());
 
     return jsonObject;
 }

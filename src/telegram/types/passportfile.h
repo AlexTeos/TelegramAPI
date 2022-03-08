@@ -11,8 +11,8 @@ struct PassportFile
 
     QString m_file_id;
     QString m_file_unique_id;
-    qint64  m_file_size = 0;
-    qint64  m_file_date = 0;
+    qint64  m_file_size;
+    qint64  m_file_date;
 };
 
 void readJsonObject(PassportFile::Ptr& value, const QJsonObject& json, const QString& valueName);

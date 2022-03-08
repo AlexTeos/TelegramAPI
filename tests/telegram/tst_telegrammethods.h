@@ -11,7 +11,9 @@ private slots:
     void initTestCase();
     void cleanupTestCase();
     void testApiSendMessage();
+    void testApiSendMessageComplicated();
 
 private:
     Telegram::Api m_api;
+    qint64        m_user_id = 295590000;
 };

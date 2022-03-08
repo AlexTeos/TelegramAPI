@@ -9,8 +9,8 @@ struct ChatMemberOwner : public ChatMember
 {
     typedef QSharedPointer<ChatMemberOwner> Ptr;
 
-    bool    m_is_anonymous = false;
-    QString m_custom_title;
+    bool                   m_is_anonymous;
+    std::optional<QString> m_custom_title;
 };
 
 void readJsonObject(ChatMemberOwner::Ptr& value, const QJsonObject& json, const QString& valueName);

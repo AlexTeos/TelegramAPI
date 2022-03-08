@@ -9,7 +9,7 @@ struct VoiceChatEnded
 {
     typedef QSharedPointer<VoiceChatEnded> Ptr;
 
-    qint64 m_duration = 0;
+    qint64 m_duration;
 };
 
 void readJsonObject(VoiceChatEnded::Ptr& value, const QJsonObject& json, const QString& valueName);

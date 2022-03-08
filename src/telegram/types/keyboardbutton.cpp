@@ -22,9 +22,9 @@ QJsonObject toJsonValue(const KeyboardButton::Ptr& value)
     QJsonObject jsonObject;
 
     jsonObject.insert("text", value->m_text);
-    jsonObject.insert("request_contact", value->m_request_contact);
-    jsonObject.insert("request_location", value->m_request_location);
-    jsonObject.insert("request_poll", toJsonValue(value->m_request_poll));
+    if (value->m_request_contact) jsonObject.insert("request_contact", value->m_request_contact.value());
+    if (value->m_request_location) jsonObject.insert("request_location", value->m_request_location.value());
+    if (value->m_request_poll) jsonObject.insert("request_poll", toJsonValue(value->m_request_poll));
 
     return jsonObject;
 }

@@ -20,8 +20,9 @@ QJsonValue toJsonValue(const ForceReply::Ptr& value)
     QJsonObject jsonObject;
 
     jsonObject.insert("force_reply", value->m_force_reply);
-    jsonObject.insert("input_field_placeholder", value->m_input_field_placeholder);
-    jsonObject.insert("selective", value->m_selective);
+    if (value->m_input_field_placeholder)
+        jsonObject.insert("input_field_placeholder", value->m_input_field_placeholder.value());
+    if (value->m_selective) jsonObject.insert("selective", value->m_selective.value());
 
     return jsonObject;
 }

@@ -9,7 +9,7 @@ struct MessageAutoDeleteTimerChanged
 {
     typedef QSharedPointer<MessageAutoDeleteTimerChanged> Ptr;
 
-    qint64 m_message_auto_delete_time = 0;
+    qint64 m_message_auto_delete_time;
 };
 
 void readJsonObject(MessageAutoDeleteTimerChanged::Ptr& value, const QJsonObject& json, const QString& valueName);

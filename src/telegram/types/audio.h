@@ -10,15 +10,15 @@ struct Audio
 {
     typedef QSharedPointer<Audio> Ptr;
 
-    QString        m_file_id;
-    QString        m_file_unique_id;
-    qint64         m_duration = 0;
-    QString        m_performer;
-    QString        m_title;
-    QString        m_file_name;
-    QString        m_mime_type;
-    qint64         m_file_size = 0;
-    PhotoSize::Ptr m_thumb;
+    QString                m_file_id;
+    QString                m_file_unique_id;
+    qint64                 m_duration;
+    std::optional<QString> m_performer;
+    std::optional<QString> m_title;
+    std::optional<QString> m_file_name;
+    std::optional<QString> m_mime_type;
+    std::optional<qint64>  m_file_size;
+    PhotoSize::Ptr         m_thumb;
 };
 
 void readJsonObject(Audio::Ptr& value, const QJsonObject& json, const QString& valueName);

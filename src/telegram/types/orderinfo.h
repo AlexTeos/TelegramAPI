@@ -10,10 +10,10 @@ struct OrderInfo
 {
     typedef QSharedPointer<OrderInfo> Ptr;
 
-    QString              m_name;
-    QString              m_phone_number;
-    QString              m_email;
-    ShippingAddress::Ptr m_shipping_address;
+    std::optional<QString> m_name;
+    std::optional<QString> m_phone_number;
+    std::optional<QString> m_email;
+    ShippingAddress::Ptr   m_shipping_address;
 };
 
 void readJsonObject(OrderInfo::Ptr& value, const QJsonObject& json, const QString& valueName);

@@ -26,9 +26,9 @@ QJsonValue toJsonValue(const MessageEntity::Ptr& value)
     jsonObject.insert("type", value->m_type);
     jsonObject.insert("offset", value->m_offset);
     jsonObject.insert("length", value->m_length);
-    jsonObject.insert("url", value->m_url);
-    jsonObject.insert("user", toJsonValue(value->m_user));
-    jsonObject.insert("language", value->m_language);
+    if (value->m_url) jsonObject.insert("url", value->m_url.value());
+    if (value->m_user) jsonObject.insert("user", toJsonValue(value->m_user));
+    if (value->m_language) jsonObject.insert("language", value->m_language.value());
 
     return jsonObject;
 }

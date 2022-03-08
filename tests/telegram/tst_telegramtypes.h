@@ -14,4 +14,5 @@ private slots:
     void tesApiInlineKeyboardMarkup();
     void tesApiPollAnswer();
     void tesApiLocation();
+    void tesApiMessageEntity();
 };

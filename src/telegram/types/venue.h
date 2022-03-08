@@ -10,13 +10,13 @@ struct Venue
 {
     typedef QSharedPointer<Venue> Ptr;
 
-    Location::Ptr m_location;
-    QString       m_title;
-    QString       m_address;
-    QString       m_foursquare_id;
-    QString       m_foursquare_type;
-    QString       m_google_place_id;
-    QString       m_google_place_type;
+    Location::Ptr          m_location;
+    QString                m_title;
+    QString                m_address;
+    std::optional<QString> m_foursquare_id;
+    std::optional<QString> m_foursquare_type;
+    std::optional<QString> m_google_place_id;
+    std::optional<QString> m_google_place_type;
 };
 
 void readJsonObject(Venue::Ptr& value, const QJsonObject& json, const QString& valueName);

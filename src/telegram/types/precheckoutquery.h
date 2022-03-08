@@ -11,13 +11,13 @@ struct PreCheckoutQuery
 {
     typedef QSharedPointer<PreCheckoutQuery> Ptr;
 
-    QString        m_id;
-    User::Ptr      m_from;
-    QString        m_currency;
-    qint64         m_total_amount = 0;
-    QString        m_invoice_payload;
-    QString        m_shipping_option_id;
-    OrderInfo::Ptr m_order_info;
+    QString                m_id;
+    User::Ptr              m_from;
+    QString                m_currency;
+    qint64                 m_total_amount;
+    QString                m_invoice_payload;
+    std::optional<QString> m_shipping_option_id;
+    OrderInfo::Ptr         m_order_info;
 };
 
 void readJsonObject(PreCheckoutQuery::Ptr& value, const QJsonObject& json, const QString& valueName);

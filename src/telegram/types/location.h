@@ -9,12 +9,12 @@ struct Location
 {
     typedef QSharedPointer<Location> Ptr;
 
-    double m_longitude              = 0;
-    double m_latitude               = 0;
-    double m_horizontal_accuracy    = 0;
-    qint64 m_live_period            = 0;
-    qint64 m_heading                = 0;
-    qint64 m_proximity_alert_radius = 0;
+    double                m_longitude;
+    double                m_latitude;
+    std::optional<double> m_horizontal_accuracy;
+    std::optional<qint64> m_live_period;
+    std::optional<qint64> m_heading;
+    std::optional<qint64> m_proximity_alert_radius;
 };
 
 void readJsonObject(Location::Ptr& value, const QJsonObject& json, const QString& valueName);

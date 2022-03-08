@@ -11,9 +11,9 @@ struct EncryptedPassportElement
     typedef QSharedPointer<EncryptedPassportElement> Ptr;
 
     QString                    m_type;
-    QString                    m_data;
-    QString                    m_phone_number;
-    QString                    m_email;
+    std::optional<QString>     m_data;
+    std::optional<QString>     m_phone_number;
+    std::optional<QString>     m_email;
     QVector<PassportFile::Ptr> m_files;
     PassportFile::Ptr          m_front_side;
     PassportFile::Ptr          m_reverse_side;

@@ -9,9 +9,9 @@ struct ForceReply
 {
     typedef QSharedPointer<ForceReply> Ptr;
 
-    bool    m_force_reply = true;
-    QString m_input_field_placeholder;
-    bool    m_selective = false;
+    bool                   m_force_reply;
+    std::optional<QString> m_input_field_placeholder;
+    std::optional<bool>    m_selective;
 };
 
 void       readJsonObject(ForceReply::Ptr& value, const QJsonObject& json, const QString& valueName);

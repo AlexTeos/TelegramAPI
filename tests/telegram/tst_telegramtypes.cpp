@@ -326,3 +326,20 @@ void TestTelegramTypes::tesApiLocation()
     QVERIFY(location->m_latitude == 58.978341);
     QVERIFY(location->m_longitude == 32.370649);
 }
+
+void TestTelegramTypes::tesApiMessageEntity()
+{
+    QString messageEntityJson = "{\"messageEntity\":[{\"type\":\"url\"}, {\"type\":\"phone_number\"}]}";
+
+    QVector<MessageEntity::Ptr> messageEntity;
+
+    QJsonDocument jsonDocument(QJsonDocument::fromJson(messageEntityJson.toLatin1()));
+
+    readJsonObject(messageEntity, jsonDocument.object(), "messageEntity");
+
+    QVERIFY(messageEntity.size() == 2);
+    QVERIFY(messageEntity[0]);
+    QVERIFY(messageEntity[0]->m_type == "url");
+    QVERIFY(messageEntity[1]);
+    QVERIFY(messageEntity[1]->m_type == "phone_number");
+}

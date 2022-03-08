@@ -9,8 +9,8 @@ struct ReplyKeyboardRemove
 {
     typedef QSharedPointer<ReplyKeyboardRemove> Ptr;
 
-    bool m_remove_keyboard = true;
-    bool m_selective       = false;
+    bool                m_remove_keyboard;
+    std::optional<bool> m_selective;
 };
 
 void       readJsonObject(ReplyKeyboardRemove::Ptr& value, const QJsonObject& json, const QString& valueName);

@@ -11,14 +11,14 @@ struct InlineKeyboardButton
 {
     typedef QSharedPointer<InlineKeyboardButton> Ptr;
 
-    QString           m_text;
-    QString           m_url;
-    LoginUrl::Ptr     m_login_url;
-    QString           m_callback_data;
-    QString           m_switch_inline_query;
-    QString           m_switch_inline_query_current_chat;
-    CallbackGame::Ptr m_callback_game;
-    bool              m_pay = false;
+    QString                m_text;
+    std::optional<QString> m_url;
+    LoginUrl::Ptr          m_login_url;
+    std::optional<QString> m_callback_data;
+    std::optional<QString> m_switch_inline_query;
+    std::optional<QString> m_switch_inline_query_current_chat;
+    CallbackGame::Ptr      m_callback_game;
+    std::optional<bool>    m_pay;
 };
 
 void       readJsonObject(InlineKeyboardButton::Ptr& value, const QJsonObject& json, const QString& valueName);

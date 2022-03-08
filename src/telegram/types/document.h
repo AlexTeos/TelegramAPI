@@ -10,12 +10,12 @@ struct Document
 {
     typedef QSharedPointer<Document> Ptr;
 
-    QString        m_file_id;
-    QString        m_file_unique_id;
-    PhotoSize::Ptr m_thumb;
-    QString        m_file_name;
-    QString        m_mime_type;
-    qint64         m_file_size = 0;
+    QString                m_file_id;
+    QString                m_file_unique_id;
+    PhotoSize::Ptr         m_thumb;
+    std::optional<QString> m_file_name;
+    std::optional<QString> m_mime_type;
+    std::optional<qint64>  m_file_size;
 };
 
 void readJsonObject(Document::Ptr& value, const QJsonObject& json, const QString& valueName);

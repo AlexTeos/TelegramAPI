@@ -26,13 +26,14 @@ QJsonValue toJsonValue(const InlineKeyboardButton::Ptr& value)
     QJsonObject jsonObject;
 
     jsonObject.insert("text", value->m_text);
-    jsonObject.insert("url", value->m_url);
-    jsonObject.insert("login_url", toJsonValue(value->m_login_url));
-    jsonObject.insert("callback_data", value->m_callback_data);
-    jsonObject.insert("switch_inline_query", value->m_switch_inline_query);
-    jsonObject.insert("switch_inline_query_current_chat", value->m_switch_inline_query_current_chat);
-    jsonObject.insert("callback_game", toJsonValue(value->m_callback_game));
-    jsonObject.insert("pay", value->m_pay);
+    if (value->m_url) jsonObject.insert("url", value->m_url.value());
+    if (value->m_login_url) jsonObject.insert("login_url", toJsonValue(value->m_login_url));
+    if (value->m_callback_data) jsonObject.insert("callback_data", value->m_callback_data.value());
+    if (value->m_switch_inline_query) jsonObject.insert("switch_inline_query", value->m_switch_inline_query.value());
+    if (value->m_switch_inline_query_current_chat)
+        jsonObject.insert("switch_inline_query_current_chat", value->m_switch_inline_query_current_chat.value());
+    if (value->m_callback_game) jsonObject.insert("callback_game", toJsonValue(value->m_callback_game));
+    if (value->m_pay) jsonObject.insert("pay", value->m_pay.value());
 
     return jsonObject;
 }

@@ -11,8 +11,8 @@ struct KeyboardButton
     typedef QSharedPointer<KeyboardButton> Ptr;
 
     QString                     m_text;
-    bool                        m_request_contact  = false;
-    bool                        m_request_location = false;
+    std::optional<bool>         m_request_contact;
+    std::optional<bool>         m_request_location;
     KeyboardButtonPollType::Ptr m_request_poll;
 };
 

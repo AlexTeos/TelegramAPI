@@ -22,9 +22,9 @@ QJsonValue toJsonValue(const LoginUrl::Ptr& value)
     QJsonObject jsonObject;
 
     jsonObject.insert("url", value->m_url);
-    jsonObject.insert("forward_text", value->m_forward_text);
-    jsonObject.insert("bot_username", value->m_bot_username);
-    jsonObject.insert("request_write_access", value->m_request_write_access);
+    if (value->m_forward_text) jsonObject.insert("forward_text", value->m_forward_text.value());
+    if (value->m_bot_username) jsonObject.insert("bot_username", value->m_bot_username.value());
+    if (value->m_request_write_access) jsonObject.insert("request_write_access", value->m_request_write_access.value());
 
     return jsonObject;
 }

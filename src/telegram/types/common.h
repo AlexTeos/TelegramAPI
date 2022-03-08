@@ -13,6 +13,19 @@ void readJsonObject(bool& value, const QJsonObject& json, const QString& valueNa
 void readJsonObject(double& value, const QJsonObject& json, const QString& valueName);
 
 template <typename T>
+void readJsonObject(std::optional<T>& value, const QJsonObject& json, const QString& valueName)
+{
+    if (json.contains(valueName))
+    {
+        T valueTemp;
+        readJsonObject(valueTemp, json, valueName);
+        value = valueTemp;
+    }
+    else
+        value = std::nullopt;
+}
+
+template <typename T>
 void readJsonObject(QVector<T>& valueArray, const QJsonObject& json, const QString& valueName)
 {
     if (json.contains(valueName) && json[valueName].isArray())

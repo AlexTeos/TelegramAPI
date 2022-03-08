@@ -11,11 +11,11 @@ struct ChosenInlineResult
 {
     typedef QSharedPointer<ChosenInlineResult> Ptr;
 
-    QString       m_result_id;
-    User::Ptr     m_from;
-    Location::Ptr m_location;
-    QString       m_inline_message_id;
-    QString       m_query;
+    QString                m_result_id;
+    User::Ptr              m_from;
+    Location::Ptr          m_location;
+    std::optional<QString> m_inline_message_id;
+    QString                m_query;
 };
 
 void readJsonObject(ChosenInlineResult::Ptr& value, const QJsonObject& json, const QString& valueName);

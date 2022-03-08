@@ -9,10 +9,10 @@ struct LoginUrl
 {
     typedef QSharedPointer<LoginUrl> Ptr;
 
-    QString m_url;
-    QString m_forward_text;
-    QString m_bot_username;
-    bool    m_request_write_access = false;
+    QString                m_url;
+    std::optional<QString> m_forward_text;
+    std::optional<QString> m_bot_username;
+    std::optional<bool>    m_request_write_access;
 };
 
 void       readJsonObject(LoginUrl::Ptr& value, const QJsonObject& json, const QString& valueName);

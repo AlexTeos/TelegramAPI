@@ -29,12 +29,14 @@ QJsonValue toJsonValue(const User::Ptr& value)
     jsonObject.insert("id", value->m_id);
     jsonObject.insert("is_bot", value->m_is_bot);
     jsonObject.insert("first_name", value->m_first_name);
-    jsonObject.insert("last_name", value->m_last_name);
-    jsonObject.insert("username", value->m_username);
-    jsonObject.insert("language_code", value->m_language_code);
-    jsonObject.insert("can_join_groups", value->m_can_join_groups);
-    jsonObject.insert("can_read_all_group_messages", value->m_can_read_all_group_messages);
-    jsonObject.insert("supports_inline_queries", value->m_supports_inline_queries);
+    if (value->m_last_name) jsonObject.insert("last_name", value->m_last_name.value());
+    if (value->m_username) jsonObject.insert("username", value->m_username.value());
+    if (value->m_language_code) jsonObject.insert("language_code", value->m_language_code.value());
+    if (value->m_can_join_groups) jsonObject.insert("can_join_groups", value->m_can_join_groups.value());
+    if (value->m_can_read_all_group_messages)
+        jsonObject.insert("can_read_all_group_messages", value->m_can_read_all_group_messages.value());
+    if (value->m_supports_inline_queries)
+        jsonObject.insert("supports_inline_queries", value->m_supports_inline_queries.value());
 
     return jsonObject;
 }

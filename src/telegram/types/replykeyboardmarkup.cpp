@@ -23,10 +23,10 @@ QJsonValue toJsonValue(const ReplyKeyboardMarkup::Ptr& value)
     QJsonObject jsonObject;
 
     jsonObject.insert("remove_keyboard", toJsonValue(value->m_keyboard));
-    jsonObject.insert("selective", value->m_resize_keyboard);
-    jsonObject.insert("remove_keyboard", value->m_one_time_keyboard);
-    jsonObject.insert("selective", value->m_input_field_placeholder);
-    jsonObject.insert("remove_keyboard", value->m_selective);
+    if (value->m_resize_keyboard) jsonObject.insert("selective", value->m_resize_keyboard.value());
+    if (value->m_one_time_keyboard) jsonObject.insert("remove_keyboard", value->m_one_time_keyboard.value());
+    if (value->m_input_field_placeholder) jsonObject.insert("selective", value->m_input_field_placeholder.value());
+    if (value->m_selective) jsonObject.insert("remove_keyboard", value->m_selective.value());
 
     return jsonObject;
 }

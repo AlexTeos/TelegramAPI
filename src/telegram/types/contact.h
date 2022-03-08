@@ -9,11 +9,11 @@ struct Contact
 {
     typedef QSharedPointer<Contact> Ptr;
 
-    QString m_phone_number;
-    QString m_first_name;
-    QString m_last_name;
-    qint64  m_user_id = 0;
-    QString m_vcard;
+    QString                m_phone_number;
+    QString                m_first_name;
+    std::optional<QString> m_last_name;
+    std::optional<qint64>  m_user_id;
+    std::optional<QString> m_vcard;
 };
 
 void readJsonObject(Contact::Ptr& value, const QJsonObject& json, const QString& valueName);

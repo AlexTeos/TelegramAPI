@@ -11,12 +11,12 @@ struct InlineQuery
 {
     typedef QSharedPointer<InlineQuery> Ptr;
 
-    QString       m_id;
-    User::Ptr     m_from;
-    QString       m_query;
-    QString       m_offset;
-    QString       m_chat_type;
-    Location::Ptr m_location;
+    QString                m_id;
+    User::Ptr              m_from;
+    QString                m_query;
+    QString                m_offset;
+    std::optional<QString> m_chat_type;
+    Location::Ptr          m_location;
 };
 
 void readJsonObject(InlineQuery::Ptr& value, const QJsonObject& json, const QString& valueName);

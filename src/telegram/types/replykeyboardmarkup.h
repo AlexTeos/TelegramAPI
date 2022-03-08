@@ -11,10 +11,10 @@ struct ReplyKeyboardMarkup
     typedef QSharedPointer<ReplyKeyboardMarkup> Ptr;
 
     QVector<QVector<KeyboardButton::Ptr>> m_keyboard;
-    bool                                  m_resize_keyboard   = false;
-    bool                                  m_one_time_keyboard = false;
-    QString                               m_input_field_placeholder;
-    bool                                  m_selective = false;
+    std::optional<bool>                   m_resize_keyboard;
+    std::optional<bool>                   m_one_time_keyboard;
+    std::optional<QString>                m_input_field_placeholder;
+    std::optional<bool>                   m_selective;
 };
 
 void       readJsonObject(ReplyKeyboardMarkup::Ptr& value, const QJsonObject& json, const QString& valueName);

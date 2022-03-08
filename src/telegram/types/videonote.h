@@ -10,12 +10,12 @@ struct VideoNote
 {
     typedef QSharedPointer<VideoNote> Ptr;
 
-    QString        m_file_id;
-    QString        m_file_unique_id;
-    qint64         m_length   = 0;
-    qint64         m_duration = 0;
-    PhotoSize::Ptr m_thumb;
-    qint64         m_file_size = 0;
+    QString               m_file_id;
+    QString               m_file_unique_id;
+    qint64                m_length;
+    qint64                m_duration;
+    PhotoSize::Ptr        m_thumb;
+    std::optional<qint64> m_file_size;
 };
 
 void readJsonObject(VideoNote::Ptr& value, const QJsonObject& json, const QString& valueName);

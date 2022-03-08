@@ -18,7 +18,7 @@ QJsonObject toJsonValue(const KeyboardButtonPollType::Ptr& value)
 {
     QJsonObject jsonObject;
 
-    jsonObject.insert("type", value->m_type);
+    if (value->m_type) jsonObject.insert("type", value->m_type.value());
 
     return jsonObject;
 }

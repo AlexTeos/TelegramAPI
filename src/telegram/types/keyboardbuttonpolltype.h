@@ -9,7 +9,7 @@ struct KeyboardButtonPollType
 {
     typedef QSharedPointer<KeyboardButtonPollType> Ptr;
 
-    QString m_type;
+    std::optional<QString> m_type;
 };
 
 void        readJsonObject(KeyboardButtonPollType::Ptr& value, const QJsonObject& json, const QString& valueName);

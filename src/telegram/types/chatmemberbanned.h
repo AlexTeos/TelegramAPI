@@ -9,7 +9,7 @@ struct ChatMemberBanned : public ChatMember
 {
     typedef QSharedPointer<ChatMemberBanned> Ptr;
 
-    qint64 m_until_date = 0;
+    qint64 m_until_date;
 };
 
 void readJsonObject(ChatMemberBanned::Ptr& value, const QJsonObject& json, const QString& valueName);
