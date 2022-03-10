@@ -15,7 +15,7 @@ void TestTelegramMethods::cleanupTestCase() {}
 
 void TestTelegramMethods::testApiSendMessage()
 {
-    m_api.sendMessage(m_user_id, "Test message");
+    QVERIFY(m_api.sendMessage(m_user_id, "Test message"));
 }
 
 void TestTelegramMethods::testApiSendMessageComplicated()
@@ -38,14 +38,19 @@ void TestTelegramMethods::testApiSendMessageComplicated()
 
     readJsonObject(messageEntity, messageEntityJsonDocument.object(), "messageEntity");
 
-    m_api.sendMessage(m_user_id,
-                      "<b>Test</b> <i>message</i>",
-                      "HTML",
-                      messageEntity,
-                      false,
-                      false,
-                      false,
-                      std::nullopt,
-                      true,
-                      inlineKeyboardMarkup);
+    QVERIFY(m_api.sendMessage(m_user_id,
+                              "<b>Test</b> <i>message</i>",
+                              "HTML",
+                              messageEntity,
+                              false,
+                              false,
+                              false,
+                              std::nullopt,
+                              true,
+                              inlineKeyboardMarkup));
+}
+
+void TestTelegramMethods::testApiGetUpdates()
+{
+    QVERIFY(m_api.getUpdates());
 }

@@ -12,6 +12,7 @@ private slots:
     void cleanupTestCase();
     void testApiSendMessage();
     void testApiSendMessageComplicated();
+    void testApiGetUpdates();
 
 private:
     Telegram::Api m_api;

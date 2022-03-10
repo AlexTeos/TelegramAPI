@@ -18,7 +18,7 @@ void Api::setUrl(const QString& url)
     m_url = url;
 }
 
-bool Api::sendMessage(
+std::optional<Telegram::Message::Ptr> Api::sendMessage(
     const qint64&                                     chat_id,
     const QString&                                    text,
     const std::optional<QString>&                     parse_mode,
@@ -32,7 +32,7 @@ bool Api::sendMessage(
         std::variant<InlineKeyboardMarkup::Ptr, ReplyKeyboardMarkup::Ptr, ReplyKeyboardRemove::Ptr, ForceReply::Ptr>>&
         reply_markup)
 {
-    if (m_token == "") return false;
+    if (m_token == "") return std::nullopt;
 
     QJsonObject postJson{{"text", text}, {"chat_id", chat_id}};
 
@@ -61,13 +61,54 @@ bool Api::sendMessage(
 
     QJsonDocument jsonDocument(postJson);
 
-    return sendRequest(jsonDocument);
+    auto replyResponse = sendRequest("sendMessage", jsonDocument);
+
+    if (replyResponse)
+    {
+        Message::Ptr message;
+
+        readJsonObject(message, replyResponse.value(), "result");
+
+        return message;
+    }
+
+    return std::nullopt;
 }
 
-bool Api::sendRequest(const QJsonDocument& jsonDocument)
+std::optional<QVector<Update::Ptr>> Api::getUpdates(const std::optional<qint64>&           offset,
+                                                    const std::optional<qint64>&           limit,
+                                                    const std::optional<qint64>&           timeout,
+                                                    const std::optional<QVector<QString>>& allowed_updates)
+{
+    if (m_token == "") return std::nullopt;
+
+    QJsonObject postJson;
+
+    if (offset) postJson.insert("parse_mode", offset.value());
+    if (limit) postJson.insert("entities", toJsonValue(limit.value()));
+    if (timeout) postJson.insert("disable_web_page_preview", timeout.value());
+    if (allowed_updates) postJson.insert("disable_notification", toJsonValue(allowed_updates.value()));
+
+    QJsonDocument jsonDocument(postJson);
+
+    auto replyResponse = sendRequest("getUpdates", jsonDocument);
+
+    if (replyResponse)
+    {
+        QVector<Update::Ptr> update;
+
+        readJsonObject(update, replyResponse.value(), "result");
+
+        return update;
+    }
+
+    return std::nullopt;
+}
+
+std::optional<QJsonObject> Api::sendRequest(const QString& method, const QJsonDocument& jsonDocument)
 {
     QNetworkRequest request;
-    request.setUrl(QUrl(m_url + m_token + "/sendMessage"));
+    request.setUrl(QUrl(m_url + m_token + "/" + method));
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 
     QEventLoop     eventLoop;
@@ -75,11 +116,21 @@ bool Api::sendRequest(const QJsonDocument& jsonDocument)
     QObject::connect(reply, &QNetworkReply::finished, &eventLoop, &QEventLoop::quit);
     eventLoop.exec();
 
-    QString replyResponse = reply->readAll();
+    QJsonDocument replyJsonDocument(QJsonDocument::fromJson(reply->readAll()));
 
     reply->deleteLater();
 
-    return true;
-}
+    if (replyJsonDocument.isObject())
+    {
+        QJsonObject replyJsonObject = replyJsonDocument.object();
+        if (replyJsonObject.contains("ok") && replyJsonObject["ok"].isBool() && replyJsonObject["ok"].toBool() &&
+            replyJsonObject.contains("result"))
+        {
+            replyJsonObject.remove("ok");
+            return replyJsonObject;
+        }
+    }
 
+    return std::nullopt;
+}
 }
