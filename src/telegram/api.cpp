@@ -105,6 +105,24 @@ std::optional<QVector<Update::Ptr>> Api::getUpdates(const std::optional<qint64>&
     return std::nullopt;
 }
 
+std::optional<User::Ptr> Api::getMe()
+{
+    if (m_token == "") return std::nullopt;
+
+    auto replyResponse = sendRequest("getMe", QJsonDocument());
+
+    if (replyResponse)
+    {
+        User::Ptr user;
+
+        readJsonObject(user, replyResponse.value(), "result");
+
+        return user;
+    }
+
+    return std::nullopt;
+}
+
 std::optional<QJsonObject> Api::sendRequest(const QString& method, const QJsonDocument& jsonDocument)
 {
     QNetworkRequest request;

@@ -54,3 +54,8 @@ void TestTelegramMethods::testApiGetUpdates()
 {
     QVERIFY(m_api.getUpdates());
 }
+
+void TestTelegramMethods::testApiGetMe()
+{
+    QVERIFY(m_api.getMe());
+}

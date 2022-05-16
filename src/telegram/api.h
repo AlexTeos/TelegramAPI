@@ -41,6 +41,8 @@ public:
         const std::optional<qint64>&           timeout         = std::nullopt,
         const std::optional<QVector<QString>>& allowed_updates = std::nullopt);
 
+    std::optional<Telegram::User::Ptr> getMe();
+
 private:
     std::optional<QJsonObject> sendRequest(const QString& method, const QJsonDocument& jsonDocument);
 

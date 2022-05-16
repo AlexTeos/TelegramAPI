@@ -13,6 +13,7 @@ private slots:
     void testApiSendMessage();
     void testApiSendMessageComplicated();
     void testApiGetUpdates();
+    void testApiGetMe();
 
 private:
     Telegram::Api m_api;
