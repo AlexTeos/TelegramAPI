@@ -1,6 +1,6 @@
-#include "../src/telegram/types/replykeyboardmarkup.h"
-#include "telegram/tst_telegrammethods.h"
-#include "telegram/tst_telegramtypes.h"
+#include "tst_telegrammethods.h"
+#include "tst_telegramtypes.h"
+
 int main(int argc, char* argv[])
 {
     QCoreApplication a(argc, argv);
