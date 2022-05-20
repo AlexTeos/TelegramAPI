@@ -82,10 +82,10 @@ std::optional<QVector<Update::Ptr>> Api::getUpdates(const std::optional<qint64>&
 
     QJsonObject postJson;
 
-    if (offset) postJson.insert("parse_mode", offset.value());
-    if (limit) postJson.insert("entities", toJsonValue(limit.value()));
-    if (timeout) postJson.insert("disable_web_page_preview", timeout.value());
-    if (allowed_updates) postJson.insert("disable_notification", toJsonValue(allowed_updates.value()));
+    if (offset) postJson.insert("offset", offset.value());
+    if (limit) postJson.insert("limit", toJsonValue(limit.value()));
+    if (timeout) postJson.insert("timeout", timeout.value());
+    if (allowed_updates) postJson.insert("allowed_updates", toJsonValue(allowed_updates.value()));
 
     QJsonDocument jsonDocument(postJson);
 
