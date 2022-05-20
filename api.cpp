@@ -8,14 +8,11 @@ namespace Telegram
 {
 Api::Api() : m_networkManager(new QNetworkAccessManager()) {}
 
-void Api::setToken(const QString& token)
+bool Api::start(const QString& token)
 {
     m_token = token;
-}
 
-void Api::setUrl(const QString& url)
-{
-    m_url = url;
+    return getMe().has_value();
 }
 
 std::optional<Telegram::Message::Ptr> Api::sendMessage(
@@ -32,8 +29,6 @@ std::optional<Telegram::Message::Ptr> Api::sendMessage(
         std::variant<InlineKeyboardMarkup::Ptr, ReplyKeyboardMarkup::Ptr, ReplyKeyboardRemove::Ptr, ForceReply::Ptr>>&
         reply_markup)
 {
-    if (m_token == "") return std::nullopt;
-
     QJsonObject postJson{{"text", text}, {"chat_id", chat_id}};
 
     if (parse_mode) postJson.insert("parse_mode", parse_mode.value());
@@ -78,8 +73,6 @@ std::optional<QVector<Update::Ptr>> Api::getUpdates(const std::optional<qint64>&
                                                     const std::optional<qint64>&           timeout,
                                                     const std::optional<QVector<QString>>& allowed_updates)
 {
-    if (m_token == "") return std::nullopt;
-
     QJsonObject postJson;
 
     if (offset) postJson.insert("offset", offset.value());
@@ -103,8 +96,6 @@ std::optional<QVector<Update::Ptr>> Api::getUpdates(const std::optional<qint64>&
 
 std::optional<User::Ptr> Api::getMe()
 {
-    if (m_token == "") return std::nullopt;
-
     auto replyResponse = sendRequest("getMe", QJsonDocument());
 
     if (replyResponse)
@@ -119,8 +110,10 @@ std::optional<User::Ptr> Api::getMe()
 
 std::optional<QJsonObject> Api::sendRequest(const QString& method, const QJsonDocument& jsonDocument)
 {
+    if (m_token == "") return std::nullopt;
+
     QNetworkRequest request;
-    request.setUrl(QUrl(m_url + m_token + "/" + method));
+    request.setUrl(QUrl(m_url + "bot" + m_token + "/" + method));
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 
     QEventLoop     eventLoop;

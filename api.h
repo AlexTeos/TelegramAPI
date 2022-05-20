@@ -17,8 +17,7 @@ class Api
 public:
     Api();
 
-    void setToken(const QString& token);
-    void setUrl(const QString& url);
+    bool start(const QString& token);
 
     std::optional<Telegram::Message::Ptr> sendMessage(
         const qint64&                                       chat_id,

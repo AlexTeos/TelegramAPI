@@ -8,7 +8,7 @@ using namespace Telegram;
 
 void TestTelegramMethods::initTestCase()
 {
-    m_api.setToken("bottoken");
+    m_api.start("bottoken");
 }
 
 void TestTelegramMethods::cleanupTestCase() {}
