@@ -42,16 +42,13 @@ std::optional<Telegram::Message::Ptr> Api::sendMessage(
     if (reply_markup)
     {
         if (std::holds_alternative<InlineKeyboardMarkup::Ptr>(reply_markup.value()))
-            postJson.insert("reply_to_message_id",
-                            toJsonValue(std::get<InlineKeyboardMarkup::Ptr>(reply_markup.value())));
+            postJson.insert("reply_markup", toJsonValue(std::get<InlineKeyboardMarkup::Ptr>(reply_markup.value())));
         else if (std::holds_alternative<ReplyKeyboardMarkup::Ptr>(reply_markup.value()))
-            postJson.insert("reply_to_message_id",
-                            toJsonValue(std::get<ReplyKeyboardMarkup::Ptr>(reply_markup.value())));
+            postJson.insert("reply_markup", toJsonValue(std::get<ReplyKeyboardMarkup::Ptr>(reply_markup.value())));
         else if (std::holds_alternative<ReplyKeyboardRemove::Ptr>(reply_markup.value()))
-            postJson.insert("reply_to_message_id",
-                            toJsonValue(std::get<ReplyKeyboardRemove::Ptr>(reply_markup.value())));
+            postJson.insert("reply_markup", toJsonValue(std::get<ReplyKeyboardRemove::Ptr>(reply_markup.value())));
         else if (std::holds_alternative<ForceReply::Ptr>(reply_markup.value()))
-            postJson.insert("reply_to_message_id", toJsonValue(std::get<ForceReply::Ptr>(reply_markup.value())));
+            postJson.insert("reply_markup", toJsonValue(std::get<ForceReply::Ptr>(reply_markup.value())));
     };
 
     QJsonDocument jsonDocument(postJson);

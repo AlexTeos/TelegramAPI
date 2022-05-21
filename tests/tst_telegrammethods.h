@@ -11,7 +11,9 @@ private slots:
     void initTestCase();
     void cleanupTestCase();
     void testApiSendMessage();
-    void testApiSendMessageComplicated();
+    void testApiSendFormattedMessage();
+    void testApiSendMessageEntity();
+    void testApiSendReplyKeyboardMarkup();
     void testApiGetUpdates();
     void testApiGetMe();
 
