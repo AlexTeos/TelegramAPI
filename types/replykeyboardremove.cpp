@@ -22,7 +22,7 @@ QJsonValue toJsonValue(const ReplyKeyboardRemove::Ptr& value)
 {
     QJsonObject jsonObject;
 
-    jsonObject.insert("remove_keyboard", value->m_remove_keyboard);
+    jsonObject.insert("remove_keyboard", true);
     if (value->m_selective) jsonObject.insert("selective", value->m_selective.value());
 
     return jsonObject;

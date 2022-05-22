@@ -58,6 +58,62 @@ void TestTelegramMethods::testApiSendReplyKeyboardMarkup()
                               std::nullopt,
                               std::nullopt,
                               replyKeyboardMarkup));
+
+    QString replyKeyboardRemoveJson = "{\"replyKeyboardRemove\":{}}";
+
+    ReplyKeyboardRemove::Ptr replyKeyboardRemove;
+
+    QJsonDocument replyKeyboardRemoveJsonDocument(QJsonDocument::fromJson(replyKeyboardRemoveJson.toLatin1()));
+
+    readJsonObject(replyKeyboardRemove, replyKeyboardRemoveJsonDocument.object(), "replyKeyboardRemove");
+
+    QVERIFY(m_api.sendMessage(m_user_id,
+                              "Message with ReplyKeyboardRemove",
+                              std::nullopt,
+                              std::nullopt,
+                              std::nullopt,
+                              std::nullopt,
+                              std::nullopt,
+                              std::nullopt,
+                              std::nullopt,
+                              replyKeyboardRemove));
+}
+
+void TestTelegramMethods::testApiSendInlineKeyboardMarkup()
+{
+    QString inlineKeyboardMarkupJson =
+        "{\"inlineKeyboardMarkup\":{\"inline_keyboard\":[[{\"text\":\"1\",\"callback_data\":\"1\"},{\"text\":\"2\","
+        "\"callback_data\":\"2\"},{\"text\":\"3\",\"callback_data\":\"3\"}],[{\"text\":\"4\",\"callback_data\":\"4\"}],"
+        "[{\"text\":\"5\",\"callback_data\":\"5\"},{\"text\":\"6\",\"callback_data\":\"6\"}]]}}";
+
+    InlineKeyboardMarkup::Ptr inlineKeyboardMarkup;
+
+    QJsonDocument inlineKeyboardMarkupJsonDocument(QJsonDocument::fromJson(inlineKeyboardMarkupJson.toLatin1()));
+
+    readJsonObject(inlineKeyboardMarkup, inlineKeyboardMarkupJsonDocument.object(), "inlineKeyboardMarkup");
+
+    QVERIFY(m_api.sendMessage(m_user_id,
+                              "Message with InlineKeyboardMarkup",
+                              std::nullopt,
+                              std::nullopt,
+                              std::nullopt,
+                              std::nullopt,
+                              std::nullopt,
+                              std::nullopt,
+                              std::nullopt,
+                              inlineKeyboardMarkup));
+}
+
+void TestTelegramMethods::testApiEditMessageText()
+{
+    Message::Ptr message = m_api.sendMessage(m_user_id, "This message will be edited").value();
+    QVERIFY(message);
+
+    QVERIFY(m_api.editMessageText("This message <s>will be edited</s> is edited",
+                                  message->m_chat->m_id,
+                                  message->m_message_id,
+                                  std::nullopt,
+                                  "HTML"));
 }
 
 void TestTelegramMethods::testApiGetUpdates()

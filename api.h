@@ -20,7 +20,7 @@ public:
     bool start(const QString& token);
 
     std::optional<Telegram::Message::Ptr> sendMessage(
-        const qint64&                                       chat_id,
+        const std::variant<qint64, QString>&                chat_id,
         const QString&                                      text,
         const std::optional<QString>&                       parse_mode                  = std::nullopt,
         const std::optional<QVector<MessageEntity::Ptr>>&   entities                    = std::nullopt,
@@ -41,6 +41,22 @@ public:
         const std::optional<QVector<QString>>& allowed_updates = std::nullopt);
 
     std::optional<Telegram::User::Ptr> getMe();
+
+    std::optional<bool> answerCallbackQuery(const QString&               callback_query_id,
+                                            const std::optional<QString> text       = std::nullopt,
+                                            const std::optional<bool>    show_alert = std::nullopt,
+                                            const std::optional<QString> url        = std::nullopt,
+                                            const std::optional<qint64>  cache_time = std::nullopt);
+
+    std::optional<std::variant<Message::Ptr, bool>> editMessageText(
+        const QString                                       text,
+        const std::optional<std::variant<qint64, QString>>& chat_id,
+        const std::optional<qint64>                         message_id               = std::nullopt,
+        const std::optional<QString>                        inline_message_id        = std::nullopt,
+        const std::optional<QString>                        parse_mode               = std::nullopt,
+        const std::optional<QVector<MessageEntity::Ptr>>    entities                 = std::nullopt,
+        const std::optional<bool>                           disable_web_page_preview = std::nullopt,
+        const std::optional<InlineKeyboardMarkup::Ptr>      reply_markup             = std::nullopt);
 
 private:
     std::optional<QJsonObject> sendRequest(const QString& method, const QJsonDocument& jsonDocument);

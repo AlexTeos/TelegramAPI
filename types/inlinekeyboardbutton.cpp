@@ -10,6 +10,7 @@ bool readJsonObject(InlineKeyboardButton::Ptr& value, const QJsonObject& json, c
 
         QJsonObject object = json[valueName].toObject();
 
+        // TODO: check that at least one optional field is set
         readJsonObject(value->m_text, object, "text");
         readJsonObject(value->m_url, object, "url");
         readJsonObject(value->m_login_url, object, "login_url");

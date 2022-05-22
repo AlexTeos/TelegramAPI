@@ -14,6 +14,8 @@ private slots:
     void testApiSendFormattedMessage();
     void testApiSendMessageEntity();
     void testApiSendReplyKeyboardMarkup();
+    void testApiSendInlineKeyboardMarkup();
+    void testApiEditMessageText();
     void testApiGetUpdates();
     void testApiGetMe();
 

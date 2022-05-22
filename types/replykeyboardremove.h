@@ -9,7 +9,7 @@ struct ReplyKeyboardRemove
 {
     typedef QSharedPointer<ReplyKeyboardRemove> Ptr;
 
-    bool                m_remove_keyboard;
+    bool                m_remove_keyboard = true;
     std::optional<bool> m_selective;
 };
 
