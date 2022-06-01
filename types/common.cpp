@@ -18,8 +18,11 @@ bool readJsonObject(qint64& value, const QJsonObject& json, const QString& value
 {
     if (json.contains(valueName) && json[valueName].isDouble())
     {
+#if QT_VERSION >= 0x060000
         value = json[valueName].toInteger();
-
+#else
+        value = json[valueName].toInt();
+#endif
         return true;
     }
 

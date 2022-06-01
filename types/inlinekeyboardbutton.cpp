@@ -22,6 +22,8 @@ bool readJsonObject(InlineKeyboardButton::Ptr& value, const QJsonObject& json, c
 
         return true;
     }
+
+    return false;
 }
 
 QJsonValue toJsonValue(const InlineKeyboardButton::Ptr& value)
