@@ -1,4 +1,4 @@
-#include "api.h"
+#include "telegramapi.h"
 
 #include <QEventLoop>
 #include <QNetworkReply>

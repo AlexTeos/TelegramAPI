@@ -1,6 +1,6 @@
 #include "tst_telegrammethods.h"
 
-#include "api.h"
+#include "telegramapi.h"
 #include "types/inlinekeyboardbutton.h"
 #include "types/messageentity.h"
 
@@ -8,7 +8,7 @@ using namespace Telegram;
 
 void TestTelegramMethods::initTestCase()
 {
-    m_api.start("bottoken");
+    QVERIFY(m_api.start(m_bot_token));
 }
 
 void TestTelegramMethods::cleanupTestCase() {}

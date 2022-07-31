@@ -14,11 +14,17 @@ void TestTelegramTypes::cleanupTestCase() {}
 
 void TestTelegramTypes::tesApiMessage()
 {
-    QString messageJson =
-        "{\"message\":{\"message_id\":3,\"from\":{\"id\":9007199254740991,\"is_bot\":false,\"first_name\":\"test_first_"
-        "name\",\"username\":\"test_username\",\"language_code\":\"ru\"},\"chat\":{\"id\":295590000,\"first_name\":"
-        "\"test_first_name\",\"username\":\"test_username\",\"type\":\"private\"},\"date\":1645736477,\"text\":\"/"
-        "start\",\"entities\":[{\"offset\":0,\"length\":6,\"type\":\"bot_command\"}]}}";
+#if QT_VERSION >= 0x060000
+    qint64 id = 9007199254740991;
+#else
+    qint64 id = 295590000;
+#endif
+
+    QString messageJson = "{\"message\":{\"message_id\":3,\"from\":{\"id\":" + QString::number(id) +
+                          ",\"is_bot\":false,\"first_name\":\"test_first_name\",\"username\":\"test_username\","
+                          "\"language_code\":\"ru\"},\"chat\":{\"id\":295590000,\"first_name\":\"test_first_name\","
+                          "\"username\":\"test_username\",\"type\":\"private\"},\"date\":1645736477,\"text\":\"/"
+                          "start\",\"entities\":[{\"offset\":0,\"length\":6,\"type\":\"bot_command\"}]}}";
     Message::Ptr message;
 
     QJsonDocument jsonDocument(QJsonDocument::fromJson(messageJson.toLatin1()));
@@ -31,7 +37,7 @@ void TestTelegramTypes::tesApiMessage()
     QVERIFY(message->m_text == "/start");
 
     QVERIFY(message->m_from);
-    QVERIFY(message->m_from->m_id == 9007199254740991);
+    QVERIFY(message->m_from->m_id == id);
     QVERIFY(message->m_from->m_is_bot == false);
     QVERIFY(message->m_from->m_first_name == "test_first_name");
     QVERIFY(message->m_from->m_username == "test_username");
@@ -284,7 +290,7 @@ void TestTelegramTypes::tesApiPollAnswer()
 {
     QString pollAnswerJson = "{\"poll_answer\":{\"poll_id\":\"1234\",\"user\":{\"id\":295590000,\"is_bot\":false,"
                              "\"first_name\":\"test_first_name\",\"username\":\"test_username\",\"language_code\":"
-                             "\"ru\"},\"option_ids\":[9007199254740991,1,2,3,4,5,6]}}";
+                             "\"ru\"},\"option_ids\":[295590000,1,2,3,4,5,6]}}";
 
     PollAnswer::Ptr pollAnswer;
 
@@ -303,7 +309,7 @@ void TestTelegramTypes::tesApiPollAnswer()
     QVERIFY(pollAnswer->m_user->m_language_code == "ru");
 
     QVERIFY(pollAnswer->m_option_ids.size() == 7);
-    QVERIFY(pollAnswer->m_option_ids[0] == 9007199254740991);
+    QVERIFY(pollAnswer->m_option_ids[0] == 295590000);
     QVERIFY(pollAnswer->m_option_ids[1] == 1);
     QVERIFY(pollAnswer->m_option_ids[2] == 2);
     QVERIFY(pollAnswer->m_option_ids[3] == 3);

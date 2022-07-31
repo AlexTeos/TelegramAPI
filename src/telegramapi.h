@@ -1,5 +1,5 @@
-#ifndef API_H
-#define API_H
+#ifndef TELEGRAMAPI_H
+#define TELEGRAMAPI_H
 
 #include <QNetworkAccessManager>
 
@@ -66,4 +66,4 @@ private:
     QString                               m_token;
 };
 }
-#endif // API_H
+#endif // TELEGRAMAPI_H

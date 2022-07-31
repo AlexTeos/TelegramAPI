@@ -1,11 +1,13 @@
 #include <QtAlgorithms>
 #include <QtTest>
 
-#include "api.h"
+#include "telegramapi.h"
 
 class TestTelegramMethods : public QObject
 {
     Q_OBJECT
+public:
+    TestTelegramMethods(QString bot_token, qint64 user_id) : m_bot_token(bot_token), m_user_id(user_id){};
 
 private slots:
     void initTestCase();
@@ -21,5 +23,6 @@ private slots:
 
 private:
     Telegram::Api m_api;
-    qint64        m_user_id = 295590000;
+    QString       m_bot_token;
+    qint64        m_user_id;
 };

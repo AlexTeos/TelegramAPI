@@ -1,0 +1,22 @@
+QT += testlib network
+QT -= gui
+
+CONFIG += qt c++17 console warn_on depend_includepath testcase
+CONFIG -= app_bundle
+
+TEMPLATE = app
+
+SOURCES += \
+    main.cpp \
+    tst_telegrammethods.cpp \
+    tst_telegramtypes.cpp
+
+HEADERS += \
+    tst_telegrammethods.h \
+    tst_telegramtypes.h
+
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../src/release/ -ltelegramapi
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../src/debug/ -ltelegramapi
+
+INCLUDEPATH += $$PWD/../src
+DEPENDPATH += $$PWD/../src
