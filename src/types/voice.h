@@ -7,7 +7,7 @@ namespace Telegram
 {
 struct Voice
 {
-    typedef QSharedPointer<Voice> Ptr;
+    using Ptr = QSharedPointer<Voice>;
 
     QString                m_file_id;
     QString                m_file_unique_id;

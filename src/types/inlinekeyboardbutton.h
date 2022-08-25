@@ -2,14 +2,13 @@
 #define INLINEKEYBOARDBUTTON_H
 
 #include "callbackgame.h"
-#include "common.h"
 #include "loginurl.h"
 
 namespace Telegram
 {
 struct InlineKeyboardButton
 {
-    typedef QSharedPointer<InlineKeyboardButton> Ptr;
+    using Ptr = QSharedPointer<InlineKeyboardButton>;
 
     QString                m_text;
     std::optional<QString> m_url;

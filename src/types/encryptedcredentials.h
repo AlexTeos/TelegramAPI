@@ -7,7 +7,7 @@ namespace Telegram
 {
 struct EncryptedCredentials
 {
-    typedef QSharedPointer<EncryptedCredentials> Ptr;
+    using Ptr = QSharedPointer<EncryptedCredentials>;
 
     QString m_data;
     QString m_hash;

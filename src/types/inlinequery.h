@@ -1,7 +1,6 @@
 #ifndef INLINEQUERY_H
 #define INLINEQUERY_H
 
-#include "common.h"
 #include "location.h"
 #include "user.h"
 
@@ -9,7 +8,7 @@ namespace Telegram
 {
 struct InlineQuery
 {
-    typedef QSharedPointer<InlineQuery> Ptr;
+    using Ptr = QSharedPointer<InlineQuery>;
 
     QString                m_id;
     User::Ptr              m_from;

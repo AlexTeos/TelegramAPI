@@ -1,7 +1,6 @@
 #ifndef CHOSENINLINERESULT_H
 #define CHOSENINLINERESULT_H
 
-#include "common.h"
 #include "location.h"
 #include "user.h"
 
@@ -9,7 +8,7 @@ namespace Telegram
 {
 struct ChosenInlineResult
 {
-    typedef QSharedPointer<ChosenInlineResult> Ptr;
+    using Ptr = QSharedPointer<ChosenInlineResult>;
 
     QString                m_result_id;
     User::Ptr              m_from;

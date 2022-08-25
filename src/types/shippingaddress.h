@@ -7,7 +7,7 @@ namespace Telegram
 {
 struct ShippingAddress
 {
-    typedef QSharedPointer<ShippingAddress> Ptr;
+    using Ptr = QSharedPointer<ShippingAddress>;
 
     QString m_country_code;
     QString m_state;

@@ -7,7 +7,7 @@ namespace Telegram
 {
 struct Contact
 {
-    typedef QSharedPointer<Contact> Ptr;
+    using Ptr = QSharedPointer<Contact>;
 
     QString                m_phone_number;
     QString                m_first_name;

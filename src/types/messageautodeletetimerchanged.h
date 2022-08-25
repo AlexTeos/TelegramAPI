@@ -7,7 +7,7 @@ namespace Telegram
 {
 struct MessageAutoDeleteTimerChanged
 {
-    typedef QSharedPointer<MessageAutoDeleteTimerChanged> Ptr;
+    using Ptr = QSharedPointer<MessageAutoDeleteTimerChanged>;
 
     qint64 m_message_auto_delete_time;
 };

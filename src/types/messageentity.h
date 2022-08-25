@@ -1,14 +1,13 @@
 #ifndef MESSAGEENTITY_H
 #define MESSAGEENTITY_H
 
-#include "common.h"
 #include "user.h"
 
 namespace Telegram
 {
 struct MessageEntity
 {
-    typedef QSharedPointer<MessageEntity> Ptr;
+    using Ptr = QSharedPointer<MessageEntity>;
 
     QString                m_type;
     qint64                 m_offset;

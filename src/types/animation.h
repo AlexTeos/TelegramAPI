@@ -1,14 +1,13 @@
 #ifndef ANIMATION_H
 #define ANIMATION_H
 
-#include "common.h"
 #include "photosize.h"
 
 namespace Telegram
 {
 struct Animation
 {
-    typedef QSharedPointer<Animation> Ptr;
+    using Ptr = QSharedPointer<Animation>;
 
     QString                m_file_id;
     QString                m_file_unique_id;

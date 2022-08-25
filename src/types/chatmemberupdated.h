@@ -11,7 +11,7 @@ namespace Telegram
 {
 struct ChatMemberUpdated
 {
-    typedef QSharedPointer<ChatMemberUpdated> Ptr;
+    using Ptr = QSharedPointer<ChatMemberUpdated>;
 
     Chat::Ptr           m_chat;
     User::Ptr           m_from;

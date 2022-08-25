@@ -1,7 +1,6 @@
 #ifndef PASSPORTDATA_H
 #define PASSPORTDATA_H
 
-#include "common.h"
 #include "encryptedcredentials.h"
 #include "encryptedpassportelement.h"
 
@@ -9,7 +8,7 @@ namespace Telegram
 {
 struct PassportData
 {
-    typedef QSharedPointer<PassportData> Ptr;
+    using Ptr = QSharedPointer<PassportData>;
 
     QVector<EncryptedPassportElement::Ptr> m_data;
     EncryptedCredentials::Ptr              m_credentials;

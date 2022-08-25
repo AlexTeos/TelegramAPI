@@ -3,14 +3,13 @@
 
 #include "chat.h"
 #include "chatinvitelink.h"
-#include "common.h"
 #include "user.h"
 
 namespace Telegram
 {
 struct ChatJoinRequest
 {
-    typedef QSharedPointer<ChatJoinRequest> Ptr;
+    using Ptr = QSharedPointer<ChatJoinRequest>;
 
     Chat::Ptr              m_chat;
     User::Ptr              m_from;

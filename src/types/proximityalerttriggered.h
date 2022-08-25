@@ -1,14 +1,13 @@
 #ifndef PROXIMITYALERTTRIGGERED_H
 #define PROXIMITYALERTTRIGGERED_H
 
-#include "common.h"
 #include "user.h"
 
 namespace Telegram
 {
 struct ProximityAlertTriggered
 {
-    typedef QSharedPointer<ProximityAlertTriggered> Ptr;
+    using Ptr = QSharedPointer<ProximityAlertTriggered>;
 
     User::Ptr m_traveler;
     User::Ptr m_watcher;

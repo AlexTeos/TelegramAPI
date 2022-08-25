@@ -7,7 +7,7 @@ namespace Telegram
 {
 struct User
 {
-    typedef QSharedPointer<User> Ptr;
+    using Ptr = QSharedPointer<User>;
 
     qint64                 m_id;
     bool                   m_is_bot;

@@ -7,7 +7,7 @@ namespace Telegram
 {
 struct KeyboardButtonPollType
 {
-    typedef QSharedPointer<KeyboardButtonPollType> Ptr;
+    using Ptr = QSharedPointer<KeyboardButtonPollType>;
 
     std::optional<QString> m_type;
 };

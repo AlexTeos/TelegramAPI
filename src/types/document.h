@@ -1,14 +1,13 @@
 #ifndef DOCUMENT_H
 #define DOCUMENT_H
 
-#include "common.h"
 #include "photosize.h"
 
 namespace Telegram
 {
 struct Document
 {
-    typedef QSharedPointer<Document> Ptr;
+    using Ptr = QSharedPointer<Document>;
 
     QString                m_file_id;
     QString                m_file_unique_id;

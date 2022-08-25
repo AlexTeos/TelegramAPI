@@ -1,7 +1,6 @@
 #ifndef SHIPPINGQUERY_H
 #define SHIPPINGQUERY_H
 
-#include "common.h"
 #include "shippingaddress.h"
 #include "user.h"
 
@@ -9,7 +8,7 @@ namespace Telegram
 {
 struct ShippingQuery
 {
-    typedef QSharedPointer<ShippingQuery> Ptr;
+    using Ptr = QSharedPointer<ShippingQuery>;
 
     QString              m_id;
     User::Ptr            m_from;

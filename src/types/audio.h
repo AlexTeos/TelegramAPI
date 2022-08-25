@@ -1,14 +1,13 @@
 #ifndef AUDIO_H
 #define AUDIO_H
 
-#include "common.h"
 #include "photosize.h"
 
 namespace Telegram
 {
 struct Audio
 {
-    typedef QSharedPointer<Audio> Ptr;
+    using Ptr = QSharedPointer<Audio>;
 
     QString                m_file_id;
     QString                m_file_unique_id;

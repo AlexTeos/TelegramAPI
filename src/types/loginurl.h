@@ -7,7 +7,7 @@ namespace Telegram
 {
 struct LoginUrl
 {
-    typedef QSharedPointer<LoginUrl> Ptr;
+    using Ptr = QSharedPointer<LoginUrl>;
 
     QString                m_url;
     std::optional<QString> m_forward_text;

@@ -7,7 +7,7 @@ namespace Telegram
 {
 struct ReplyKeyboardRemove
 {
-    typedef QSharedPointer<ReplyKeyboardRemove> Ptr;
+    using Ptr = QSharedPointer<ReplyKeyboardRemove>;
 
     bool                m_remove_keyboard = true;
     std::optional<bool> m_selective;

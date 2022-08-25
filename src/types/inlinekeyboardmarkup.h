@@ -1,14 +1,13 @@
 #ifndef INLINEKEYBOARDMARKUP_H
 #define INLINEKEYBOARDMARKUP_H
 
-#include "common.h"
 #include "inlinekeyboardbutton.h"
 
 namespace Telegram
 {
 struct InlineKeyboardMarkup
 {
-    typedef QSharedPointer<InlineKeyboardMarkup> Ptr;
+    using Ptr = QSharedPointer<InlineKeyboardMarkup>;
 
     QJsonValue toObject(Ptr& value) const;
 

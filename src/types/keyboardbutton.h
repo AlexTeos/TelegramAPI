@@ -1,14 +1,13 @@
 #ifndef KEYBOARDBUTTON_H
 #define KEYBOARDBUTTON_H
 
-#include "common.h"
 #include "keyboardbuttonpolltype.h"
 
 namespace Telegram
 {
 struct KeyboardButton
 {
-    typedef QSharedPointer<KeyboardButton> Ptr;
+    using Ptr = QSharedPointer<KeyboardButton>;
 
     QString                     m_text;
     std::optional<bool>         m_request_contact;

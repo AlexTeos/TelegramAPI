@@ -1,14 +1,13 @@
 #ifndef SUCCESSFULPAYMENT_H
 #define SUCCESSFULPAYMENT_H
 
-#include "common.h"
 #include "orderinfo.h"
 
 namespace Telegram
 {
 struct SuccessfulPayment
 {
-    typedef QSharedPointer<SuccessfulPayment> Ptr;
+    using Ptr = QSharedPointer<SuccessfulPayment>;
 
     QString                m_currency;
     qint64                 m_total_amount = 0;

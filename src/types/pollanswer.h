@@ -1,14 +1,13 @@
 #ifndef POLLANSWER_H
 #define POLLANSWER_H
 
-#include "common.h"
 #include "user.h"
 
 namespace Telegram
 {
 struct PollAnswer
 {
-    typedef QSharedPointer<PollAnswer> Ptr;
+    using Ptr = QSharedPointer<PollAnswer>;
 
     QString         m_poll_id;
     User::Ptr       m_user;

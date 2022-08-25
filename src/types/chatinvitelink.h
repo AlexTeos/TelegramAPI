@@ -1,14 +1,13 @@
 #ifndef CHATINVITELINK_H
 #define CHATINVITELINK_H
 
-#include "common.h"
 #include "user.h"
 
 namespace Telegram
 {
 struct ChatInviteLink
 {
-    typedef QSharedPointer<ChatInviteLink> Ptr;
+    using Ptr = QSharedPointer<ChatInviteLink>;
 
     QString                m_invite_link;
     User::Ptr              m_creator;

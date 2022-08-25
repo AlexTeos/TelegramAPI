@@ -2,13 +2,12 @@
 #define VOICECHATSCHEDULED_H
 
 #include "common.h"
-#include "photosize.h"
 
 namespace Telegram
 {
 struct VoiceChatScheduled
 {
-    typedef QSharedPointer<VoiceChatScheduled> Ptr;
+    using Ptr = QSharedPointer<VoiceChatScheduled>;
 
     qint64 m_start_date = 0;
 };

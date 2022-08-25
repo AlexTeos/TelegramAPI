@@ -1,7 +1,6 @@
 #ifndef POLL_H
 #define POLL_H
 
-#include "common.h"
 #include "messageentity.h"
 #include "polloption.h"
 
@@ -9,7 +8,7 @@ namespace Telegram
 {
 struct Poll
 {
-    typedef QSharedPointer<Poll> Ptr;
+    using Ptr = QSharedPointer<Poll>;
 
     QString                     m_id;
     QString                     m_question;

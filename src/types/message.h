@@ -4,7 +4,6 @@
 #include "animation.h"
 #include "audio.h"
 #include "chat.h"
-#include "common.h"
 #include "contact.h"
 #include "dice.h"
 #include "document.h"
@@ -31,7 +30,7 @@ namespace Telegram
 {
 struct Message
 {
-    typedef QSharedPointer<Message> Ptr;
+    using Ptr = QSharedPointer<Message>;
 
     qint64                             m_message_id;
     User::Ptr                          m_from;

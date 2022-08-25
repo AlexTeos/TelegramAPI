@@ -7,7 +7,7 @@ namespace Telegram
 {
 struct CallbackGame
 {
-    typedef QSharedPointer<CallbackGame> Ptr;
+    using Ptr = QSharedPointer<CallbackGame>;
 
     qint64                 m_user_id;
     qint64                 m_score;

@@ -7,7 +7,7 @@ namespace Telegram
 {
 struct PhotoSize
 {
-    typedef QSharedPointer<PhotoSize> Ptr;
+    using Ptr = QSharedPointer<PhotoSize>;
 
     QString               m_file_id;
     QString               m_file_unique_id;

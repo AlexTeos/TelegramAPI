@@ -7,7 +7,7 @@ namespace Telegram
 {
 struct PollOption
 {
-    typedef QSharedPointer<PollOption> Ptr;
+    using Ptr = QSharedPointer<PollOption>;
 
     QString m_text;
     qint64  m_voter_count;

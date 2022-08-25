@@ -7,7 +7,7 @@ namespace Telegram
 {
 struct ChatPermissions
 {
-    typedef QSharedPointer<ChatPermissions> Ptr;
+    using Ptr = QSharedPointer<ChatPermissions>;
 
     std::optional<bool> m_can_send_messages;
     std::optional<bool> m_can_send_media_messages;

@@ -1,14 +1,13 @@
 #ifndef VIDEO_H
 #define VIDEO_H
 
-#include "common.h"
 #include "photosize.h"
 
 namespace Telegram
 {
 struct Video
 {
-    typedef QSharedPointer<Video> Ptr;
+    using Ptr = QSharedPointer<Video>;
 
     QString                m_file_id;
     QString                m_file_unique_id;

@@ -1,14 +1,13 @@
 #ifndef VOICECHATPARTICIPANTSINVITED_H
 #define VOICECHATPARTICIPANTSINVITED_H
 
-#include "common.h"
 #include "user.h"
 
 namespace Telegram
 {
 struct VoiceChatParticipantsInvited
 {
-    typedef QSharedPointer<VoiceChatParticipantsInvited> Ptr;
+    using Ptr = QSharedPointer<VoiceChatParticipantsInvited>;
 
     QVector<User::Ptr> m_users;
 };

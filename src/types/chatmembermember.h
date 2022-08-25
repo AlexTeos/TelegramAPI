@@ -7,7 +7,7 @@ namespace Telegram
 {
 struct ChatMemberMember : public ChatMember
 {
-    typedef QSharedPointer<ChatMemberMember> Ptr;
+    using Ptr = QSharedPointer<ChatMemberMember>;
 };
 
 bool readJsonObject(ChatMemberMember::Ptr& value, const QJsonObject& json, const QString& valueName);

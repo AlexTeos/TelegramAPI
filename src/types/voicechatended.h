@@ -7,7 +7,7 @@ namespace Telegram
 {
 struct VoiceChatEnded
 {
-    typedef QSharedPointer<VoiceChatEnded> Ptr;
+    using Ptr = QSharedPointer<VoiceChatEnded>;
 
     qint64 m_duration;
 };

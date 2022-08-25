@@ -1,14 +1,13 @@
 #ifndef ENCRYPTEDPASSPORTELEMENT_H
 #define ENCRYPTEDPASSPORTELEMENT_H
 
-#include "common.h"
 #include "passportfile.h"
 
 namespace Telegram
 {
 struct EncryptedPassportElement
 {
-    typedef QSharedPointer<EncryptedPassportElement> Ptr;
+    using Ptr = QSharedPointer<EncryptedPassportElement>;
 
     QString                    m_type;
     std::optional<QString>     m_data;

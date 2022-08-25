@@ -7,7 +7,7 @@ namespace Telegram
 {
 struct MaskPosition
 {
-    typedef QSharedPointer<MaskPosition> Ptr;
+    using Ptr = QSharedPointer<MaskPosition>;
 
     QString m_point;
     double  m_x_shift;

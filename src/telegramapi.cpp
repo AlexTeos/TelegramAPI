@@ -110,11 +110,11 @@ std::optional<User::Ptr> Api::getMe()
     return std::nullopt;
 }
 
-std::optional<bool> Api::answerCallbackQuery(const QString&               callback_query_id,
-                                             const std::optional<QString> text,
-                                             const std::optional<bool>    show_alert,
-                                             const std::optional<QString> url,
-                                             const std::optional<qint64>  cache_time)
+std::optional<bool> Api::answerCallbackQuery(const QString&                callback_query_id,
+                                             const std::optional<QString>& text,
+                                             const std::optional<bool>&    show_alert,
+                                             const std::optional<QString>& url,
+                                             const std::optional<qint64>&  cache_time)
 {
     QJsonObject postJson{{"callback_query_id", callback_query_id}};
 
@@ -138,14 +138,14 @@ std::optional<bool> Api::answerCallbackQuery(const QString&               callba
 }
 
 std::optional<std::variant<Message::Ptr, bool>> Api::editMessageText(
-    const QString                                       text,
+    const QString&                                      text,
     const std::optional<std::variant<qint64, QString>>& chat_id,
-    const std::optional<qint64>                         message_id,
-    const std::optional<QString>                        inline_message_id,
-    const std::optional<QString>                        parse_mode,
-    const std::optional<QVector<MessageEntity::Ptr>>    entities,
-    const std::optional<bool>                           disable_web_page_preview,
-    const std::optional<InlineKeyboardMarkup::Ptr>      reply_markup)
+    const std::optional<qint64>&                        message_id,
+    const std::optional<QString>&                       inline_message_id,
+    const std::optional<QString>&                       parse_mode,
+    const std::optional<QVector<MessageEntity::Ptr>>&   entities,
+    const std::optional<bool>&                          disable_web_page_preview,
+    const std::optional<InlineKeyboardMarkup::Ptr>&     reply_markup)
 {
     if ((not inline_message_id) && not(chat_id && message_id)) return std::nullopt;
 

@@ -7,7 +7,7 @@ namespace Telegram
 {
 struct PassportFile
 {
-    typedef QSharedPointer<PassportFile> Ptr;
+    using Ptr = QSharedPointer<PassportFile>;
 
     QString m_file_id;
     QString m_file_unique_id;

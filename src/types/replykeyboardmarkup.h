@@ -1,14 +1,13 @@
 #ifndef REPLYKEYBOARDMARKUP_H
 #define REPLYKEYBOARDMARKUP_H
 
-#include "common.h"
 #include "keyboardbutton.h"
 
 namespace Telegram
 {
 struct ReplyKeyboardMarkup
 {
-    typedef QSharedPointer<ReplyKeyboardMarkup> Ptr;
+    using Ptr = QSharedPointer<ReplyKeyboardMarkup>;
 
     QVector<QVector<KeyboardButton::Ptr>> m_keyboard;
     std::optional<bool>                   m_resize_keyboard;

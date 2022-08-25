@@ -1,14 +1,13 @@
 #ifndef ORDERINFO_H
 #define ORDERINFO_H
 
-#include "common.h"
 #include "shippingaddress.h"
 
 namespace Telegram
 {
 struct OrderInfo
 {
-    typedef QSharedPointer<OrderInfo> Ptr;
+    using Ptr = QSharedPointer<OrderInfo>;
 
     std::optional<QString> m_name;
     std::optional<QString> m_phone_number;

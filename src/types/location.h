@@ -7,7 +7,7 @@ namespace Telegram
 {
 struct Location
 {
-    typedef QSharedPointer<Location> Ptr;
+    using Ptr = QSharedPointer<Location>;
 
     double                m_longitude;
     double                m_latitude;

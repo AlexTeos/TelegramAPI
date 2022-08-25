@@ -1,14 +1,13 @@
 #ifndef CHATMEMBER_H
 #define CHATMEMBER_H
 
-#include "common.h"
 #include "user.h"
 
 namespace Telegram
 {
 struct ChatMember
 {
-    typedef QSharedPointer<ChatMember> Ptr;
+    using Ptr = QSharedPointer<ChatMember>;
 
     QString   m_status;
     User::Ptr m_user;

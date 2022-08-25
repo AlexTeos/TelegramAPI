@@ -1,7 +1,6 @@
 #ifndef STICKER_H
 #define STICKER_H
 
-#include "common.h"
 #include "maskposition.h"
 #include "photosize.h"
 
@@ -9,7 +8,7 @@ namespace Telegram
 {
 struct Sticker
 {
-    typedef QSharedPointer<Sticker> Ptr;
+    using Ptr = QSharedPointer<Sticker>;
 
     QString                m_file_id;
     QString                m_file_unique_id;

@@ -1,14 +1,13 @@
 #ifndef VIDEONOTE_H
 #define VIDEONOTE_H
 
-#include "common.h"
 #include "photosize.h"
 
 namespace Telegram
 {
 struct VideoNote
 {
-    typedef QSharedPointer<VideoNote> Ptr;
+    using Ptr = QSharedPointer<VideoNote>;
 
     QString               m_file_id;
     QString               m_file_unique_id;

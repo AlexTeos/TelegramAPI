@@ -4,7 +4,6 @@
 #include "chatlocation.h"
 #include "chatpermissions.h"
 #include "chatphoto.h"
-#include "common.h"
 
 namespace Telegram
 {
@@ -12,7 +11,7 @@ struct Message;
 
 struct Chat
 {
-    typedef QSharedPointer<Chat> Ptr;
+    using Ptr = QSharedPointer<Chat>;
 
     qint64                  m_id;
     QString                 m_type;

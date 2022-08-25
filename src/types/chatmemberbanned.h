@@ -7,7 +7,7 @@ namespace Telegram
 {
 struct ChatMemberBanned : public ChatMember
 {
-    typedef QSharedPointer<ChatMemberBanned> Ptr;
+    using Ptr = QSharedPointer<ChatMemberBanned>;
 
     qint64 m_until_date;
 };

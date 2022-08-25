@@ -1,14 +1,13 @@
 #ifndef CALLBACKQUERY_H
 #define CALLBACKQUERY_H
 
-#include "common.h"
 #include "message.h"
 
 namespace Telegram
 {
 struct CallbackQuery
 {
-    typedef QSharedPointer<CallbackQuery> Ptr;
+    using Ptr = QSharedPointer<CallbackQuery>;
 
     QString                m_id;
     User::Ptr              m_from;

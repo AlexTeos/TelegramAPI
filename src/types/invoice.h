@@ -7,7 +7,7 @@ namespace Telegram
 {
 struct Invoice
 {
-    typedef QSharedPointer<Invoice> Ptr;
+    using Ptr = QSharedPointer<Invoice>;
 
     QString m_title;
     QString m_description;

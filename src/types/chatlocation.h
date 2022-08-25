@@ -1,14 +1,13 @@
 #ifndef CHATLOCATION_H
 #define CHATLOCATION_H
 
-#include "common.h"
 #include "location.h"
 
 namespace Telegram
 {
 struct ChatLocation
 {
-    typedef QSharedPointer<ChatLocation> Ptr;
+    using Ptr = QSharedPointer<ChatLocation>;
 
     Location::Ptr m_location;
     QString       m_address;

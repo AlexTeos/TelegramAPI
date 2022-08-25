@@ -5,7 +5,6 @@
 #include "chatjoinrequest.h"
 #include "chatmemberupdated.h"
 #include "choseninlineresult.h"
-#include "common.h"
 #include "inlinequery.h"
 #include "message.h"
 #include "poll.h"
@@ -17,7 +16,7 @@ namespace Telegram
 {
 struct Update
 {
-    typedef QSharedPointer<Update> Ptr;
+    using Ptr = QSharedPointer<Update>;
 
     qint64                  m_update_id;
     Message::Ptr            m_message;

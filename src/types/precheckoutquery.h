@@ -1,7 +1,6 @@
 #ifndef PRECHECKOUTQUERY_H
 #define PRECHECKOUTQUERY_H
 
-#include "common.h"
 #include "orderinfo.h"
 #include "user.h"
 
@@ -9,7 +8,7 @@ namespace Telegram
 {
 struct PreCheckoutQuery
 {
-    typedef QSharedPointer<PreCheckoutQuery> Ptr;
+    using Ptr = QSharedPointer<PreCheckoutQuery>;
 
     QString                m_id;
     User::Ptr              m_from;

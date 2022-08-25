@@ -7,7 +7,7 @@ namespace Telegram
 {
 struct ForceReply
 {
-    typedef QSharedPointer<ForceReply> Ptr;
+    using Ptr = QSharedPointer<ForceReply>;
 
     bool                   m_force_reply;
     std::optional<QString> m_input_field_placeholder;

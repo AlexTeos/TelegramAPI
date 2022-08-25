@@ -1,14 +1,13 @@
 #ifndef VENUE_H
 #define VENUE_H
 
-#include "common.h"
 #include "location.h"
 
 namespace Telegram
 {
 struct Venue
 {
-    typedef QSharedPointer<Venue> Ptr;
+    using Ptr = QSharedPointer<Venue>;
 
     Location::Ptr          m_location;
     QString                m_title;

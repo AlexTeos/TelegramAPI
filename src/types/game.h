@@ -2,7 +2,6 @@
 #define GAME_H
 
 #include "animation.h"
-#include "common.h"
 #include "messageentity.h"
 #include "photosize.h"
 
@@ -10,7 +9,7 @@ namespace Telegram
 {
 struct Game
 {
-    typedef QSharedPointer<Game> Ptr;
+    using Ptr = QSharedPointer<Game>;
 
     QString                     m_title;
     QString                     m_description;

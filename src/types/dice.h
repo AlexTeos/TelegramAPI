@@ -1,12 +1,13 @@
 #ifndef DICE_H
 #define DICE_H
+
 #include "common.h"
 
 namespace Telegram
 {
 struct Dice
 {
-    typedef QSharedPointer<Dice> Ptr;
+    using Ptr = QSharedPointer<Dice>;
 
     QString m_emoji;
     qint64  m_value = 0;
