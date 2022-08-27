@@ -10,7 +10,7 @@ struct Dice
     using Ptr = QSharedPointer<Dice>;
 
     QString m_emoji;
-    qint64  m_value = 0;
+    qint64  m_value;
 };
 
 bool readJsonObject(Dice::Ptr& value, const QJsonObject& json, const QString& valueName);

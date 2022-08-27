@@ -1,8 +1,6 @@
 #include "tst_telegrammethods.h"
 
 #include "telegramapi.h"
-#include "types/inlinekeyboardbutton.h"
-#include "types/messageentity.h"
 
 using namespace Telegram;
 
@@ -126,6 +124,40 @@ void TestTelegramMethods::testApiGetMe()
     QVERIFY(m_api.getMe());
 }
 
+void TestTelegramMethods::testMyCommands()
+{
+    QString commandsJson =
+        "{\"commands\":[{\"command\":\"test_command_1\",\"description\":\"First test command description "
+        "\"},{\"command\":\"test_command_2\",\"description\":\"Second test command description "
+        "\"},{\"command\":\"test_command_3\",\"description\":\"Third test command description \"}]}";
+
+    QJsonDocument commandsJsonDocument(QJsonDocument::fromJson(commandsJson.toLatin1()));
+
+    QVector<BotCommand::Ptr> commands;
+    readJsonObject(commands, commandsJsonDocument.object(), "menu_button");
+
+    auto setMyCommandsResult = m_api.setMyCommands(commands);
+    QVERIFY(setMyCommandsResult);
+    QVERIFY(setMyCommandsResult.value());
+
+    auto getMyCommandsResult = m_api.getMyCommands();
+    QVERIFY(getMyCommandsResult);
+    QVERIFY(getMyCommandsResult.value().size() == commands.size());
+    for (int i = 0; i < commands.size(); ++i)
+    {
+        QVERIFY(commands[i]->m_command == getMyCommandsResult.value()[i]->m_command);
+        QVERIFY(commands[i]->m_description == getMyCommandsResult.value()[i]->m_description);
+    }
+
+    auto deleteMyCommands = m_api.deleteMyCommands();
+    QVERIFY(deleteMyCommands);
+    QVERIFY(deleteMyCommands.value());
+
+    auto getMyCommandsAfterDeleteResult = m_api.getMyCommands();
+    QVERIFY(getMyCommandsAfterDeleteResult);
+    QVERIFY(getMyCommandsAfterDeleteResult.value().size() == 0);
+}
+
 void TestTelegramMethods::testMenuButton()
 {
     MenuButton::Ptr menuButton;
@@ -136,11 +168,11 @@ void TestTelegramMethods::testMenuButton()
     readJsonObject(menuButton, menuButtonDefaultJsonDocument.object(), "menu_button");
     MenuButtonDefault::Ptr menuButtonDefault          = menuButton.staticCast<MenuButtonDefault>();
     auto                   setMenuButtonDefaultResult = m_api.setChatMenuButton(m_user_id, menuButtonDefault);
-    QVERIFY(setMenuButtonDefaultResult.has_value());
+    QVERIFY(setMenuButtonDefaultResult);
     QVERIFY(setMenuButtonDefaultResult.value());
 
     auto getChatMenuButtonDefaultResult = m_api.getChatMenuButton(m_user_id);
-    QVERIFY(getChatMenuButtonDefaultResult.has_value());
+    QVERIFY(getChatMenuButtonDefaultResult);
     QVERIFY(std::holds_alternative<MenuButtonDefault::Ptr>(getChatMenuButtonDefaultResult.value()));
     QVERIFY(std::get<MenuButtonDefault::Ptr>(getChatMenuButtonDefaultResult.value())->m_type == "default");
 
@@ -150,11 +182,11 @@ void TestTelegramMethods::testMenuButton()
     readJsonObject(menuButton, menuButtonCommandsJsonDocument.object(), "menu_button");
     MenuButtonCommands::Ptr menuButtonCommands          = menuButton.staticCast<MenuButtonCommands>();
     auto                    setMenuButtonCommandsResult = m_api.setChatMenuButton(m_user_id, menuButtonCommands);
-    QVERIFY(setMenuButtonCommandsResult.has_value());
+    QVERIFY(setMenuButtonCommandsResult);
     QVERIFY(setMenuButtonCommandsResult.value());
 
     auto getChatMenuButtonCommandsResult = m_api.getChatMenuButton(m_user_id);
-    QVERIFY(getChatMenuButtonDefaultResult.has_value());
+    QVERIFY(getChatMenuButtonDefaultResult);
     QVERIFY(std::holds_alternative<MenuButtonCommands::Ptr>(getChatMenuButtonCommandsResult.value()));
     QVERIFY(std::get<MenuButtonCommands::Ptr>(getChatMenuButtonCommandsResult.value())->m_type == "commands");
 
@@ -165,11 +197,11 @@ void TestTelegramMethods::testMenuButton()
     //readJsonObject(menuButton, menuButtonWebAppJsonDocument.object(), "menu_button");
     //MenuButtonWebApp::Ptr menuButtonWebApp          = menuButton.staticCast<MenuButtonWebApp>();
     //auto                  setMenuButtonWebAppResult = m_api.setChatMenuButton(m_user_id, menuButtonWebApp);
-    //QVERIFY(setMenuButtonWebAppResult.has_value());
+    //QVERIFY(setMenuButtonWebAppResult);
     //QVERIFY(setMenuButtonWebAppResult.value());
 
     //auto getChatMenuButtonWebAppResult = m_api.getChatMenuButton(m_user_id);
-    //QVERIFY(getChatMenuButtonDefaultResult.has_value());
+    //QVERIFY(getChatMenuButtonDefaultResult);
     //QVERIFY(std::holds_alternative<MenuButtonWebApp::Ptr>(getChatMenuButtonWebAppResult.value()));
     //QVERIFY(std::get<MenuButtonWebApp::Ptr>(getChatMenuButtonWebAppResult.value())->m_type == "web_app");
     //QVERIFY(std::get<MenuButtonWebApp::Ptr>(getChatMenuButtonWebAppResult.value())->m_text == "TestLink");

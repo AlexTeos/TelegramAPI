@@ -8,6 +8,15 @@ SOURCES += \
     telegramapi.cpp \
     types/animation.cpp \
     types/audio.cpp \
+    types/botcommand.cpp \
+    types/botcommandscope.cpp \
+    types/botcommandscopeallchatadministrators.cpp \
+    types/botcommandscopeallgroupchats.cpp \
+    types/botcommandscopeallprivatechats.cpp \
+    types/botcommandscopechat.cpp \
+    types/botcommandscopechatadministrators.cpp \
+    types/botcommandscopechatmember.cpp \
+    types/botcommandscopedefault.cpp \
     types/callbackgame.cpp \
     types/callbackquery.cpp \
     types/chat.cpp \
@@ -80,6 +89,15 @@ HEADERS += \
     telegramapi.h \
     types/animation.h \
     types/audio.h \
+    types/botcommand.h \
+    types/botcommandscope.h \
+    types/botcommandscopeallchatadministrators.h \
+    types/botcommandscopeallgroupchats.h \
+    types/botcommandscopeallprivatechats.h \
+    types/botcommandscopechat.h \
+    types/botcommandscopechatadministrators.h \
+    types/botcommandscopechatmember.h \
+    types/botcommandscopedefault.h \
     types/callbackgame.h \
     types/callbackquery.h \
     types/chat.h \

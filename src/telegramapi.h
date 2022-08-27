@@ -3,6 +3,8 @@
 
 #include <QNetworkAccessManager>
 
+#include "types/botcommand.h"
+#include "types/botcommandscope.h"
 #include "types/forcereply.h"
 #include "types/inlinekeyboardmarkup.h"
 #include "types/menubuttoncommands.h"
@@ -68,6 +70,17 @@ public:
 
     std::optional<std::variant<MenuButtonCommands::Ptr, MenuButtonWebApp::Ptr, MenuButtonDefault::Ptr>>
     getChatMenuButton(const std::optional<std::variant<qint64, QString>>& chat_id = std::nullopt);
+
+    std::optional<bool> setMyCommands(const QVector<BotCommand::Ptr>&            commands,
+                                      const std::optional<BotCommandScope::Ptr>& scope         = std::nullopt,
+                                      const std::optional<QString>&              language_code = std::nullopt);
+
+    std::optional<bool> deleteMyCommands(const std::optional<BotCommandScope::Ptr>& scope         = std::nullopt,
+                                         const std::optional<QString>&              language_code = std::nullopt);
+
+    std::optional<QVector<BotCommand::Ptr>> getMyCommands(
+        const std::optional<BotCommandScope::Ptr>& scope         = std::nullopt,
+        const std::optional<QString>&              language_code = std::nullopt);
 
 private:
     std::optional<QJsonObject> sendRequest(const QString& method, const QJsonDocument& jsonDocument);

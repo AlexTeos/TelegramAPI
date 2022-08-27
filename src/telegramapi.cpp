@@ -263,6 +263,75 @@ std::optional<std::variant<MenuButtonCommands::Ptr, MenuButtonWebApp::Ptr, MenuB
     return std::nullopt;
 }
 
+std::optional<bool> Api::setMyCommands(const QVector<BotCommand::Ptr>&            commands,
+                                       const std::optional<BotCommandScope::Ptr>& scope,
+                                       const std::optional<QString>&              language_code)
+{
+    QJsonObject postJson;
+
+    postJson.insert("commands", toJsonValue(commands));
+
+    if (scope) postJson.insert("scope", toJsonValue(scope.value()));
+    if (scope) postJson.insert("language_code", toJsonValue(language_code.value()));
+
+    QJsonDocument jsonDocument(postJson);
+
+    auto replyResponse = sendRequest("setMyCommands", jsonDocument);
+
+    if (replyResponse)
+    {
+        bool result;
+
+        if (readJsonObject(result, replyResponse.value(), "result")) return result;
+    }
+
+    return std::nullopt;
+}
+
+std::optional<bool> Api::deleteMyCommands(const std::optional<BotCommandScope::Ptr>& scope,
+                                          const std::optional<QString>&              language_code)
+{
+    QJsonObject postJson;
+
+    if (scope) postJson.insert("scope", toJsonValue(scope.value()));
+    if (scope) postJson.insert("language_code", toJsonValue(language_code.value()));
+
+    QJsonDocument jsonDocument(postJson);
+
+    auto replyResponse = sendRequest("deleteMyCommands", jsonDocument);
+
+    if (replyResponse)
+    {
+        bool result;
+
+        if (readJsonObject(result, replyResponse.value(), "result")) return result;
+    }
+
+    return std::nullopt;
+}
+
+std::optional<QVector<BotCommand::Ptr>> Api::getMyCommands(const std::optional<BotCommandScope::Ptr>& scope,
+                                                           const std::optional<QString>&              language_code)
+{
+    QJsonObject postJson;
+
+    if (scope) postJson.insert("scope", toJsonValue(scope.value()));
+    if (scope) postJson.insert("language_code", toJsonValue(language_code.value()));
+
+    QJsonDocument jsonDocument(postJson);
+
+    auto replyResponse = sendRequest("getMyCommands", jsonDocument);
+
+    if (replyResponse)
+    {
+        QVector<BotCommand::Ptr> result;
+
+        if (readJsonObject(result, replyResponse.value(), "result")) return result;
+    }
+
+    return std::nullopt;
+}
+
 std::optional<QJsonObject> Api::sendRequest(const QString& method, const QJsonDocument& jsonDocument)
 {
     if (m_token == "") return std::nullopt;

@@ -9,7 +9,7 @@ struct VoiceChatScheduled
 {
     using Ptr = QSharedPointer<VoiceChatScheduled>;
 
-    qint64 m_start_date = 0;
+    qint64 m_start_date;
 };
 
 bool readJsonObject(VoiceChatScheduled::Ptr& value, const QJsonObject& json, const QString& valueName);

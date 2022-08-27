@@ -20,6 +20,7 @@ private slots:
     void testApiEditMessageText();
     void testApiGetUpdates();
     void testApiGetMe();
+    void testMyCommands();
     void testMenuButton();
 
 private:

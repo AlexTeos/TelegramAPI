@@ -15,19 +15,19 @@ bool readJsonObject(MenuButton::Ptr& value, const QJsonObject& json, const QStri
         QString type;
         readJsonObject(type, object, "type");
 
-        if (type == "commands")
+        if (type == MenuButtonCommands::Type)
         {
             MenuButtonCommands::Ptr valuePtr;
             readJsonObject(valuePtr, json, valueName);
             value = valuePtr;
         }
-        else if (type == "web_app")
+        else if (type == MenuButtonWebApp::Type)
         {
             MenuButtonWebApp::Ptr valuePtr;
             readJsonObject(valuePtr, json, valueName);
             value = valuePtr;
         }
-        else if (type == "default")
+        else if (type == MenuButtonDefault::Type)
         {
             MenuButtonDefault::Ptr valuePtr;
             readJsonObject(valuePtr, json, valueName);
