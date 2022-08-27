@@ -2,6 +2,8 @@
 
 namespace Telegram
 {
+const QString ChatMemberBanned::Type("kicked");
+
 bool readJsonObject(ChatMemberBanned::Ptr& value, const QJsonObject& json, const QString& valueName)
 {
     if (json.contains(valueName) && json[valueName].isObject())

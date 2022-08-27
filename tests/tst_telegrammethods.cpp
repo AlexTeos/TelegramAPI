@@ -125,3 +125,54 @@ void TestTelegramMethods::testApiGetMe()
 {
     QVERIFY(m_api.getMe());
 }
+
+void TestTelegramMethods::testMenuButton()
+{
+    MenuButton::Ptr menuButton;
+
+    // Default
+    QString       menuButtonDefaultJson = "{\"menu_button\":{\"type\":\"default\"}}";
+    QJsonDocument menuButtonDefaultJsonDocument(QJsonDocument::fromJson(menuButtonDefaultJson.toLatin1()));
+    readJsonObject(menuButton, menuButtonDefaultJsonDocument.object(), "menu_button");
+    MenuButtonDefault::Ptr menuButtonDefault          = menuButton.staticCast<MenuButtonDefault>();
+    auto                   setMenuButtonDefaultResult = m_api.setChatMenuButton(m_user_id, menuButtonDefault);
+    QVERIFY(setMenuButtonDefaultResult.has_value());
+    QVERIFY(setMenuButtonDefaultResult.value());
+
+    auto getChatMenuButtonDefaultResult = m_api.getChatMenuButton(m_user_id);
+    QVERIFY(getChatMenuButtonDefaultResult.has_value());
+    QVERIFY(std::holds_alternative<MenuButtonDefault::Ptr>(getChatMenuButtonDefaultResult.value()));
+    QVERIFY(std::get<MenuButtonDefault::Ptr>(getChatMenuButtonDefaultResult.value())->m_type == "default");
+
+    // Commands
+    QString       menuButtonCommandsJson = "{\"menu_button\":{\"type\":\"commands\"}}";
+    QJsonDocument menuButtonCommandsJsonDocument(QJsonDocument::fromJson(menuButtonCommandsJson.toLatin1()));
+    readJsonObject(menuButton, menuButtonCommandsJsonDocument.object(), "menu_button");
+    MenuButtonCommands::Ptr menuButtonCommands          = menuButton.staticCast<MenuButtonCommands>();
+    auto                    setMenuButtonCommandsResult = m_api.setChatMenuButton(m_user_id, menuButtonCommands);
+    QVERIFY(setMenuButtonCommandsResult.has_value());
+    QVERIFY(setMenuButtonCommandsResult.value());
+
+    auto getChatMenuButtonCommandsResult = m_api.getChatMenuButton(m_user_id);
+    QVERIFY(getChatMenuButtonDefaultResult.has_value());
+    QVERIFY(std::holds_alternative<MenuButtonCommands::Ptr>(getChatMenuButtonCommandsResult.value()));
+    QVERIFY(std::get<MenuButtonCommands::Ptr>(getChatMenuButtonCommandsResult.value())->m_type == "commands");
+
+    // Web App
+    //QString menuButtonWebAppJson =
+    //    "{\"menu_button\":{\"type\":\"web_app\",\"text\":\"TestLink\",\"web_app\":{\"m_url\":\"https://test.link/\"}}}";
+    //QJsonDocument menuButtonWebAppJsonDocument(QJsonDocument::fromJson(menuButtonWebAppJson.toLatin1()));
+    //readJsonObject(menuButton, menuButtonWebAppJsonDocument.object(), "menu_button");
+    //MenuButtonWebApp::Ptr menuButtonWebApp          = menuButton.staticCast<MenuButtonWebApp>();
+    //auto                  setMenuButtonWebAppResult = m_api.setChatMenuButton(m_user_id, menuButtonWebApp);
+    //QVERIFY(setMenuButtonWebAppResult.has_value());
+    //QVERIFY(setMenuButtonWebAppResult.value());
+
+    //auto getChatMenuButtonWebAppResult = m_api.getChatMenuButton(m_user_id);
+    //QVERIFY(getChatMenuButtonDefaultResult.has_value());
+    //QVERIFY(std::holds_alternative<MenuButtonWebApp::Ptr>(getChatMenuButtonWebAppResult.value()));
+    //QVERIFY(std::get<MenuButtonWebApp::Ptr>(getChatMenuButtonWebAppResult.value())->m_type == "web_app");
+    //QVERIFY(std::get<MenuButtonWebApp::Ptr>(getChatMenuButtonWebAppResult.value())->m_text == "TestLink");
+    //QVERIFY(std::get<MenuButtonWebApp::Ptr>(getChatMenuButtonWebAppResult.value())->m_web_app->m_url ==
+    //        "https://test.link/");
+}

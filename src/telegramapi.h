@@ -5,6 +5,9 @@
 
 #include "types/forcereply.h"
 #include "types/inlinekeyboardmarkup.h"
+#include "types/menubuttoncommands.h"
+#include "types/menubuttondefault.h"
+#include "types/menubuttonwebapp.h"
 #include "types/messageentity.h"
 #include "types/replykeyboardmarkup.h"
 #include "types/replykeyboardremove.h"
@@ -57,6 +60,14 @@ public:
         const std::optional<QVector<MessageEntity::Ptr>>&   entities                 = std::nullopt,
         const std::optional<bool>&                          disable_web_page_preview = std::nullopt,
         const std::optional<InlineKeyboardMarkup::Ptr>&     reply_markup             = std::nullopt);
+
+    std::optional<bool> setChatMenuButton(
+        const std::optional<std::variant<qint64, QString>>& chat_id = std::nullopt,
+        const std::optional<std::variant<MenuButtonCommands::Ptr, MenuButtonWebApp::Ptr, MenuButtonDefault::Ptr>>&
+            menu_button = std::nullopt);
+
+    std::optional<std::variant<MenuButtonCommands::Ptr, MenuButtonWebApp::Ptr, MenuButtonDefault::Ptr>>
+    getChatMenuButton(const std::optional<std::variant<qint64, QString>>& chat_id = std::nullopt);
 
 private:
     std::optional<QJsonObject> sendRequest(const QString& method, const QJsonDocument& jsonDocument);

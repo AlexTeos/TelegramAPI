@@ -18,37 +18,37 @@ bool readJsonObject(ChatMember::Ptr& value, const QJsonObject& json, const QStri
         QString status;
         readJsonObject(status, object, "status");
 
-        if (status == "administrator")
+        if (status == ChatMemberAdministrator::Type)
         {
             ChatMemberAdministrator::Ptr valuePtr;
             readJsonObject(valuePtr, json, valueName);
             value = valuePtr;
         }
-        else if (status == "creator")
+        else if (status == ChatMemberOwner::Type)
         {
             ChatMemberOwner::Ptr valuePtr;
             readJsonObject(valuePtr, json, valueName);
             value = valuePtr;
         }
-        else if (status == "kicked")
+        else if (status == ChatMemberBanned::Type)
         {
             ChatMemberBanned::Ptr valuePtr;
             readJsonObject(valuePtr, json, valueName);
             value = valuePtr;
         }
-        else if (status == "left")
+        else if (status == ChatMemberLeft::Type)
         {
             ChatMemberLeft::Ptr valuePtr;
             readJsonObject(valuePtr, json, valueName);
             value = valuePtr;
         }
-        else if (status == "member")
+        else if (status == ChatMemberMember::Type)
         {
             ChatMemberMember::Ptr valuePtr;
             readJsonObject(valuePtr, json, valueName);
             value = valuePtr;
         }
-        else if (status == "restricted")
+        else if (status == ChatMemberRestricted::Type)
         {
             ChatMemberRestricted::Ptr valuePtr;
             readJsonObject(valuePtr, json, valueName);

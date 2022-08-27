@@ -8,6 +8,7 @@ namespace Telegram
 struct ChatMemberBanned : public ChatMember
 {
     using Ptr = QSharedPointer<ChatMemberBanned>;
+    static const QString Type;
 
     qint64 m_until_date;
 };

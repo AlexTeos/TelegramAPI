@@ -8,6 +8,7 @@ namespace Telegram
 struct ChatMemberAdministrator : public ChatMember
 {
     using Ptr = QSharedPointer<ChatMemberAdministrator>;
+    static const QString Type;
 
     bool                   m_can_be_edited;
     bool                   m_is_anonymous;

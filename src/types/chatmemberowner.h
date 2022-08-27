@@ -8,6 +8,7 @@ namespace Telegram
 struct ChatMemberOwner : public ChatMember
 {
     using Ptr = QSharedPointer<ChatMemberOwner>;
+    static const QString Type;
 
     bool                   m_is_anonymous;
     std::optional<QString> m_custom_title;

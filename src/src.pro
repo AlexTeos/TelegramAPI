@@ -42,6 +42,10 @@ SOURCES += \
     types/location.cpp \
     types/loginurl.cpp \
     types/maskposition.cpp \
+    types/menubutton.cpp \
+    types/menubuttoncommands.cpp \
+    types/menubuttondefault.cpp \
+    types/menubuttonwebapp.cpp \
     types/message.cpp \
     types/messageautodeletetimerchanged.cpp \
     types/messageentity.cpp \
@@ -69,7 +73,8 @@ SOURCES += \
     types/voicechatended.cpp \
     types/voicechatparticipantsinvited.cpp \
     types/voicechatscheduled.cpp \
-    types/voicechatstarted.cpp
+    types/voicechatstarted.cpp \
+    types/webappinfo.cpp
 
 HEADERS += \
     telegramapi.h \
@@ -109,6 +114,10 @@ HEADERS += \
     types/location.h \
     types/loginurl.h \
     types/maskposition.h \
+    types/menubutton.h \
+    types/menubuttoncommands.h \
+    types/menubuttondefault.h \
+    types/menubuttonwebapp.h \
     types/message.h \
     types/messageautodeletetimerchanged.h \
     types/messageentity.h \
@@ -136,4 +145,5 @@ HEADERS += \
     types/voicechatended.h \
     types/voicechatparticipantsinvited.h \
     types/voicechatscheduled.h \
-    types/voicechatstarted.h
+    types/voicechatstarted.h \
+    types/webappinfo.h

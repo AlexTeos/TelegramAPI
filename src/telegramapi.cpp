@@ -189,6 +189,80 @@ std::optional<std::variant<Message::Ptr, bool>> Api::editMessageText(
     return std::nullopt;
 }
 
+std::optional<bool> Api::setChatMenuButton(
+    const std::optional<std::variant<qint64, QString>>& chat_id,
+    const std::optional<std::variant<MenuButtonCommands::Ptr, MenuButtonWebApp::Ptr, MenuButtonDefault::Ptr>>&
+        menu_button)
+{
+    QJsonObject postJson;
+
+    if (chat_id)
+    {
+        if (std::holds_alternative<qint64>(chat_id.value()))
+            postJson.insert("chat_id", std::get<qint64>(chat_id.value()));
+        else
+            postJson.insert("chat_id", std::get<QString>(chat_id.value()));
+    }
+
+    if (menu_button)
+    {
+        if (std::holds_alternative<MenuButtonCommands::Ptr>(menu_button.value()))
+            postJson.insert("menu_button", toJsonValue(std::get<MenuButtonCommands::Ptr>(menu_button.value())));
+        else if (std::holds_alternative<MenuButtonWebApp::Ptr>(menu_button.value()))
+            postJson.insert("menu_button", toJsonValue(std::get<MenuButtonWebApp::Ptr>(menu_button.value())));
+        else if (std::holds_alternative<MenuButtonDefault::Ptr>(menu_button.value()))
+            postJson.insert("menu_button", toJsonValue(std::get<MenuButtonDefault::Ptr>(menu_button.value())));
+    };
+
+    QJsonDocument jsonDocument(postJson);
+
+    auto replyResponse = sendRequest("setChatMenuButton", jsonDocument);
+
+    if (replyResponse)
+    {
+        bool result;
+
+        if (readJsonObject(result, replyResponse.value(), "result")) return result;
+    }
+
+    return std::nullopt;
+}
+
+std::optional<std::variant<MenuButtonCommands::Ptr, MenuButtonWebApp::Ptr, MenuButtonDefault::Ptr>> Api::
+    getChatMenuButton(const std::optional<std::variant<qint64, QString>>& chat_id)
+{
+    QJsonObject postJson;
+
+    if (chat_id)
+    {
+        if (std::holds_alternative<qint64>(chat_id.value()))
+            postJson.insert("chat_id", std::get<qint64>(chat_id.value()));
+        else
+            postJson.insert("chat_id", std::get<QString>(chat_id.value()));
+    }
+
+    QJsonDocument jsonDocument(postJson);
+
+    auto replyResponse = sendRequest("getChatMenuButton", jsonDocument);
+
+    if (replyResponse)
+    {
+        MenuButton::Ptr result;
+
+        if (readJsonObject(result, replyResponse.value(), "result"))
+        {
+            if (result->m_type == MenuButtonCommands::Type)
+                return result.staticCast<MenuButtonCommands>();
+            else if (result->m_type == MenuButtonWebApp::Type)
+                return result.staticCast<MenuButtonWebApp>();
+            else if (result->m_type == MenuButtonDefault::Type)
+                return result.staticCast<MenuButtonDefault>();
+        }
+    }
+
+    return std::nullopt;
+}
+
 std::optional<QJsonObject> Api::sendRequest(const QString& method, const QJsonDocument& jsonDocument)
 {
     if (m_token == "") return std::nullopt;

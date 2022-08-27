@@ -2,6 +2,8 @@
 
 namespace Telegram
 {
+const QString ChatMemberMember::Type("member");
+
 bool readJsonObject(ChatMemberMember::Ptr& value, const QJsonObject& json, const QString& valueName)
 {
     if (json.contains(valueName) && json[valueName].isObject())
