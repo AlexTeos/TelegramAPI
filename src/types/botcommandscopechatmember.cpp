@@ -4,11 +4,34 @@ namespace Telegram
 {
 const QString BotCommandScopeChatMember::Type("chat_member");
 
-bool readJsonObject(BotCommandScopeChatMember::Ptr& value, const QJsonObject& json, const QString& valueName)
+QJsonObject BotCommandScopeChatMember::toJsonValue()
+{
+    QJsonObject jsonObject = BotCommandScope::toJsonValue();
+
+    if (std::holds_alternative<qint64>(m_chat_id))
+        jsonObject.insert("chat_id", std::get<qint64>(m_chat_id));
+    else
+        jsonObject.insert("chat_id", std::get<QString>(m_chat_id));
+
+    jsonObject.insert("user_id", m_user_id);
+
+    return jsonObject;
+}
+
+bool BotCommandScopeChatMember::readJsonObject(const QJsonObject& json, const QString& valueName)
 {
     if (json.contains(valueName) && json[valueName].isObject())
     {
-        value = BotCommandScopeChatMember::Ptr::create();
+        BotCommandScope::readJsonObject(json, valueName);
+
+        QJsonObject object = json[valueName].toObject();
+
+        if (std::holds_alternative<qint64>(m_chat_id))
+            Telegram::readJsonObject(std::get<qint64>(m_chat_id), object, "chat_id");
+        else
+            Telegram::readJsonObject(std::get<QString>(m_chat_id), object, "chat_id");
+
+        Telegram::readJsonObject(m_user_id, object, "user_id");
 
         return true;
     }
@@ -16,17 +39,11 @@ bool readJsonObject(BotCommandScopeChatMember::Ptr& value, const QJsonObject& js
     return false;
 }
 
-QJsonObject toJsonValue(const BotCommandScopeChatMember::Ptr& value)
+bool readJsonObject(BotCommandScopeChatMember::Ptr& value, const QJsonObject& json, const QString& valueName)
 {
-    QJsonObject jsonObject = toJsonValue(value.staticCast<BotCommandScope>());
+    value = BotCommandScopeChatMember::Ptr::create();
 
-    if (std::holds_alternative<qint64>(value->m_chat_id))
-        jsonObject.insert("chat_id", std::get<qint64>(value->m_chat_id));
-    else
-        jsonObject.insert("chat_id", std::get<QString>(value->m_chat_id));
-
-    jsonObject.insert("user_id", value->m_user_id);
-
-    return jsonObject;
+    return value->readJsonObject(json, valueName);
 }
+
 }

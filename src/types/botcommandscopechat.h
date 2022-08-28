@@ -11,10 +11,16 @@ struct BotCommandScopeChat : public BotCommandScope
     static const QString Type;
 
     std::variant<qint64, QString> m_chat_id;
+
+    bool readJsonObject(const QJsonObject& json, const QString& valueName);
+
+    friend bool readJsonObject(BotCommandScopeChat::Ptr&, const QJsonObject&, const QString&);
+
+protected:
+    virtual QJsonObject toJsonValue();
 };
 
-bool        readJsonObject(BotCommandScopeChat::Ptr& value, const QJsonObject& json, const QString& valueName);
-QJsonObject toJsonValue(const BotCommandScopeChat::Ptr& value);
+bool readJsonObject(BotCommandScopeChat::Ptr& value, const QJsonObject& json, const QString& valueName);
 }
 
 #endif // BOTCOMMANDSCOPECHAT_H

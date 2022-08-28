@@ -272,7 +272,7 @@ std::optional<bool> Api::setMyCommands(const QVector<BotCommand::Ptr>&          
     postJson.insert("commands", toJsonValue(commands));
 
     if (scope) postJson.insert("scope", toJsonValue(scope.value()));
-    if (scope) postJson.insert("language_code", toJsonValue(language_code.value()));
+    if (language_code) postJson.insert("language_code", toJsonValue(language_code.value()));
 
     QJsonDocument jsonDocument(postJson);
 

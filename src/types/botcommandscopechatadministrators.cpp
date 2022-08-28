@@ -4,11 +4,30 @@ namespace Telegram
 {
 const QString BotCommandScopeChatAdministrators::Type("chat_administrators");
 
-bool readJsonObject(BotCommandScopeChatAdministrators::Ptr& value, const QJsonObject& json, const QString& valueName)
+QJsonObject BotCommandScopeChatAdministrators::toJsonValue()
+{
+    QJsonObject jsonObject = BotCommandScope::toJsonValue();
+
+    if (std::holds_alternative<qint64>(m_chat_id))
+        jsonObject.insert("chat_id", std::get<qint64>(m_chat_id));
+    else
+        jsonObject.insert("chat_id", std::get<QString>(m_chat_id));
+
+    return jsonObject;
+}
+
+bool BotCommandScopeChatAdministrators::readJsonObject(const QJsonObject& json, const QString& valueName)
 {
     if (json.contains(valueName) && json[valueName].isObject())
     {
-        value = BotCommandScopeChatAdministrators::Ptr::create();
+        BotCommandScope::readJsonObject(json, valueName);
+
+        QJsonObject object = json[valueName].toObject();
+
+        if (std::holds_alternative<qint64>(m_chat_id))
+            Telegram::readJsonObject(std::get<qint64>(m_chat_id), object, "chat_id");
+        else
+            Telegram::readJsonObject(std::get<QString>(m_chat_id), object, "chat_id");
 
         return true;
     }
@@ -16,15 +35,11 @@ bool readJsonObject(BotCommandScopeChatAdministrators::Ptr& value, const QJsonOb
     return false;
 }
 
-QJsonObject toJsonValue(const BotCommandScopeChatAdministrators::Ptr& value)
+bool readJsonObject(BotCommandScopeChatAdministrators::Ptr& value, const QJsonObject& json, const QString& valueName)
 {
-    QJsonObject jsonObject = toJsonValue(value.staticCast<BotCommandScope>());
+    value = BotCommandScopeChatAdministrators::Ptr::create();
 
-    if (std::holds_alternative<qint64>(value->m_chat_id))
-        jsonObject.insert("chat_id", std::get<qint64>(value->m_chat_id));
-    else
-        jsonObject.insert("chat_id", std::get<QString>(value->m_chat_id));
-
-    return jsonObject;
+    return value->readJsonObject(json, valueName);
 }
+
 }

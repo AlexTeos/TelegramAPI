@@ -4,20 +4,15 @@ namespace Telegram
 {
 const QString BotCommandScopeAllChatAdministrators::Type("all_chat_administrators");
 
-bool readJsonObject(BotCommandScopeAllChatAdministrators::Ptr& value, const QJsonObject& json, const QString& valueName)
+QJsonObject BotCommandScopeAllChatAdministrators::toJsonValue()
 {
-    if (json.contains(valueName) && json[valueName].isObject())
-    {
-        value = BotCommandScopeAllChatAdministrators::Ptr::create();
-
-        return true;
-    }
-
-    return false;
+    return BotCommandScope::toJsonValue();
 }
 
-QJsonObject toJsonValue(const BotCommandScopeAllChatAdministrators::Ptr& value)
+bool readJsonObject(BotCommandScopeAllChatAdministrators::Ptr& value, const QJsonObject& json, const QString& valueName)
 {
-    return toJsonValue(value.staticCast<BotCommandScope>());
+    value = BotCommandScopeAllChatAdministrators::Ptr::create();
+
+    return value->readJsonObject(json, valueName);
 }
 }

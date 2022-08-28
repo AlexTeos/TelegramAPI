@@ -9,12 +9,15 @@ struct BotCommandScopeAllChatAdministrators : public BotCommandScope
 {
     using Ptr = QSharedPointer<BotCommandScopeAllChatAdministrators>;
     static const QString Type;
+
+    friend bool readJsonObject(BotCommandScopeAllChatAdministrators::Ptr&, const QJsonObject&, const QString&);
+
+    QJsonObject toJsonValue();
 };
 
-bool        readJsonObject(BotCommandScopeAllChatAdministrators::Ptr& value,
-                           const QJsonObject&                         json,
-                           const QString&                             valueName);
-QJsonObject toJsonValue(const BotCommandScopeAllChatAdministrators::Ptr& value);
+bool readJsonObject(BotCommandScopeAllChatAdministrators::Ptr& value,
+                    const QJsonObject&                         json,
+                    const QString&                             valueName);
 }
 
 #endif // BOTCOMMANDSCOPEALLCHATADMINISTRATORS_H

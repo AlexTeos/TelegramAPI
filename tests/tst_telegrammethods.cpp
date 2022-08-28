@@ -1,6 +1,7 @@
 #include "tst_telegrammethods.h"
 
 #include "telegramapi.h"
+#include "types/botcommandscopeallchatadministrators.h"
 
 using namespace Telegram;
 
@@ -127,15 +128,16 @@ void TestTelegramMethods::testApiGetMe()
 void TestTelegramMethods::testMyCommands()
 {
     QString commandsJson =
-        "{\"commands\":[{\"command\":\"test_command_1\",\"description\":\"First test command description "
-        "\"},{\"command\":\"test_command_2\",\"description\":\"Second test command description "
-        "\"},{\"command\":\"test_command_3\",\"description\":\"Third test command description \"}]}";
+        "{\"commands\":[{\"command\":\"test_command_1\",\"description\":\"First test command description"
+        "\"},{\"command\":\"test_command_2\",\"description\":\"Second test command description"
+        "\"},{\"command\":\"test_command_3\",\"description\":\"Third test command description\"}]}";
 
     QJsonDocument commandsJsonDocument(QJsonDocument::fromJson(commandsJson.toLatin1()));
 
     QVector<BotCommand::Ptr> commands;
-    readJsonObject(commands, commandsJsonDocument.object(), "menu_button");
+    readJsonObject(commands, commandsJsonDocument.object(), "commands");
 
+    m_api.setMyCommands(commands);
     auto setMyCommandsResult = m_api.setMyCommands(commands);
     QVERIFY(setMyCommandsResult);
     QVERIFY(setMyCommandsResult.value());

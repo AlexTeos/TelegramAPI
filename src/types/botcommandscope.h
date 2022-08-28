@@ -10,10 +10,17 @@ struct BotCommandScope
     using Ptr = QSharedPointer<BotCommandScope>;
 
     QString m_type;
+
+protected:
+    BotCommandScope(){};
+
+    virtual bool readJsonObject(const QJsonObject& json, const QString& valueName);
+
+    virtual QJsonObject toJsonValue() = 0;
+
+    friend QJsonObject toJsonValue(const BotCommandScope::Ptr&);
 };
 
-bool        readJsonObject(BotCommandScope::Ptr& value, const QJsonObject& json, const QString& valueName);
-QJsonObject toJsonValue(const BotCommandScope::Ptr& value);
 }
 
 #endif // BOTCOMMANDSCOPE_H
