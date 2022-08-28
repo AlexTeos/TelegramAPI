@@ -1,7 +1,6 @@
 #include "tst_telegrammethods.h"
 
 #include "telegramapi.h"
-#include "types/botcommandscopeallchatadministrators.h"
 
 using namespace Telegram;
 
@@ -56,7 +55,7 @@ void TestTelegramMethods::testApiSendReplyKeyboardMarkup()
                               std::nullopt,
                               std::nullopt,
                               std::nullopt,
-                              replyKeyboardMarkup));
+                              std::optional(replyKeyboardMarkup)));
 
     QString replyKeyboardRemoveJson = "{\"replyKeyboardRemove\":{}}";
 
@@ -75,7 +74,7 @@ void TestTelegramMethods::testApiSendReplyKeyboardMarkup()
                               std::nullopt,
                               std::nullopt,
                               std::nullopt,
-                              replyKeyboardRemove));
+                              std::optional(replyKeyboardRemove)));
 }
 
 void TestTelegramMethods::testApiSendInlineKeyboardMarkup()
@@ -100,7 +99,7 @@ void TestTelegramMethods::testApiSendInlineKeyboardMarkup()
                               std::nullopt,
                               std::nullopt,
                               std::nullopt,
-                              inlineKeyboardMarkup));
+                              std::optional(inlineKeyboardMarkup)));
 }
 
 void TestTelegramMethods::testApiEditMessageText()

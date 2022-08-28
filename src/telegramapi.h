@@ -24,20 +24,49 @@ public:
 
     bool start(const QString& token);
 
+    template <typename KeyboardType = InlineKeyboardMarkup::Ptr>
     std::optional<Telegram::Message::Ptr> sendMessage(
-        const std::variant<qint64, QString>&                chat_id,
-        const QString&                                      text,
-        const std::optional<QString>&                       parse_mode                  = std::nullopt,
-        const std::optional<QVector<MessageEntity::Ptr>>&   entities                    = std::nullopt,
-        const std::optional<bool>&                          disable_web_page_preview    = std::nullopt,
-        const std::optional<bool>&                          disable_notification        = std::nullopt,
-        const std::optional<bool>&                          protect_content             = std::nullopt,
-        const std::optional<qint64>&                        reply_to_message_id         = std::nullopt,
-        const std::optional<bool>&                          allow_sending_without_reply = std::nullopt,
-        const std::optional<std::variant<InlineKeyboardMarkup::Ptr,
-                                         ReplyKeyboardMarkup::Ptr,
-                                         ReplyKeyboardRemove::Ptr,
-                                         ForceReply::Ptr>>& reply_markup                = std::nullopt);
+        const std::variant<qint64, QString>&              chat_id,
+        const QString&                                    text,
+        const std::optional<QString>&                     parse_mode                  = std::nullopt,
+        const std::optional<QVector<MessageEntity::Ptr>>& entities                    = std::nullopt,
+        const std::optional<bool>&                        disable_web_page_preview    = std::nullopt,
+        const std::optional<bool>&                        disable_notification        = std::nullopt,
+        const std::optional<bool>&                        protect_content             = std::nullopt,
+        const std::optional<qint64>&                      reply_to_message_id         = std::nullopt,
+        const std::optional<bool>&                        allow_sending_without_reply = std::nullopt,
+        const std::optional<KeyboardType>&                reply_markup                = std::nullopt)
+    {
+        QJsonObject postJson{{"text", text}};
+
+        if (std::holds_alternative<qint64>(chat_id))
+            postJson.insert("chat_id", std::get<qint64>(chat_id));
+        else
+            postJson.insert("chat_id", std::get<QString>(chat_id));
+
+        if (parse_mode) postJson.insert("parse_mode", parse_mode.value());
+        if (entities) postJson.insert("entities", toJsonValue(entities.value()));
+        if (disable_web_page_preview) postJson.insert("disable_web_page_preview", disable_web_page_preview.value());
+        if (disable_notification) postJson.insert("disable_notification", disable_notification.value());
+        if (protect_content) postJson.insert("protect_content", protect_content.value());
+        if (reply_to_message_id) postJson.insert("reply_to_message_id", reply_to_message_id.value());
+        if (allow_sending_without_reply)
+            postJson.insert("allow_sending_without_reply", allow_sending_without_reply.value());
+        if (reply_markup) postJson.insert("reply_markup", toJsonValue(reply_markup.value()));
+
+        QJsonDocument jsonDocument(postJson);
+
+        auto replyResponse = sendRequest("sendMessage", jsonDocument);
+
+        if (replyResponse)
+        {
+            Message::Ptr message;
+
+            if (readJsonObject(message, replyResponse.value(), "result")) return message;
+        }
+
+        return std::nullopt;
+    }
 
     std::optional<QVector<Telegram::Update::Ptr>> getUpdates(
         const std::optional<qint64>&           offset          = std::nullopt,

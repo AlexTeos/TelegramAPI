@@ -15,61 +15,6 @@ bool Api::start(const QString& token)
     return getMe().has_value();
 }
 
-std::optional<Message::Ptr> Api::sendMessage(
-    const std::variant<qint64, QString>&              chat_id,
-    const QString&                                    text,
-    const std::optional<QString>&                     parse_mode,
-    const std::optional<QVector<MessageEntity::Ptr>>& entities,
-    const std::optional<bool>&                        disable_web_page_preview,
-    const std::optional<bool>&                        disable_notification,
-    const std::optional<bool>&                        protect_content,
-    const std::optional<qint64>&                      reply_to_message_id,
-    const std::optional<bool>&                        allow_sending_without_reply,
-    const std::optional<
-        std::variant<InlineKeyboardMarkup::Ptr, ReplyKeyboardMarkup::Ptr, ReplyKeyboardRemove::Ptr, ForceReply::Ptr>>&
-        reply_markup)
-{
-    QJsonObject postJson{{"text", text}};
-
-    if (std::holds_alternative<qint64>(chat_id))
-        postJson.insert("chat_id", std::get<qint64>(chat_id));
-    else
-        postJson.insert("chat_id", std::get<QString>(chat_id));
-
-    if (parse_mode) postJson.insert("parse_mode", parse_mode.value());
-    if (entities) postJson.insert("entities", toJsonValue(entities.value()));
-    if (disable_web_page_preview) postJson.insert("disable_web_page_preview", disable_web_page_preview.value());
-    if (disable_notification) postJson.insert("disable_notification", disable_notification.value());
-    if (protect_content) postJson.insert("protect_content", protect_content.value());
-    if (reply_to_message_id) postJson.insert("reply_to_message_id", reply_to_message_id.value());
-    if (allow_sending_without_reply)
-        postJson.insert("allow_sending_without_reply", allow_sending_without_reply.value());
-    if (reply_markup)
-    {
-        if (std::holds_alternative<InlineKeyboardMarkup::Ptr>(reply_markup.value()))
-            postJson.insert("reply_markup", toJsonValue(std::get<InlineKeyboardMarkup::Ptr>(reply_markup.value())));
-        else if (std::holds_alternative<ReplyKeyboardMarkup::Ptr>(reply_markup.value()))
-            postJson.insert("reply_markup", toJsonValue(std::get<ReplyKeyboardMarkup::Ptr>(reply_markup.value())));
-        else if (std::holds_alternative<ReplyKeyboardRemove::Ptr>(reply_markup.value()))
-            postJson.insert("reply_markup", toJsonValue(std::get<ReplyKeyboardRemove::Ptr>(reply_markup.value())));
-        else if (std::holds_alternative<ForceReply::Ptr>(reply_markup.value()))
-            postJson.insert("reply_markup", toJsonValue(std::get<ForceReply::Ptr>(reply_markup.value())));
-    };
-
-    QJsonDocument jsonDocument(postJson);
-
-    auto replyResponse = sendRequest("sendMessage", jsonDocument);
-
-    if (replyResponse)
-    {
-        Message::Ptr message;
-
-        if (readJsonObject(message, replyResponse.value(), "result")) return message;
-    }
-
-    return std::nullopt;
-}
-
 std::optional<QVector<Update::Ptr>> Api::getUpdates(const std::optional<qint64>&           offset,
                                                     const std::optional<qint64>&           limit,
                                                     const std::optional<qint64>&           timeout,
@@ -362,4 +307,5 @@ std::optional<QJsonObject> Api::sendRequest(const QString& method, const QJsonDo
 
     return std::nullopt;
 }
+
 }
