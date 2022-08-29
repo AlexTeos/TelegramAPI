@@ -4,6 +4,10 @@
 #include <QNetworkReply>
 #include <QNetworkRequest>
 
+#include "types/menubuttoncommands.h"
+#include "types/menubuttondefault.h"
+#include "types/menubuttonwebapp.h"
+
 namespace Telegram
 {
 Api::Api() : m_networkManager(new QNetworkAccessManager()) {}

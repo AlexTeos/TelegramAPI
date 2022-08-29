@@ -1,6 +1,8 @@
 #include "tst_telegrammethods.h"
 
 #include "telegramapi.h"
+#include "types/menubuttoncommands.h"
+#include "types/menubuttondefault.h"
 
 using namespace Telegram;
 

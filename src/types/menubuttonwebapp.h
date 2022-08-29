@@ -11,10 +11,10 @@ struct MenuButtonWebApp : public MenuButton
     using Ptr = QSharedPointer<MenuButtonWebApp>;
     static const QString Type;
 
+    bool readJsonObject(const QJsonObject& json, const QString& valueName);
+
     QString         m_text;
     WebAppInfo::Ptr m_web_app;
-
-    bool readJsonObject(const QJsonObject& json, const QString& valueName);
 
     friend bool readJsonObject(MenuButtonWebApp::Ptr&, const QJsonObject&, const QString&);
 

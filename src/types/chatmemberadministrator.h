@@ -8,7 +8,9 @@ namespace Telegram
 struct ChatMemberAdministrator : public ChatMember
 {
     using Ptr = QSharedPointer<ChatMemberAdministrator>;
-    static const QString Type;
+    static const QString Status;
+
+    bool readJsonObject(const QJsonObject& json, const QString& valueName);
 
     bool                   m_can_be_edited;
     bool                   m_is_anonymous;
@@ -23,6 +25,11 @@ struct ChatMemberAdministrator : public ChatMember
     std::optional<bool>    m_can_edit_messages;
     std::optional<bool>    m_can_pin_messages;
     std::optional<QString> m_custom_title;
+
+    friend bool readJsonObject(ChatMemberAdministrator::Ptr&, const QJsonObject&, const QString&);
+
+protected:
+    virtual QJsonObject toJsonValue();
 };
 
 bool readJsonObject(ChatMemberAdministrator::Ptr& value, const QJsonObject& json, const QString& valueName);

@@ -45,5 +45,4 @@ bool readJsonObject(BotCommandScopeChatMember::Ptr& value, const QJsonObject& js
 
     return value->readJsonObject(json, valueName);
 }
-
 }

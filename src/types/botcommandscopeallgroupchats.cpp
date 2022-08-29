@@ -15,5 +15,4 @@ bool readJsonObject(BotCommandScopeAllGroupChats::Ptr& value, const QJsonObject&
 
     return value->readJsonObject(json, valueName);
 }
-
 }

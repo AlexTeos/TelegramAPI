@@ -12,7 +12,6 @@ namespace Telegram
 struct ChatMemberUpdated
 {
     using Ptr = QSharedPointer<ChatMemberUpdated>;
-    static const QString Type;
 
     Chat::Ptr           m_chat;
     User::Ptr           m_from;

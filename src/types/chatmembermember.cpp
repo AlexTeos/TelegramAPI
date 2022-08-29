@@ -2,17 +2,29 @@
 
 namespace Telegram
 {
-const QString ChatMemberMember::Type("member");
+const QString ChatMemberMember::Status("member");
 
-bool readJsonObject(ChatMemberMember::Ptr& value, const QJsonObject& json, const QString& valueName)
+QJsonObject ChatMemberMember::toJsonValue()
+{
+    return ChatMember::toJsonValue();
+}
+
+bool ChatMemberMember::readJsonObject(const QJsonObject& json, const QString& valueName)
 {
     if (json.contains(valueName) && json[valueName].isObject())
     {
-        value = ChatMemberMember::Ptr::create();
+        ChatMember::readJsonObject(json, valueName);
 
         return true;
     }
 
     return false;
+}
+
+bool readJsonObject(ChatMemberMember::Ptr& value, const QJsonObject& json, const QString& valueName)
+{
+    value = ChatMemberMember::Ptr::create();
+
+    return value->readJsonObject(json, valueName);
 }
 }

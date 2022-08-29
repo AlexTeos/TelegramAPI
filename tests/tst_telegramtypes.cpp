@@ -62,13 +62,11 @@ void TestTelegramTypes::tesApiChatMember()
         "{\"new_chat_member\":{\"status\":\"creator\",\"user\":{\"id\":295590000,\"is_bot\":false,\"first_name\":"
         "\"User\",\"username\":\"user\",\"language_code\":\"ru\"}, \"is_anonymous\":false, \"custom_title\":\"test\"}}";
 
-    ChatMember::Ptr chatMember;
+    ChatMemberOwner::Ptr chatMemberOwner;
 
     QJsonDocument jsonDocument(QJsonDocument::fromJson(chatMemberJson.toLatin1()));
 
-    readJsonObject(chatMember, jsonDocument.object(), "new_chat_member");
-
-    ChatMemberOwner::Ptr chatMemberOwner = chatMember.staticCast<ChatMemberOwner>();
+    readJsonObject(chatMemberOwner, jsonDocument.object(), "new_chat_member");
 
     QVERIFY(chatMemberOwner);
     QVERIFY(chatMemberOwner->m_status == "creator");

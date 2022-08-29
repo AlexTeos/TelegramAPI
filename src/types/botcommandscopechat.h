@@ -10,9 +10,9 @@ struct BotCommandScopeChat : public BotCommandScope
     using Ptr = QSharedPointer<BotCommandScopeChat>;
     static const QString Type;
 
-    std::variant<qint64, QString> m_chat_id;
-
     bool readJsonObject(const QJsonObject& json, const QString& valueName);
+
+    std::variant<qint64, QString> m_chat_id;
 
     friend bool readJsonObject(BotCommandScopeChat::Ptr&, const QJsonObject&, const QString&);
 
