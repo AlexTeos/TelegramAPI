@@ -23,13 +23,6 @@ bool BotCommandScopeDefault::readJsonObject(const QJsonObject& json, const QStri
 
 bool readJsonObject(BotCommandScopeDefault::Ptr& value, const QJsonObject& json, const QString& valueName)
 {
-    if (json.contains(valueName) && json[valueName].isObject())
-    {
-        value = BotCommandScopeDefault::Ptr::create();
-
-        return true;
-    }
-
     value = BotCommandScopeDefault::Ptr::create();
 
     return value->readJsonObject(json, valueName);

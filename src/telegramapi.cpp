@@ -134,10 +134,8 @@ std::optional<std::variant<Message::Ptr, bool>> Api::editMessageText(
     return std::nullopt;
 }
 
-std::optional<bool> Api::setChatMenuButton(
-    const std::optional<std::variant<qint64, QString>>& chat_id,
-    const std::optional<std::variant<MenuButtonCommands::Ptr, MenuButtonWebApp::Ptr, MenuButtonDefault::Ptr>>&
-        menu_button)
+std::optional<bool> Api::setChatMenuButton(const std::optional<std::variant<qint64, QString>>& chat_id,
+                                           const std::optional<MenuButton::Ptr>&               menu_button)
 {
     QJsonObject postJson;
 
@@ -149,15 +147,7 @@ std::optional<bool> Api::setChatMenuButton(
             postJson.insert("chat_id", std::get<QString>(chat_id.value()));
     }
 
-    if (menu_button)
-    {
-        if (std::holds_alternative<MenuButtonCommands::Ptr>(menu_button.value()))
-            postJson.insert("menu_button", toJsonValue(std::get<MenuButtonCommands::Ptr>(menu_button.value())));
-        else if (std::holds_alternative<MenuButtonWebApp::Ptr>(menu_button.value()))
-            postJson.insert("menu_button", toJsonValue(std::get<MenuButtonWebApp::Ptr>(menu_button.value())));
-        else if (std::holds_alternative<MenuButtonDefault::Ptr>(menu_button.value()))
-            postJson.insert("menu_button", toJsonValue(std::get<MenuButtonDefault::Ptr>(menu_button.value())));
-    };
+    if (menu_button) postJson.insert("menu_button", toJsonValue(menu_button.value()));
 
     QJsonDocument jsonDocument(postJson);
 
@@ -173,8 +163,7 @@ std::optional<bool> Api::setChatMenuButton(
     return std::nullopt;
 }
 
-std::optional<std::variant<MenuButtonCommands::Ptr, MenuButtonWebApp::Ptr, MenuButtonDefault::Ptr>> Api::
-    getChatMenuButton(const std::optional<std::variant<qint64, QString>>& chat_id)
+std::optional<MenuButton::Ptr> Api::getChatMenuButton(const std::optional<std::variant<qint64, QString>>& chat_id)
 {
     QJsonObject postJson;
 
@@ -192,16 +181,25 @@ std::optional<std::variant<MenuButtonCommands::Ptr, MenuButtonWebApp::Ptr, MenuB
 
     if (replyResponse)
     {
-        MenuButton::Ptr result;
+        MenuButton::Ptr typeResult;
 
-        if (readJsonObject(result, replyResponse.value(), "result"))
+        if (readJsonObject(typeResult, replyResponse.value(), "result"))
         {
-            if (result->m_type == MenuButtonCommands::Type)
-                return result.staticCast<MenuButtonCommands>();
-            else if (result->m_type == MenuButtonWebApp::Type)
-                return result.staticCast<MenuButtonWebApp>();
-            else if (result->m_type == MenuButtonDefault::Type)
-                return result.staticCast<MenuButtonDefault>();
+            if (typeResult->m_type == MenuButtonCommands::Type)
+            {
+                MenuButtonCommands::Ptr result;
+                if (readJsonObject(result, replyResponse.value(), "result")) return result;
+            }
+            else if (typeResult->m_type == MenuButtonWebApp::Type)
+            {
+                MenuButtonWebApp::Ptr result;
+                if (readJsonObject(result, replyResponse.value(), "result")) return result;
+            }
+            else if (typeResult->m_type == MenuButtonDefault::Type)
+            {
+                MenuButtonDefault::Ptr result;
+                if (readJsonObject(result, replyResponse.value(), "result")) return result;
+            }
         }
     }
 

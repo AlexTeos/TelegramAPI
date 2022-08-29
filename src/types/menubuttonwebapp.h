@@ -13,10 +13,16 @@ struct MenuButtonWebApp : public MenuButton
 
     QString         m_text;
     WebAppInfo::Ptr m_web_app;
+
+    bool readJsonObject(const QJsonObject& json, const QString& valueName);
+
+    friend bool readJsonObject(MenuButtonWebApp::Ptr&, const QJsonObject&, const QString&);
+
+protected:
+    virtual QJsonObject toJsonValue();
 };
 
-bool        readJsonObject(MenuButtonWebApp::Ptr& value, const QJsonObject& json, const QString& valueName);
-QJsonObject toJsonValue(const MenuButtonWebApp::Ptr& value);
+bool readJsonObject(MenuButtonWebApp::Ptr& value, const QJsonObject& json, const QString& valueName);
 }
 
 #endif // MENUBUTTONWEBAPP_H

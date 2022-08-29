@@ -92,13 +92,11 @@ public:
         const std::optional<bool>&                          disable_web_page_preview = std::nullopt,
         const std::optional<InlineKeyboardMarkup::Ptr>&     reply_markup             = std::nullopt);
 
-    std::optional<bool> setChatMenuButton(
-        const std::optional<std::variant<qint64, QString>>& chat_id = std::nullopt,
-        const std::optional<std::variant<MenuButtonCommands::Ptr, MenuButtonWebApp::Ptr, MenuButtonDefault::Ptr>>&
-            menu_button = std::nullopt);
+    std::optional<bool> setChatMenuButton(const std::optional<std::variant<qint64, QString>>& chat_id = std::nullopt,
+                                          const std::optional<MenuButton::Ptr>& menu_button           = std::nullopt);
 
-    std::optional<std::variant<MenuButtonCommands::Ptr, MenuButtonWebApp::Ptr, MenuButtonDefault::Ptr>>
-    getChatMenuButton(const std::optional<std::variant<qint64, QString>>& chat_id = std::nullopt);
+    std::optional<MenuButton::Ptr> getChatMenuButton(
+        const std::optional<std::variant<qint64, QString>>& chat_id = std::nullopt);
 
     std::optional<bool> setMyCommands(const QVector<BotCommand::Ptr>&            commands,
                                       const std::optional<BotCommandScope::Ptr>& scope         = std::nullopt,

@@ -1,13 +1,5 @@
 #include "botcommandscope.h"
 
-#include "botcommandscopeallchatadministrators.h"
-#include "botcommandscopeallgroupchats.h"
-#include "botcommandscopeallprivatechats.h"
-#include "botcommandscopechat.h"
-#include "botcommandscopechatadministrators.h"
-#include "botcommandscopechatmember.h"
-#include "botcommandscopedefault.h"
-
 namespace Telegram
 {
 bool BotCommandScope::readJsonObject(const QJsonObject& json, const QString& valueName)
@@ -38,4 +30,10 @@ QJsonObject toJsonValue(const BotCommandScope::Ptr& value)
     return value->toJsonValue();
 }
 
+bool readJsonObject(BotCommandScope::Ptr& value, const QJsonObject& json, const QString& valueName)
+{
+    value = BotCommandScope::Ptr::create();
+
+    return value->readJsonObject(json, valueName);
+}
 }

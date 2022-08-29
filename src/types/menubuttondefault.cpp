@@ -4,20 +4,15 @@ namespace Telegram
 {
 const QString MenuButtonDefault::Type("default");
 
-bool readJsonObject(MenuButtonDefault::Ptr& value, const QJsonObject& json, const QString& valueName)
+QJsonObject MenuButtonDefault::toJsonValue()
 {
-    if (json.contains(valueName) && json[valueName].isObject())
-    {
-        value = MenuButtonDefault::Ptr::create();
-
-        return true;
-    }
-
-    return false;
+    return MenuButton::toJsonValue();
 }
 
-QJsonObject toJsonValue(const MenuButtonDefault::Ptr& value)
+bool readJsonObject(MenuButtonDefault::Ptr& value, const QJsonObject& json, const QString& valueName)
 {
-    return toJsonValue(value.staticCast<MenuButton>());
+    value = MenuButtonDefault::Ptr::create();
+
+    return value->readJsonObject(json, valueName);
 }
 }

@@ -4,16 +4,26 @@ namespace Telegram
 {
 const QString MenuButtonWebApp::Type("web_app");
 
-bool readJsonObject(MenuButtonWebApp::Ptr& value, const QJsonObject& json, const QString& valueName)
+QJsonObject MenuButtonWebApp::toJsonValue()
+{
+    QJsonObject jsonObject = MenuButton::toJsonValue();
+
+    jsonObject.insert("text", m_text);
+    jsonObject.insert("web_app", Telegram::toJsonValue(m_web_app));
+
+    return jsonObject;
+}
+
+bool MenuButtonWebApp::readJsonObject(const QJsonObject& json, const QString& valueName)
 {
     if (json.contains(valueName) && json[valueName].isObject())
     {
-        value = MenuButtonWebApp::Ptr::create();
+        MenuButtonWebApp::readJsonObject(json, valueName);
 
         QJsonObject object = json[valueName].toObject();
 
-        readJsonObject(value->m_text, object, "text");
-        readJsonObject(value->m_web_app, object, "web_app");
+        Telegram::readJsonObject(m_text, object, "text");
+        Telegram::readJsonObject(m_web_app, object, "web_app");
 
         return true;
     }
@@ -21,13 +31,10 @@ bool readJsonObject(MenuButtonWebApp::Ptr& value, const QJsonObject& json, const
     return false;
 }
 
-QJsonObject toJsonValue(const MenuButtonWebApp::Ptr& value)
+bool readJsonObject(MenuButtonWebApp::Ptr& value, const QJsonObject& json, const QString& valueName)
 {
-    QJsonObject jsonObject = toJsonValue(value.staticCast<MenuButton>());
+    value = MenuButtonWebApp::Ptr::create();
 
-    jsonObject.insert("text", value->m_text);
-    jsonObject.insert("web_app", toJsonValue(value->m_web_app));
-
-    return jsonObject;
+    return value->readJsonObject(json, valueName);
 }
 }
