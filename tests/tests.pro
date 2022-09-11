@@ -15,8 +15,9 @@ HEADERS += \
     tst_telegrammethods.h \
     tst_telegramtypes.h
 
-win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../src/release/ -ltelegramapi
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../src/debug/ -ltelegramapi
+CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../src/release/ -ltelegramapi
+else:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../src/debug/ -ltelegramapi
+else:unix:!macx: LIBS += -L$$OUT_PWD/../src/ -ltelegramapi
 
 INCLUDEPATH += $$PWD/../src
 DEPENDPATH += $$PWD/../src
