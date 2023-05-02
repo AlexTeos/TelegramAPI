@@ -9,8 +9,8 @@ int main(int argc, char* argv[])
 
     if (argc > 2)
     {
-        settings.setValue("Token", argv[1]);
-        settings.setValue("UserId", argv[2]);
+        settings.setValue("Token", QString(argv[1]));
+        settings.setValue("UserId", QString(argv[2]));
         argv += 2;
         argc -= 2;
     }
