@@ -3,6 +3,7 @@
 #include <QEventLoop>
 #include <QNetworkReply>
 #include <QNetworkRequest>
+#include <QtGlobal>
 
 #include "types/menubuttoncommands.h"
 #include "types/menubuttondefault.h"
@@ -39,8 +40,13 @@ std::optional<QVector<Update::Ptr>> Api::getUpdates(const std::optional<qint64>&
     {
         QVector<Update::Ptr> update;
 
-        if (readJsonObject(update, replyResponse.value(), "result")) return update;
+        if (readJsonObject(update, replyResponse.value(), "result"))
+            return update;
+        else
+            qWarning() << "No result field in response";
     }
+    else
+        qWarning() << "Incorrect response";
 
     return std::nullopt;
 }
@@ -53,8 +59,13 @@ std::optional<User::Ptr> Api::getMe()
     {
         User::Ptr user;
 
-        if (readJsonObject(user, replyResponse.value(), "result")) return user;
+        if (readJsonObject(user, replyResponse.value(), "result"))
+            return user;
+        else
+            qWarning() << "No result field in response";
     }
+    else
+        qWarning() << "Incorrect response";
 
     return std::nullopt;
 }
@@ -80,8 +91,13 @@ std::optional<bool> Api::answerCallbackQuery(const QString&                callb
     {
         bool result;
 
-        if (readJsonObject(result, replyResponse.value(), "result")) return result;
+        if (readJsonObject(result, replyResponse.value(), "result"))
+            return result;
+        else
+            qWarning() << "No result field in response";
     }
+    else
+        qWarning() << "Incorrect response";
 
     return std::nullopt;
 }
@@ -125,15 +141,23 @@ std::optional<std::variant<Message::Ptr, bool>> Api::editMessageText(
         {
             bool result;
 
-            if (readJsonObject(result, replyResponse.value(), "result")) return result;
+            if (readJsonObject(result, replyResponse.value(), "result"))
+                return result;
+            else
+                qWarning() << "No result field in response";
         }
         else
         {
             Message::Ptr message;
 
-            if (readJsonObject(message, replyResponse.value(), "result")) return message;
+            if (readJsonObject(message, replyResponse.value(), "result"))
+                return message;
+            else
+                qWarning() << "No result field in response";
         }
     }
+    else
+        qWarning() << "Incorrect response";
 
     return std::nullopt;
 }
@@ -161,8 +185,13 @@ std::optional<bool> Api::setChatMenuButton(const std::optional<std::variant<qint
     {
         bool result;
 
-        if (readJsonObject(result, replyResponse.value(), "result")) return result;
+        if (readJsonObject(result, replyResponse.value(), "result"))
+            return result;
+        else
+            qWarning() << "No result field in response";
     }
+    else
+        qWarning() << "Incorrect response";
 
     return std::nullopt;
 }
@@ -204,8 +233,13 @@ std::optional<MenuButton::Ptr> Api::getChatMenuButton(const std::optional<std::v
                 MenuButtonDefault::Ptr result;
                 if (readJsonObject(result, replyResponse.value(), "result")) return result;
             }
+            qWarning() << "Unrecognized m_type:" << typeResult->m_type;
         }
+        else
+            qWarning() << "No result field in response";
     }
+    else
+        qWarning() << "Incorrect response";
 
     return std::nullopt;
 }
@@ -229,8 +263,13 @@ std::optional<bool> Api::setMyCommands(const QVector<BotCommand::Ptr>&          
     {
         bool result;
 
-        if (readJsonObject(result, replyResponse.value(), "result")) return result;
+        if (readJsonObject(result, replyResponse.value(), "result"))
+            return result;
+        else
+            qWarning() << "No result field in response";
     }
+    else
+        qWarning() << "Incorrect response";
 
     return std::nullopt;
 }
@@ -251,8 +290,13 @@ std::optional<bool> Api::deleteMyCommands(const std::optional<BotCommandScope::P
     {
         bool result;
 
-        if (readJsonObject(result, replyResponse.value(), "result")) return result;
+        if (readJsonObject(result, replyResponse.value(), "result"))
+            return result;
+        else
+            qWarning() << "No result field in response";
     }
+    else
+        qWarning() << "Incorrect response";
 
     return std::nullopt;
 }
@@ -273,8 +317,13 @@ std::optional<QVector<BotCommand::Ptr>> Api::getMyCommands(const std::optional<B
     {
         QVector<BotCommand::Ptr> result;
 
-        if (readJsonObject(result, replyResponse.value(), "result")) return result;
+        if (readJsonObject(result, replyResponse.value(), "result"))
+            return result;
+        else
+            qWarning() << "No result field in response";
     }
+    else
+        qWarning() << "Incorrect response";
 
     return std::nullopt;
 }
@@ -303,9 +352,16 @@ std::optional<QJsonObject> Api::sendRequest(const QString& method, const QJsonDo
             replyJsonObject.contains("result"))
         {
             replyJsonObject.remove("ok");
+            qDebug() << "Successful request:" << request.url() << "data" << jsonDocument.toJson() << "reply:" << arr;
             return replyJsonObject;
         }
+        else
+            qWarning() << "Server responded with an error. Request:" << request.url() << "data" << jsonDocument.toJson()
+                       << "reply:" << arr;
     }
+    else
+        qWarning() << "Incorrect reply format. Request:" << request.url() << "data" << jsonDocument.toJson()
+                   << "reply:" << arr;
 
     return std::nullopt;
 }
