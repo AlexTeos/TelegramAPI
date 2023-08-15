@@ -143,6 +143,7 @@ void TestTelegramMethods::testMyCommands()
     QVERIFY(setMyCommandsResult);
     QVERIFY(setMyCommandsResult.value());
 
+    QThread::msleep(100);
     auto getMyCommandsResult = m_api.getMyCommands();
     QVERIFY(getMyCommandsResult);
     QVERIFY(getMyCommandsResult.value().size() == commands.size());
@@ -156,6 +157,7 @@ void TestTelegramMethods::testMyCommands()
     QVERIFY(deleteMyCommands);
     QVERIFY(deleteMyCommands.value());
 
+    QThread::msleep(100);
     auto getMyCommandsAfterDeleteResult = m_api.getMyCommands();
     QVERIFY(getMyCommandsAfterDeleteResult);
     QVERIFY(getMyCommandsAfterDeleteResult.value().size() == 0);
@@ -171,6 +173,7 @@ void TestTelegramMethods::testMenuButton()
     readJsonObject(menuButton, menuButtonDefaultJsonDocument.object(), "menu_button");
     MenuButtonDefault::Ptr menuButtonDefault          = menuButton.staticCast<MenuButtonDefault>();
     auto                   setMenuButtonDefaultResult = m_api.setChatMenuButton(m_user_id, menuButtonDefault);
+    QThread::msleep(100);
     QVERIFY(setMenuButtonDefaultResult);
     QVERIFY(setMenuButtonDefaultResult.value());
 
@@ -186,6 +189,7 @@ void TestTelegramMethods::testMenuButton()
     readJsonObject(menuButton, menuButtonCommandsJsonDocument.object(), "menu_button");
     MenuButtonCommands::Ptr menuButtonCommands          = menuButton.staticCast<MenuButtonCommands>();
     auto                    setMenuButtonCommandsResult = m_api.setChatMenuButton(m_user_id, menuButtonCommands);
+    QThread::msleep(100);
     QVERIFY(setMenuButtonCommandsResult);
     QVERIFY(setMenuButtonCommandsResult.value());
 
