@@ -14,17 +14,15 @@ void TestTelegramTypes::cleanupTestCase() {}
 
 void TestTelegramTypes::tesApiMessage()
 {
-#if QT_VERSION >= 0x060000
     qint64 id = 9007199254740991;
-#else
-    qint64 id = 295590000;
-#endif
 
-    QString messageJson = "{\"message\":{\"message_id\":3,\"from\":{\"id\":" + QString::number(id) +
-                          ",\"is_bot\":false,\"first_name\":\"test_first_name\",\"username\":\"test_username\","
-                          "\"language_code\":\"ru\"},\"chat\":{\"id\":295590000,\"first_name\":\"test_first_name\","
-                          "\"username\":\"test_username\",\"type\":\"private\"},\"date\":1645736477,\"text\":\"/"
-                          "start\",\"entities\":[{\"offset\":0,\"length\":6,\"type\":\"bot_command\"}]}}";
+    QString messageJson =
+        "{\"message\":{\"message_id\":3,\"from\":{\"id\":" + QString::number(id) +
+        ",\"is_bot\":false,\"first_name\":\"test_first_name\",\"username\":\"test_username\",\"language_code\":\"ru\"},"
+        "\"chat\":{\"id\":" +
+        QString::number(id) +
+        ",\"first_name\":\"test_first_name\",\"username\":\"test_username\",\"type\":\"private\"},\"date\":1645736477,"
+        "\"text\":\"/start\",\"entities\":[{\"offset\":0,\"length\":6,\"type\":\"bot_command\"}]}}";
     Message::Ptr message;
 
     QJsonDocument jsonDocument(QJsonDocument::fromJson(messageJson.toLatin1()));
@@ -44,7 +42,7 @@ void TestTelegramTypes::tesApiMessage()
     QVERIFY(message->m_from->m_language_code == "ru");
 
     QVERIFY(message->m_chat);
-    QVERIFY(message->m_chat->m_id == 295590000);
+    QVERIFY(message->m_chat->m_id == id);
     QVERIFY(message->m_chat->m_first_name == "test_first_name");
     QVERIFY(message->m_chat->m_username == "test_username");
     QVERIFY(message->m_chat->m_type == "private");

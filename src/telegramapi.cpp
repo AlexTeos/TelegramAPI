@@ -336,14 +336,16 @@ std::optional<QJsonObject> Api::sendRequest(const QString& method, const QJsonDo
     request.setUrl(QUrl(m_url + "bot" + m_token + "/" + method));
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 
+    QSslConfiguration conf = request.sslConfiguration();
+    conf.setPeerVerifyMode(QSslSocket::VerifyNone);
+    request.setSslConfiguration(conf);
+
     QEventLoop     eventLoop;
     QNetworkReply* reply = m_networkManager->post(request, jsonDocument.toJson());
     QObject::connect(reply, &QNetworkReply::finished, &eventLoop, &QEventLoop::quit);
     eventLoop.exec();
     QByteArray    arr = reply->readAll();
     QJsonDocument replyJsonDocument(QJsonDocument::fromJson(arr));
-
-    reply->deleteLater();
 
     if (replyJsonDocument.isObject())
     {
@@ -360,8 +362,10 @@ std::optional<QJsonObject> Api::sendRequest(const QString& method, const QJsonDo
                        << "reply:" << arr;
     }
     else
-        qWarning() << "Incorrect reply format. Request:" << request.url() << "data" << jsonDocument.toJson()
-                   << "reply:" << arr;
+        qWarning() << "Incorrect reply format. Request:" << request.url() << "; data:" << jsonDocument.toJson()
+                   << "; reply:" << arr << "; reply error:" << reply->errorString();
+
+    reply->deleteLater();
 
     return std::nullopt;
 }

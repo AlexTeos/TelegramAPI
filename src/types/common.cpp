@@ -21,7 +21,7 @@ bool readJsonObject(qint64& value, const QJsonObject& json, const QString& value
 #if QT_VERSION >= 0x060000
         value = json[valueName].toInteger();
 #else
-        value = json[valueName].toInt();
+        value = json[valueName].toDouble();
 #endif
         return true;
     }
