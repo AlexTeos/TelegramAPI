@@ -4,6 +4,8 @@ CONFIG += qt c++17
 TEMPLATE = lib
 TARGET = telegramapi
 
+DEFINES += QT_MESSAGELOGCONTEXT
+
 SOURCES += \
     telegramapi.cpp \
     types/animation.cpp \

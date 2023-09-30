@@ -15,8 +15,19 @@
 
 namespace Telegram
 {
-class Api
+struct Error
 {
+    Error() {}
+    Error(const quint32& errorCode, const QString& description) : m_errorCode(errorCode), m_description(description) {}
+    quint32 m_errorCode;
+    QString m_description;
+};
+typedef Error NetworkError;
+typedef Error TelegramError;
+
+class Api : public QObject
+{
+    Q_OBJECT
 public:
     Api();
 
@@ -106,6 +117,10 @@ public:
     std::optional<QVector<BotCommand::Ptr>> getMyCommands(
         const std::optional<BotCommandScope::Ptr>& scope         = std::nullopt,
         const std::optional<QString>&              language_code = std::nullopt);
+
+signals:
+    void telegramError(TelegramError error);
+    void networkError(NetworkError error);
 
 private:
     std::optional<QJsonObject> sendRequest(const QString& method, const QJsonDocument& jsonDocument);

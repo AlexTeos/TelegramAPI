@@ -344,28 +344,47 @@ std::optional<QJsonObject> Api::sendRequest(const QString& method, const QJsonDo
     QNetworkReply* reply = m_networkManager->post(request, jsonDocument.toJson());
     QObject::connect(reply, &QNetworkReply::finished, &eventLoop, &QEventLoop::quit);
     eventLoop.exec();
-    QByteArray    arr = reply->readAll();
-    QJsonDocument replyJsonDocument(QJsonDocument::fromJson(arr));
-
-    if (replyJsonDocument.isObject())
+    if (reply->error() == QNetworkReply::NoError)
     {
-        QJsonObject replyJsonObject = replyJsonDocument.object();
-        if (replyJsonObject.contains("ok") && replyJsonObject["ok"].isBool() && replyJsonObject["ok"].toBool() &&
-            replyJsonObject.contains("result"))
+        QByteArray arr = reply->readAll();
+        reply->deleteLater();
+        QJsonDocument replyJsonDocument(QJsonDocument::fromJson(arr));
+        if (replyJsonDocument.isObject())
         {
-            replyJsonObject.remove("ok");
-            qDebug() << "Successful request:" << request.url() << "data" << jsonDocument.toJson() << "reply:" << arr;
-            return replyJsonObject;
+            QJsonObject replyJsonObject = replyJsonDocument.object();
+            if (replyJsonObject.contains("ok") && replyJsonObject["ok"].isBool() && replyJsonObject["ok"].toBool() &&
+                replyJsonObject.contains("result"))
+            {
+                replyJsonObject.remove("ok");
+                qDebug() << "Successful request:" << request.url() << "data" << jsonDocument.toJson()
+                         << "reply:" << arr;
+                return replyJsonObject;
+            }
+            else
+            {
+                if (replyJsonObject.contains("error_code") && replyJsonObject["error_code"].isDouble() &&
+                    replyJsonObject.contains("description") && replyJsonObject["description"].isString())
+                {
+                    qWarning() << "Telegram responded with an error. Request:" << request.url()
+                               << "data:" << jsonDocument.toJson() << "reply:" << arr;
+                    emit telegramError(TelegramError(replyJsonObject["error_code"].toDouble(),
+                                                     replyJsonObject["description"].toString()));
+                }
+            }
         }
         else
-            qWarning() << "Server responded with an error. Request:" << request.url() << "data" << jsonDocument.toJson()
-                       << "reply:" << arr;
-    }
-    else
-        qWarning() << "Incorrect reply format. Request:" << request.url() << "; data:" << jsonDocument.toJson()
-                   << "; reply:" << arr << "; reply error:" << reply->errorString();
+        {
+            qWarning() << "Telegram responded with incorrect json format. Request:" << request.url() << "data:" << arr;
+            emit telegramError(TelegramError(0, "Incorrect response format"));
+        }
 
+        return std::nullopt;
+    }
+
+    QString replyError = reply->errorString();
     reply->deleteLater();
+    qWarning() << "Incorrect reply format. Request:" << request.url() << "; reply error:" << replyError;
+    emit networkError(NetworkError(reply->error(), replyError));
 
     return std::nullopt;
 }
